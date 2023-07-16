@@ -7,10 +7,10 @@ type Artworks = {
   artworks: Artwork[]
   }
   
-  export default function handler(
+  export const handler = (
     req: NextApiRequest,
     res: NextApiResponse<Artworks | Error>
-  ) {
+  ) => {
     console.log(req.body)
     console.log(req.query)
     // res.status(200).json({ name: 'Bea' })

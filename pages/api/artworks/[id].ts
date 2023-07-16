@@ -1,18 +1,18 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { Artwork } from '../../../types/artwork'
 import { Error } from '../../../types/error'
+import { getArtworkById } from '../../../libs/artworks/artworks'
 
-//en algún sitio debe faltar el fetch por id
-  
-  export default function handler(
+  export const handler = (
     req: NextApiRequest,
     res: NextApiResponse<Artwork | Error>
-  ) {
+  ) => {
    
     const id = req.query._id as string
-    const artwork = Artwork[id]
+    const artwork = getArtworkById(id)
+    
     if (!artwork) {
-        res.status(404).json({error: 'Artwork not found'})      
+        res.status(404).json({message: 'Artwork not found'})      
         return
     }
   res.status(200).json(artwork)

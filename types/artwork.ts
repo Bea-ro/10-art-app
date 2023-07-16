@@ -6,7 +6,7 @@ export type Artwork = {
     area: string,
     // area: 'pinture' | 'sculpture' | 'arquitecture',
     movement: string,
-   image?: string
+   image?: string | undefined
 }
 
 

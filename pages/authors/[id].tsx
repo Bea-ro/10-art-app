@@ -23,11 +23,25 @@ const AuthorPage = ({ author }: Props) => {
 <p>{author.movement}</p>
 
         </div>
-        <Link href="/">BACK</Link>
+        <Link href="/authors">BACK</Link>
       </main>
     </>
   );
 };              
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const response: Author[] = await fetch(
+    `https://my-json-server.typicode.com/bea-ro/shop-api/authors/`
+  ).then((res) => res.json());
+  return {
+    // paths: response.map((author) => ({
+    //   params: { id: author._id }
+    // })),
+    // fallback: false
+    paths:[],
+    fallback: 'blocking'
+  };
+}
 
 export const getStaticProps: GetStaticProps = async (context) => {
     const id = context.params?.id as string;
@@ -35,7 +49,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       const response: Author = await fetch(
         `https://complete-server-rtc.onrender.com/api/authors/${id}`
       ).then((res) => res.json());
-      console.log(response);
+     
       return {
         props: {
           author: response,
@@ -44,17 +58,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       };
     };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-        const response: Author[] = await fetch(
-          `https://my-json-server.typicode.com/bea-ro/shop-api/authors/`
-        ).then((res) => res.json());
-        return {
-          paths: response.map((author) => ({
-            params: { id: author._id }
-          })),
-          fallback: false
-        };
-      }
+
 
 export type Props = {
   author: Author;

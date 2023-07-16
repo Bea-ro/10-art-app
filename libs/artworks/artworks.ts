@@ -5,3 +5,10 @@ const response = await fetch('https://complete-server-rtc.onrender.com/api/artwo
 .then((res) => res.json())
 return response
 }
+
+export const getArtworkById = async (id): Promise<Artwork> => {
+    const response = await fetch(`https://complete-server-rtc.onrender.com/api/artworks/${id}`)
+    .then((res) => res.json())
+    console.log(response)
+    return response
+    }

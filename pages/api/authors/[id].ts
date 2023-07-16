@@ -1,18 +1,18 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { Author } from '../../../types/author'
 import { Error } from '../../../types/error'
+import { getAuthorById } from '../../../libs/authors/authors'
 
-//en algún sitio debe faltar el fetch por id
   
-  export default function handler(
+export const handler = (
     req: NextApiRequest,
     res: NextApiResponse<Author | Error>
-  ) {
-   
-    const id = req.query._id as string
-    const author = Author[id]
+  ) => {
+   console.log('query', req.query)
+    const id = req.query.id as string
+    const author = getAuthorById(id)
     if (!author) {
-        res.status(404).json({error: 'Author not found'})      
+        res.status(404).json({message: 'Author not found'})      
         return
     }
   res.status(200).json(author)
