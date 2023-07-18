@@ -1,4 +1,4 @@
-import Layout from '../../components/Layout'
+import Layout from '../../components/ui/Layout'
 import Link from 'next/link'
 import Image from 'next/image'
 import useSwr from 'swr';

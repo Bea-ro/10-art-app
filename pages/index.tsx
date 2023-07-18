@@ -1,4 +1,4 @@
-import Layout from '../components/Layout'
+import Layout from '../components/ui/Layout'
 import Link from 'next/link'
 import Image from 'next/image'
 // import useSwr from 'swr';
@@ -8,6 +8,7 @@ import { Author } from '../types/author'
 import { getArtworks } from '../libs/artworks/artworks';
 import { getAuthors } from '../libs/authors/authors';
 import { fetcher } from '../utils/fetcher';
+import RegisterLogin from '../components/RegisterLogin/Login'
 
 const Home = ( { artworks, authors }: Props ) => {
 
@@ -26,6 +27,8 @@ const Home = ( { artworks, authors }: Props ) => {
       description="Find information about artists from all movements and artworks of pinture, sculpture and arquitecture.">
       <main>
       <h1>Your art app</h1>
+
+<RegisterLogin/>
 
         <ul>
           {artworks.map((artwork) => (
