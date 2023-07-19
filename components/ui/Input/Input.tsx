@@ -1,25 +1,42 @@
-const Input = ({ type, placeholder, onChange, value, name } : Props) => {
+const Input = ({ type, placeholder, htmlFor, id, registerInfo } : Props) => {
+
     return (
       <>
         <input
+          htmlFor={htmlFor}
           type={type}
-          className="input"
-          placeholder={placeholder}
-          onChange={onChange}
-          value={value}
-          name={name}
+          placeholder={placeholder}    
+          id={id}   
+          {...registerInfo}
         />
       </>
     );
   };
-
-  export type Props = {
+  export type Required = {
+    value: boolean, 
+    message: string
+  }
+  
+  export type RegisterInfo = {
+    htmlFor: string,
     type: string,
     placeholder: string,
-    // onChange: function
-    value: string,
-    name: string
+    id: string,
+    value: string
+  required: Required,
+  pattern?: RegExp | undefined
+  }
+
+
+  export type Props = {
+    htmlFor?: string,
+    type: string,
+    placeholder: string,
+    id: string
+    registerInfo: RegisterInfo 
    }
-  
-  
+
+ 
+
+    
   export default Input;

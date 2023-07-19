@@ -1,66 +1,73 @@
 import Link from 'next/link'
-import { useState } from 'React'
+import {useForm} from 'react-hook-form'
 import Input from '../ui/Input/Input';
 import Button from '../ui/Button/Button';
 import Message from '../ui/Message/Message';
 
 const Login = () => {
 
-  const [userLogged, setUserLogged] = useState<Record<string, string>>({
-    email: '',
-    password: ''
-  })
+  const { handleSubmit, register, formState } = useForm<Record<string, string>>({defaultValues: 
+  {email: '',
+  password: ''
+}
+})
 
-  const [error, setError] = useState<string>('')
+console.log(formState)
+const emptyInputs = !formState.isDirty
 
-  //tipar lo que recibe y devuelve
-  const handleFormSubmit = (event: object) : Record<string, string> => {
-    event.preventDefault();
-//fetch login
-    event.target.reset();
+  const onSubmit = (values) => {
+    console.log(values)
   };
-
-    //tipar lo que recibe y devuelve
-  const handleInputChange = (event: object) : Record<string, string> => {
-    setUserLogged({
-      ...userLogged,
-      [event.target.name]: event.target.value
-    });
-  };
-
 
   return (
  
     <div className="register-login-container">
      
-      <form onSubmit={handleFormSubmit} className="register-login-form">
+      <form onSubmit={handleSubmit(onSubmit)} className="register-login-form">
         <Input
+         htmlFor="email"
           type="email"
           placeholder="email address"
-          name="email"
-          value={userLogged?.email}
-          onChange={handleInputChange}
+          id="email"
+     
+          registerInfo={
+            {...register('email', {
+              required: {
+                value:true, 
+                message: 'You should provide a valid email address'
+            }
+            })
+            } 
+          }
         />
 
         <Input
+         htmlFor="password"
           type="password"
           placeholder="password"
-          name="password"
-          value={userLogged?.password}
-          onChange={handleInputChange}
+          id="password"
+          registerInfo={
+            {...register('password', {
+              required: {
+                value:true, 
+                message: "You should provide a valid password"
+            },
+          pattern: /^(?=.*?[A-Z])(?=.*?[a-z]).{6,}$/
+          })
+        }}
         />
-        <Button buttonText="Submit"/>
+        <Button buttonText="Submit" emptyInputs={emptyInputs}/>
       </form>
 
-      {error && <Message messageText={error} />}
+      <Message/>
          
       <div className="register-container">
 
       {/* <Link to="/register">
-        <p className="register-cta" onClick={() => setError('')}>Create your account if you don't have one yet</p>
+        <p className="register-cta">Create your account if you don't have one yet</p>
       </Link> */}
       
-      <Button buttonText="Register"/>
+      <Button buttonText="Register" emptyInputs={emptyInputs}/>
       </div>
       
   

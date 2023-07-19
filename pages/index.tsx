@@ -8,7 +8,7 @@ import { Author } from '../types/author'
 import { getArtworks } from '../libs/artworks/artworks';
 import { getAuthors } from '../libs/authors/authors';
 import { fetcher } from '../utils/fetcher';
-import RegisterLogin from '../components/RegisterLogin/Login'
+import Login from '../components/RegisterLogin/Login';
 
 const Home = ( { artworks, authors }: Props ) => {
 
@@ -28,7 +28,7 @@ const Home = ( { artworks, authors }: Props ) => {
       <main>
       <h1>Your art app</h1>
 
-<RegisterLogin/>
+<Login/>
 
         <ul>
           {artworks.map((artwork) => (

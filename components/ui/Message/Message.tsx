@@ -1,15 +1,19 @@
-const Message = ({ messageText } : Props) => {
+import { useForm } from 'react-hook-form'
+
+const Message = () => {
+
+  const { formState } = useForm<Record<string, string>>({defaultValues: 
+    {email: '',
+    password: ''
+  }
+  })
+
     return (
-      <div className="message-container">
-        <h3 className="message">{messageText}</h3>
-      </div>
+
+formState.errors.email? <p>{formState.errors.email.message}</p> : (formState.errors.password? <p>{formState.errors.password.message}</p> : null ) 
+
     );
   };
-  
-
-  export type Props = {
-    messageText: string
-   }
 
    
   export default Message;
