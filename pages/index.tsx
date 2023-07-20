@@ -8,7 +8,7 @@ import { Author } from '../types/author'
 import { getArtworks } from '../libs/artworks/artworks';
 import { getAuthors } from '../libs/authors/authors';
 import { fetcher } from '../utils/fetcher';
-import Login from '../components/RegisterLogin/Login';
+import RegisterLogin from '../components/RegisterLogin/RegisterLogin';
 
 const Home = ( { artworks, authors }: Props ) => {
 
@@ -26,9 +26,18 @@ const Home = ( { artworks, authors }: Props ) => {
       <Layout title="Art App" 
       description="Find information about artists from all movements and artworks of pinture, sculpture and arquitecture.">
       <main>
+        <div>
       <h1>Your art app</h1>
 
-<Login/>
+{/* //con estado ver si ejecuta evento Login o Register */}
+<RegisterLogin/> 
+{/* <div className="register-container">
+<Link href="/register">
+  <p className="register-cta">Create your account if you don't have one yet</p>
+</Link>
+<Button buttonText="Register" emptyInputs={emptyInputs}/>
+</div> */}
+
 
         <ul>
           {artworks.map((artwork) => (
@@ -72,7 +81,9 @@ const Home = ( { artworks, authors }: Props ) => {
 
         </ul>
 <Link href="/authors">See all Authors</Link>
+</div>
       </main>
+     
       </Layout>
   
   )

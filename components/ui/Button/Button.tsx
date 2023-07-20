@@ -1,8 +1,8 @@
-const Button = ({buttonText, emptyInputs} : Props) => {
+const Button = ({buttonText, emptyForm} : Props) => {
 
   return (
     <>
-        <button type="submit" disabled={emptyInputs}
+        <button type="submit" disabled={emptyForm}
         >{buttonText}</button>
     </>
   )
@@ -10,7 +10,7 @@ const Button = ({buttonText, emptyInputs} : Props) => {
 
 export type Props = {
   buttonText: string,
-  emptyInputs: boolean
+  emptyForm: boolean
  }
 
 export default Button
