@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import { useForm } from 'react-hook-form'
 
 const Message = () => {

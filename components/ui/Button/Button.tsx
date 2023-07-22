@@ -1,9 +1,10 @@
+import { ButtonStyled } from './ButtonStyled';
 const Button = ({buttonText, emptyForm} : Props) => {
 
   return (
     <>
-        <button type="submit" disabled={emptyForm}
-        >{buttonText}</button>
+        <ButtonStyled type="submit" disabled={emptyForm}
+        >{buttonText}</ButtonStyled>
     </>
   )
 }

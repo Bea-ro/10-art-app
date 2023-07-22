@@ -7,8 +7,10 @@ import { Artwork } from '../types/artwork'
 import { Author } from '../types/author'
 import { getArtworks } from '../libs/artworks/artworks';
 import { getAuthors } from '../libs/authors/authors';
-import { fetcher } from '../utils/fetcher';
-import RegisterLogin from '../components/RegisterLogin/RegisterLogin';
+//import { fetcher } from '../utils/fetcher';
+import PageTitle from '../components/ui/PageTitle/PageTitle';
+import Form from '../components/ui/Form/Form';
+import Message from '../components/ui/Message/Message';
 
 const Home = ( { artworks, authors }: Props ) => {
 
@@ -25,12 +27,11 @@ const Home = ( { artworks, authors }: Props ) => {
   return (
       <Layout title="Art App" 
       description="Find information about artists from all movements and artworks of pinture, sculpture and arquitecture.">
-      <main>
-        <div>
-      <h1>Your art app</h1>
+      <PageTitle title="Your Art App"/>
 
 {/* //con estado ver si ejecuta evento Login o Register */}
-<RegisterLogin/> 
+<Form/>
+<Message/>
 {/* <div className="register-container">
 <Link href="/register">
   <p className="register-cta">Create your account if you don't have one yet</p>
@@ -56,7 +57,7 @@ const Home = ( { artworks, authors }: Props ) => {
           }
         </ul>
 
-          <Link href="/atrworks">See all Artworks</Link>
+          <Link href="/artworks">See all Artworks</Link>
 
         <ul>
           {authors.map((author) => (
@@ -80,10 +81,7 @@ const Home = ( { artworks, authors }: Props ) => {
           }
 
         </ul>
-<Link href="/authors">See all Authors</Link>
-</div>
-      </main>
-     
+<Link href="/authors">See all Authors</Link>     
       </Layout>
   
   )
@@ -104,6 +102,7 @@ export const getStaticProps: GetStaticProps = async () => {
 export type Props = {
   artworks: Artwork[]
   authors: Author[]
+  title: string
  }
  
 

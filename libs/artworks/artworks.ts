@@ -6,7 +6,7 @@ const response = await fetch('https://complete-server-rtc.onrender.com/api/artwo
 return response
 }
 
-export const getArtworkById = async (id): Promise<Artwork> => {
+export const getArtworkById = async (id:string): Promise<Artwork> => {
     const response = await fetch(`https://complete-server-rtc.onrender.com/api/artworks/${id}`)
     .then((res) => res.json())
     console.log(response)

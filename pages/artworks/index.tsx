@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import Layout from '../../components/ui/Layout'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -6,6 +7,7 @@ import { GetStaticProps } from 'next';
 import { Artwork } from '../../types/artwork'
 import { getArtworks } from '../../libs/artworks/artworks';
 import { fetcher } from '../../utils/fetcher';
+import PageTitle from '../../components/ui/PageTitle/PageTitle';
 
 const ArtworksPage = ( { artworks }: Props ) => {
 
@@ -17,8 +19,9 @@ const ArtworksPage = ( { artworks }: Props ) => {
   return (
       <Layout title="Artworks" 
       description="Find information about artists from all movements and artworks of pinture, sculpture and arquitecture.">
-      <main>
-      <h1>Artowrks</h1>
+      
+      <PageTitle title="Artowrks"/>
+      
       <Link href="/">HOME</Link>
         <ul>
           {artworksList.map((artwork) => (
@@ -37,7 +40,7 @@ const ArtworksPage = ( { artworks }: Props ) => {
 
         </ul>
     
-      </main>
+   
       </Layout>
   
   )

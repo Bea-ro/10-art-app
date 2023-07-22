@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import { GetStaticProps } from "next"; 
 import { GetStaticPaths } from "next"; 
 import { Artwork } from "../../types/artwork";
