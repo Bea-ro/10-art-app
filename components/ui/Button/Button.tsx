@@ -1,17 +1,17 @@
 import { ButtonStyled } from './ButtonStyled';
-const Button = ({buttonText, emptyForm} : Props) => {
 
-  return (
+const Button = ({type, buttonText} : Props) => {
+
+return (
     <>
-        <ButtonStyled type="submit" disabled={emptyForm}
-        >{buttonText}</ButtonStyled>
+        <ButtonStyled type={type}>{buttonText}</ButtonStyled>
     </>
   )
 }
 
 export type Props = {
-  buttonText: string,
-  emptyForm: boolean
+  type: "button" | "submit" | "reset" | undefined
+  buttonText: string 
  }
 
 export default Button

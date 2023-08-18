@@ -5,15 +5,12 @@ import { useForm} from 'react-hook-form'
 import Input from '../Input/Input';
 import Button from '../Button/Button';
 
-import { loginPostFetch } from '../../../services/loginPostFetch';
 import { Values } from '../../../types/values'
+import { registerPostFetch } from '../../../services/registerPostFetch';
+import { loginPostFetch } from '../../../services/loginPostFetch';
 
-import { userStored } from '../../../utils/localStorage'
 
-//cambia vista register/login según seleccione el usuario
-// Esta vista no puede funcionar mediante SSR (poner SSG) ya que necesita fetch para comprobar que está autenticado
-
-const Form = () => {
+const Form = ( {action, setIsAuth}: Props) => {
 
         const { handleSubmit, register, formState } = useForm({defaultValues: 
         {email: '',
@@ -21,34 +18,26 @@ const Form = () => {
       }
       })
 
-      const [emptyForm, setEmptyForm] = useState<boolean>(true)
-
       const [error, setError] = useState<string>('');
-
-      const [isLoggedIn, setIsLoggedIn] = useState(() => {
-        if (userStored) {
-          return true;
-        } else {
-          return false;
-        }
-      });
       
-      console.log(formState)
+  
+      const onSubmitRegister = (values: Values) => { 
+        registerPostFetch(values, setError, setIsAuth); 
+       }
       
-      const onSubmit = (values: Values) => { 
-       loginPostFetch(values, setError, setIsLoggedIn); 
+      const onSubmitLogin = (values: Values) => { 
+       loginPostFetch(values, setError, setIsAuth); 
       }
 
 
   return (
 
-    <FormStyled onSubmit={handleSubmit(onSubmit)}>
+    <FormStyled onSubmit={action === "register" ? handleSubmit(onSubmitRegister): handleSubmit(onSubmitLogin)}>
      <Input
           register={register("email")}
           type="email"
           placeholder="email address"
           id="email"
-          onChange={() => setEmptyForm(false) }
         />
 
         <Input
@@ -56,12 +45,16 @@ const Form = () => {
           type="password"
           placeholder="password"
           id="password"
-          onChange={ () => setEmptyForm(false) }
         />
-        <Button buttonText="Submit" emptyForm={emptyForm}/>
+        <Button type="submit" buttonText="Submit"/>
    
    </FormStyled>
      )
 }
+
+type Props = {
+  action: string | undefined | string[]
+  setIsAuth: () => void
+} 
 
 export default Form

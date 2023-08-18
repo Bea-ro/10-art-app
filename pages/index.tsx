@@ -1,41 +1,39 @@
-import Layout from '../components/ui/Layout'
 import Link from 'next/link'
 import Image from 'next/image'
 
-// import { GetStaticProps } from 'next';
-// import { Artwork } from '../types/artwork'
-// import { Author } from '../types/author'
-// import { getArtworks } from '../libs/artworks/artworks';
-// import { getAuthors } from '../libs/authors/authors';
+import { GetStaticProps } from 'next';
+import { Artwork } from '../types/artwork'
+import { Author } from '../types/author'
+import { getArtworks } from '../libs/artworks/artworks';
+import { getAuthors } from '../libs/authors/authors';
 
+import Layout from '../components/ui/Layout'
 import PageTitle from '../components/ui/PageTitle/PageTitle';
-import Form from '../components/ui/Form/Form';
+import Button from '../components/ui/Button/Button';
 import Message from '../components/ui/Message/Message';
 
-const Home = ( 
-  // { artworks, authors }: Props 
-  ) => {
 
+const Home = ({ artworks, authors }: Props) => {
+
+  const isClient = typeof window !== 'undefined';
+  let isAuth = false;
+
+  if (isClient) {
+    const userStored = localStorage.getItem('userStored');
+    isAuth = userStored ? true : false;
+  }
+  
+    
   return (
       <Layout title="Art App" 
       description="Find information about artists from all movements and artworks of pinture, sculpture and arquitecture.">
       <PageTitle title="Your Art App"/>
       
-{/* //cuando no estás autenticado te muestra register/login y cuando sí, te muestra los ul de abajo */}
-{/* //con estado ver si ejecuta evento Login o Register */}
-<button>Register</button>
-<button>Login</button>
 
-<Message/>
-{/* <div className="register-container">
-<Link href="/register">
-  <p className="register-cta">Create your account if you don't have one yet</p>
-</Link>
-<Button buttonText="Register" emptyInputs={emptyInputs}/>
-</div> */}
-
-{/* ver dónde meter los ul */}
-        {/* <ul>
+{isAuth? 
+(
+<>
+<ul>
           {artworks.map((artwork) => (
             <li key={artwork._id}>
                <Link href="/artworks"> 
@@ -76,29 +74,40 @@ const Home = (
           }
 
         </ul>
-<Link href="/authors">See all Authors</Link>      */}
+<Link href="/authors">See all Authors</Link>
+</>
+)
+:
+(
+<>
+<Link href="/user?action=register" title="register"><Button type="button" buttonText="Register"/></Link> 
+<Link href="/user?action=login" title="login"><Button type="button" buttonText="Login"/></Link> 
+</>
+)
+}
+
+<Message/>
       </Layout>
-  
   )
 }
 
-// export const getStaticProps: GetStaticProps = async () => {
-//   const artworks = await getArtworks()
-//   const authors = await getAuthors()
-//     return {
-//       props: {
-//         artworks: artworks,
-//         authors: authors
-//       },
-//       revalidate: 30
-//      };
-//   };
+export const getStaticProps: GetStaticProps = async () => {
+  const artworks = await getArtworks()
+  const authors = await getAuthors()
+    return {
+      props: {
+        artworks: artworks,
+        authors: authors
+      },
+      revalidate: 30
+     };
+  };
 
-// export type Props = {
-//   artworks: Artwork[]
-//   authors: Author[]
-//   title: string
-//  }
+export type Props = {
+  artworks: Artwork[]
+  authors: Author[]
+  title: string
+ }
  
 
 export default Home

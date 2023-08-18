@@ -1,6 +1,6 @@
 import { Values } from '../types/values'
 
-export const loginPostFetch = (values: Values, setError: (arg0: string) => void, setIsLoggedIn: (arg0: boolean) => void) => {
+export const loginPostFetch = (values: Values, setError: (arg0: string) => void, setIsAuth: (arg0: boolean) => void) => {
     fetch('https://complete-server-rtc.onrender.com/api/users/login', {
       method: 'POST',
       headers: {
@@ -23,7 +23,7 @@ export const loginPostFetch = (values: Values, setError: (arg0: string) => void,
   
           // navigate('/favorites');
   
-          setIsLoggedIn(true);
+          setIsAuth(true);
         }
       })
       .catch((error) => {

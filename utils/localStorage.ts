@@ -1,1 +1,0 @@
-export const userStored = localStorage.getItem('userStored')
