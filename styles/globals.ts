@@ -13,12 +13,11 @@ export const Global = createGlobalStyle`
 }
 
 :root {
-  --color-dark-blue: #004b6b;
-  --color-mid-blue: #00819e;
-  --color-light-blue: #00b3aa;
-  --color-yellow: #f5de4d;
-  --color-salmon: #f05c5c;
-  --border-radius: 3px;
+  --color-blue: #96B6C5;
+  --color-light-blue: #ADC4CE;
+  --color-beige: #EEE0C9;
+  --color-grey: #F1F0E8;
+  --border-radius: 5px;
 }
 
 * {

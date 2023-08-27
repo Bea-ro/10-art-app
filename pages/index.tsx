@@ -11,6 +11,7 @@ import Layout from '../components/ui/Layout'
 import PageTitle from '../components/ui/PageTitle/PageTitle';
 import Button from '../components/ui/Button/Button';
 import Message from '../components/ui/Message/Message';
+import Container from '../components/ui/Container/Container';
 
 
 const Home = ({ artworks, authors }: Props) => {
@@ -27,6 +28,7 @@ const Home = ({ artworks, authors }: Props) => {
   return (
       <Layout title="Art App" 
       description="Find information about artists from all movements and artworks of pinture, sculpture and arquitecture.">
+          <main>
       <PageTitle title="Your Art App"/>
       
 
@@ -79,14 +81,15 @@ const Home = ({ artworks, authors }: Props) => {
 )
 :
 (
-<>
+<Container>
 <Link href="/user?action=register" title="register"><Button type="button" buttonText="Register"/></Link> 
 <Link href="/user?action=login" title="login"><Button type="button" buttonText="Login"/></Link> 
-</>
+</Container>
 )
 }
 
 <Message/>
+</main>
       </Layout>
   )
 }
