@@ -28,7 +28,7 @@ const Home = ({ artworks, authors }: Props) => {
   return (
       <Layout title="Art App" 
       description="Find information about artists from all movements and artworks of pinture, sculpture and arquitecture.">
-          <main>
+     
       <PageTitle title="Your Art App"/>
       
 
@@ -89,7 +89,7 @@ const Home = ({ artworks, authors }: Props) => {
 }
 
 <Message/>
-</main>
+
       </Layout>
   )
 }

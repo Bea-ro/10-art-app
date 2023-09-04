@@ -21,11 +21,9 @@ const UserPage = () => {
   return (
       <Layout title="Register" 
       description="Find information about artists from all movements and artworks of pinture, sculpture and arquitecture.">
-      <main>
       <PageTitle title={action === "register" ? "Register" : "Login"}/>
-      <p className="register-cta">Create your account if you don't have one yet</p>
+      <p style={{textAlign: 'center', padding: '12px', fontSize:'20px'}} className="register-cta">Create your account if you don't have one yet</p>
       <Form action={action}/>
-      </main>
       </Layout>
   
   )

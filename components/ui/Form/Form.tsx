@@ -4,11 +4,11 @@ import { useForm} from 'react-hook-form'
 
 import Input from '../Input/Input';
 import Button from '../Button/Button';
+import Container from '../Container/Container';
 
 import { Values } from '../../../types/values'
 import { registerPostFetch } from '../../../services/registerPostFetch';
 import { loginPostFetch } from '../../../services/loginPostFetch';
-
 
 const Form = ( {action, setIsAuth}: Props) => {
 
@@ -33,6 +33,7 @@ const Form = ( {action, setIsAuth}: Props) => {
   return (
 
     <FormStyled onSubmit={action === "register" ? handleSubmit(onSubmitRegister): handleSubmit(onSubmitLogin)}>
+      <Container style={{padding: '12px', flexDirection: 'column'}}>
      <Input
           register={register("email")}
           type="email"
@@ -46,6 +47,7 @@ const Form = ( {action, setIsAuth}: Props) => {
           placeholder="password"
           id="password"
         />
+        </Container>
         <Button type="submit" buttonText="Submit"/>
    
    </FormStyled>

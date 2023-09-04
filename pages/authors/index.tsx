@@ -19,7 +19,6 @@ const AuthorsPage = ( { authors }: Props ) => {
   return (
       <Layout title="Authors" 
       description="Find information about artists from all movements and artworks of pinture, sculpture and arquitecture.">
-      <main>
       <PageTitle title="Authors"/>
       <Link href="/">HOME</Link>
 
@@ -43,8 +42,6 @@ const AuthorsPage = ( { authors }: Props ) => {
           }
 
         </ul>
-    
-      </main>
       </Layout>
   
   )
