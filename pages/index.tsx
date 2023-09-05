@@ -12,6 +12,7 @@ import PageTitle from '../components/ui/PageTitle/PageTitle';
 import Button from '../components/ui/Button/Button';
 import Message from '../components/ui/Message/Message';
 import Container from '../components/ui/Container/Container';
+import Text from '../components/ui/Text/Text';
 
 
 const Home = ({ artworks, authors }: Props) => {
@@ -28,8 +29,8 @@ const Home = ({ artworks, authors }: Props) => {
   return (
       <Layout title="Art App" 
       description="Find information about artists from all movements and artworks of pinture, sculpture and arquitecture.">
-     
       <PageTitle title="Your Art App"/>
+      <Text fontSize="40px" text="Find your favourite artists and artworks"></Text>
       
 
 {isAuth? 
@@ -81,9 +82,9 @@ const Home = ({ artworks, authors }: Props) => {
 )
 :
 (
-<Container>
-<Link href="/user?action=register" title="register"><Button type="button" buttonText="Register"/></Link> 
-<Link href="/user?action=login" title="login"><Button type="button" buttonText="Login"/></Link> 
+<Container flexDirection="column">
+<Text text="Still do not have an account?"></Text>
+<Link href="/user?action=register" title="register"><Button type="button" buttonText="Free Register"/></Link> 
 </Container>
 )
 }

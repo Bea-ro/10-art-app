@@ -33,7 +33,7 @@ const Form = ( {action, setIsAuth}: Props) => {
   return (
 
     <FormStyled onSubmit={action === "register" ? handleSubmit(onSubmitRegister): handleSubmit(onSubmitLogin)}>
-      <Container style={{padding: '12px', flexDirection: 'column'}}>
+      <Container flexDirection='column'>
      <Input
           register={register("email")}
           type="email"

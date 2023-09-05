@@ -11,7 +11,7 @@ import { getAuthors } from '../../libs/authors/authors';
 import { fetcher } from '../../utils/fetcher';
 import PageTitle from '../../components/ui/PageTitle/PageTitle';
 import Form from '../../components/ui/Form/Form';
-
+import Text from '../../components/ui/Text/Text';
 
 const UserPage = () => {
   
@@ -19,10 +19,11 @@ const UserPage = () => {
   const { action } = router.query;
 
   return (
-      <Layout title="Register" 
+      <Layout title={action === "register" ? "Register" : "Login"} 
       description="Find information about artists from all movements and artworks of pinture, sculpture and arquitecture.">
       <PageTitle title={action === "register" ? "Register" : "Login"}/>
-      <p style={{textAlign: 'center', padding: '12px', fontSize:'20px'}} className="register-cta">Create your account if you don't have one yet</p>
+      <Text text={action === "register" ? "Create your free account and start enjoying" : "Please, provide your email and password for start enjoying!"}>
+      </Text>
       <Form action={action}/>
       </Layout>
   

@@ -1,8 +1,10 @@
-import { styled } from "styled-components";
+import { styled, ThemedStyledProps } from "styled-components"
 
-export const ContainerStyled = styled.div`
+export const ContainerStyled = styled.div<ThemedStyledProps<{ flexDirection?: string }>>`
 display: flex;
-justify-content: center;
+flex-direction: ${(props) => props.flexDirection || "row"};
+justify-content: ${(props) => props.justifyContent || "center"};
+align-items: center;
 gap: 12px;
-align-items: center
+padding: 20px;
 `  

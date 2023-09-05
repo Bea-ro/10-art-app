@@ -1,16 +1,18 @@
 import { ContainerStyled } from './ContainerStyled';
 
-const Container = ( {children}: Props) => {
+const Container = ( {children, flexDirection, justifyContent}: Props) => {
 
 return (
     <>
-        <ContainerStyled>{children}</ContainerStyled>
+        <ContainerStyled flexDirection={flexDirection} justifyContent={justifyContent}>{children}</ContainerStyled>
     </>
   )
 }
 
 export type Props = {
-    children: React.ReactNode 
+    children: React.ReactNode
+    flexDirection?: string
+    justifyContent?: string
    }
 
 export default Container
