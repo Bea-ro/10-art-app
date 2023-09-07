@@ -1,5 +1,6 @@
-import Link from 'next/link'
-import Image from 'next/image'
+import React, {useState} from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 
 import { GetStaticProps } from 'next';
 import { Artwork } from '../types/artwork'
@@ -24,6 +25,24 @@ const Home = ({ artworks, authors }: Props) => {
     const userStored = localStorage.getItem('userStored');
     isAuth = userStored ? true : false;
   }
+
+
+  const aspectRatio = 16 / 9;
+  const calculatedWidth = 400 * aspectRatio;
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const prevArtwork = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+      console.log('Prev button clicked');
+    }
+  };
+  const nextArtwork = () => {
+    if (currentIndex < artworks.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
+  console.log(currentIndex)
   
     
   return (
@@ -33,26 +52,32 @@ const Home = ({ artworks, authors }: Props) => {
       <Text fontSize="40px" text="Find your favourite artists and artworks"></Text>
       
 
-{isAuth? 
+{/* {isAuth? 
 (
-<>
+<> */}
+<Container flexDirection='column'>
+<Button type="button" buttonText="<" onClick={() => prevArtwork()}></Button>
 <ul>
-          {artworks.map((artwork) => (
-            <li key={artwork._id}>
+          {artworks.map((artwork, index) => (
+            <li key={artwork._id} style={{display: index === currentIndex ? 'block' : 'none'}}>
                <Link href="/artworks"> 
-          
+               
+               <Container flexDirection='column' backgroundColor='var(--color-beige)' color='var(--color-blue)' >
               <h3>{artwork.title}</h3>
-              <p>{artwork.author}</p>
-              <p>{artwork.year}</p>
-              <Image src={artwork.image ? artwork.image : ''} alt={artwork.title} height={1260} width={750}></Image>
+              <p>{artwork.author}, {artwork.year} </p>
+              <Image src={artwork.image ? artwork.image : ''} alt={artwork.title} 
+              height={400} width={calculatedWidth}
+              ></Image>
                <p>{artwork.area}</p>
                <p>{artwork.movement}</p>
+               </Container>
                </Link>
                </li>
             ))
           }
         </ul>
-
+        <Button type="button" buttonText=">" onClick={() => nextArtwork()}></Button>
+        </Container>
           <Link href="/artworks">See all Artworks</Link>
 
         <ul>
@@ -78,7 +103,7 @@ const Home = ({ artworks, authors }: Props) => {
 
         </ul>
 <Link href="/authors">See all Authors</Link>
-</>
+{/* </>
 )
 :
 (
@@ -90,7 +115,7 @@ const Home = ({ artworks, authors }: Props) => {
 }
 
 <Message/>
-
+ */}
       </Layout>
   )
 }
