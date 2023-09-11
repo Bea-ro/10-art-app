@@ -4,10 +4,6 @@ export type Artwork = {
     author: string,
     year: number,
     area: string,
-    // area: 'pinture' | 'sculpture' | 'arquitecture',
     movement: string,
-   image?: string | undefined
+   image: string | undefined
 }
-
-
-

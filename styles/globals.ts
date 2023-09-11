@@ -2,16 +2,6 @@ import { createGlobalStyle } from 'styled-components';
 
 export const Global = createGlobalStyle`
 
-@import url('https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy&display=swap');
-
-@font-face {
-    font-family: 'Sorts Mill Goudy', serif;
-    src: url('https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy&display=swap');
-    font-weight: 400;
-    font-style: normal;
-    
-}
-
 :root {
   --color-blue: #96B6C5;
   --color-light-blue: #ADC4CE;
@@ -27,7 +17,9 @@ export const Global = createGlobalStyle`
   outline: none;
   text-decoration: none;
   font-family: 'Sorts Mill Goudy', serif;
-  font-size: 15px
+  font-size: 15px;
+  font-weight: 400;
+  font-style: normal;
 }
 
 a {

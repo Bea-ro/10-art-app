@@ -11,10 +11,6 @@ type Artworks = {
     req: NextApiRequest,
     res: NextApiResponse<Artworks | Error>
   ) => {
-    console.log(req.body)
-    console.log(req.query)
-    // res.status(200).json({ name: 'Bea' })
-
     return getArtworks() 
   .then((response) => res.status(200).json({artworks: response}))
   .catch((err) => res.status(500).json({message: err}))

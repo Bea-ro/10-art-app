@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const ButtonStyled = styled.button`
+export const ButtonStyled = styled.button` 
 color: var(--color-blue);
 background-color: var(--color-beige);
 border-radius: var(--border-radius);

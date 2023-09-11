@@ -12,7 +12,6 @@ import PageTitle from '../../components/ui/PageTitle/PageTitle';
 const ArtworksPage = ( { artworks }: Props ) => {
 
   const { data, error } = useSwr('api/artworks', fetcher, {refreshInterval: 30000})
-  console.log({data, error})
 
   const artworksList = data?.artworks as Artwork[] || artworks
 

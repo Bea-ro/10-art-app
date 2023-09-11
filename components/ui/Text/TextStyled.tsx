@@ -1,6 +1,6 @@
-import { styled, ThemedStyledProps } from "styled-components";
+import { styled } from "styled-components";
 
-export const TextStyled = styled.p<ThemedStyledProps<{ fontSize?: string }>>`
+export const TextStyled = styled.p<{ fontSize?: string }>`
 text-align: center;
 font-size: ${(props) => props.fontSize || "20px"};
 `

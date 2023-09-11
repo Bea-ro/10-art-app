@@ -8,7 +8,6 @@ export const handler = (
     req: NextApiRequest,
     res: NextApiResponse<Author | Error>
   ) => {
-   console.log('query', req.query)
     const id = req.query.id as string
     const author = getAuthorById(id)
     if (!author) {

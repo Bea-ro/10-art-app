@@ -1,10 +1,10 @@
-import { styled, ThemedStyledProps } from "styled-components"
+import { styled }  from 'styled-components';
 
-export const ContainerStyled = styled.div<ThemedStyledProps<{ flexDirection?: string}>>`
+export const ContainerStyled = styled.div<{ direction?: string, color?: string }>`
 display: flex;
-flex-direction: ${(props) => props.flexDirection || "row"};
-justify-content: ${(props) => props.justifyContent || "center"};
-background-color: ${(props) => props.backgroundColor};
+flex-direction: ${(props) => props.direction || "row"};
+/* justify-content: ${(props) => props.justify || "center"}; */
+/* background-color: ${(props) => props.background}; */
 color: ${(props) => props.color};
 align-items: center;
 gap: 12px;

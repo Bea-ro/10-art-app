@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import Layout from '../../components/ui/Layout'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -7,12 +6,11 @@ import { GetStaticProps } from 'next';
 import { Author } from '../../types/author'
 import { getAuthors } from '../../libs/authors/authors';
 import { fetcher } from '../../utils/fetcher';
-import PageTitle from '@/components/ui/PageTitle/PageTitle';
+import PageTitle from '../../components/ui/PageTitle/PageTitle';
 
 const AuthorsPage = ( { authors }: Props ) => {
 
   const { data, error } = useSwr('api/authors', fetcher, {refreshInterval: 30000})
-  console.log({data, error})
 
   const authorsList = data?.artworks as Author[] || authors
 

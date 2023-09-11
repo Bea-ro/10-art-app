@@ -1,6 +1,7 @@
-import React, { useState }  from 'react'
+import React, { useContext, useState }  from 'react'
 import { FormStyled } from './FormStyled';
 import { useForm} from 'react-hook-form'
+import { useRouter } from 'next/router';
 
 import Input from '../Input/Input';
 import Button from '../Button/Button';
@@ -9,8 +10,13 @@ import Container from '../Container/Container';
 import { Values } from '../../../types/values'
 import { registerPostFetch } from '../../../services/registerPostFetch';
 import { loginPostFetch } from '../../../services/loginPostFetch';
+import { AuthContext } from '../../../pages/index';
 
-const Form = ( {action, setIsAuth}: Props) => {
+const Form = ( {action}: Props) => {
+
+  
+const { setIsAuth } = useContext(AuthContext) 
+const router = useRouter();
 
         const { handleSubmit, register, formState } = useForm({defaultValues: 
         {email: '',
@@ -22,18 +28,22 @@ const Form = ( {action, setIsAuth}: Props) => {
       
   
       const onSubmitRegister = (values: Values) => { 
-        registerPostFetch(values, setError, setIsAuth); 
+        registerPostFetch(handleNavigate, values, setError, setIsAuth); 
        }
       
+      const handleNavigate = (url: string) => {
+        router.push(url);
+      };
+
       const onSubmitLogin = (values: Values) => { 
-       loginPostFetch(values, setError, setIsAuth); 
+       loginPostFetch(handleNavigate, values, setError, setIsAuth); 
       }
 
 
   return (
 
     <FormStyled onSubmit={action === "register" ? handleSubmit(onSubmitRegister): handleSubmit(onSubmitLogin)}>
-      <Container flexDirection='column'>
+      <Container direction='column'>
      <Input
           register={register("email")}
           type="email"
@@ -56,7 +66,6 @@ const Form = ( {action, setIsAuth}: Props) => {
 
 type Props = {
   action: string | undefined | string[]
-  setIsAuth: () => void
 } 
 
 export default Form
