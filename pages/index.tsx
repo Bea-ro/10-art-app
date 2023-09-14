@@ -16,6 +16,8 @@ import Message from '../components/ui/Message/Message';
 import Container from '../components/ui/Container/Container';
 import Text from '../components/ui/Text/Text';
 import Carousel from '../components/ui/Carousel/Carousel';
+import ArtworkCard from '../components/ArtworkCard/ArtworkCard';
+import ItemsGrid from '@/components/ui/Grid/ItemsGrid';
 
 
 export const AuthContext = createContext<AuthContextType>({
@@ -55,22 +57,9 @@ const Home = ({ artworks, authors }: Props) => {
 {isAuth? 
 (
 <>
-<ul>
-          {artworks.map((item) => (
-            <li key={item._id}>
-            <Link href={`/artworks/${item._id}`} key={item._id}> 
-              <h3>{item.title}</h3>
-              <p>{item.author}, {item.year} </p>
-              <Image src={item.image ? item.image : ''} alt={item.title} 
-              height={100} width={100*(16/9)}
-              ></Image>
-               <p>{item.area}</p>
-               <p>{item.movement}</p>
-              </Link>
-                   </li>
-))}
- </ul>
+<ItemsGrid artworks={artworks}></ItemsGrid>
 <Link href="/artworks">See Artworks Detail</Link>
+
 <Carousel carouselItems={authors}></Carousel>
 <Link href="/authors">See all Authors</Link>
 </>

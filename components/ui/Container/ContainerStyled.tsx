@@ -1,9 +1,9 @@
 import { styled }  from 'styled-components';
 
-export const ContainerStyled = styled.div<{ direction?: string, color?: string }>`
+export const ContainerStyled = styled.div<{ direction?: string, justify?: string, color?: string }>`
 display: flex;
 flex-direction: ${(props) => props.direction || "row"};
-/* justify-content: ${(props) => props.justify || "center"}; */
+justify-content: ${(props) => props.justify || "center"};
 /* background-color: ${(props) => props.background}; */
 color: ${(props) => props.color};
 align-items: center;

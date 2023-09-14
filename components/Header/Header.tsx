@@ -4,7 +4,9 @@ import { HeaderStyled } from './HeaderStyled';
 
 import { AuthContext } from '../../pages/index';
 
+import Container from '../ui/Container/Container';
 import Button from '../ui/Button/Button';
+import Navbar from '../ui/Navbar/Navbar';
 
 
 const Header = () => {
@@ -21,10 +23,13 @@ const Header = () => {
 
 return (
     <HeaderStyled>
+    
+     <Navbar></Navbar> 
   <Button type="button" buttonText={
      action === "register" || action === "login"? "Home" : (isAuth? "Logout" : "Login")
   }
 onClick={handleButtonClick}/>
+
 </HeaderStyled>
   )
 }
