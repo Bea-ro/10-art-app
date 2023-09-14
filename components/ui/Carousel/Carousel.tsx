@@ -16,7 +16,6 @@ const Carousel = ({carouselItems}: Props) => {
     const prevArtwork = () => {
       if (currentIndex > 0) {
         setCurrentIndex(currentIndex - 1);
-        console.log('Prev button clicked');
       }
     };
     const nextArtwork = () => {
@@ -24,29 +23,31 @@ const Carousel = ({carouselItems}: Props) => {
         setCurrentIndex(currentIndex + 1);
       }
     };
-    console.log(currentIndex)
     
 return (
     <>
-        <Container direction='column'>
-<Button type="button" buttonText="<" onClick={() => prevArtwork()}></Button>
 <ul>
           {carouselItems.map((item, index) => (
-           
+                 
             <li key={item._id} style={{display: index === currentIndex ? 'block' : 'none'}}>
             
             {item.title ? (
-               <Link href="/artworks"> 
+              <Link href={`/artworks/${item._id}`} key={item._id}> 
                <Container direction='column' color='var(--color-blue)' >
               <h3>{item.title}</h3>
               <p>{item.author}, {item.year} </p>
+              <Container>
+              <Button type="button" buttonText="<" onClick={() => prevArtwork()}></Button>
               <Image src={item.image ? item.image : ''} alt={item.title} 
               height={400} width={400*(16/9)}
               ></Image>
+               <Button type="button" buttonText=">" onClick={() => nextArtwork()}></Button>
+               </Container>
                <p>{item.area}</p>
                <p>{item.movement}</p>
                </Container>
-               </Link>)
+              </Link>
+               )
                :
                (
                 <Link href="/authors"> 
@@ -66,8 +67,8 @@ return (
           ))}
 
         </ul>
-        <Button type="button" buttonText=">" onClick={() => nextArtwork()}></Button>
-        </Container>
+       
+       
         </>
   )
 }

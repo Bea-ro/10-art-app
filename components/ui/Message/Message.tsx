@@ -1,17 +1,19 @@
 import { useForm } from 'react-hook-form'
+import { FormData } from '../../../types/formData'
 
 const Message = () => {
 
-  const { formState } = useForm<Record<string, string>>({defaultValues: 
+  const { formState } = useForm<FormData>({defaultValues: 
     {email: '',
     password: ''
   }
   })
 
     return (
-
-formState.errors.email? <p>{formState.errors.email.message}</p> : (formState.errors.password? <p>{formState.errors.password.message}</p> : null ) 
-
+<>
+{formState.errors.password && (<p>{formState.errors.password.message}</p>) || 
+        formState.errors.email && (<p>{formState.errors.email.message}</p>)}
+        </>
     );
   };
 

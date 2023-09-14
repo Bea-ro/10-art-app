@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { LayoutStyled } from './LayoutStyled'
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
+import Footer from '../../Footer/Footer';
+import Header from '../../Header/Header';
 
 
 const Layout = ( { title, description, children }: Props ) => {

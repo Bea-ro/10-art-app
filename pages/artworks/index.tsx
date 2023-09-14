@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Layout from '../../components/ui/Layout'
+import Layout from '../../components/ui/Layout/Layout'
 import Link from 'next/link'
 import Image from 'next/image'
 import useSwr from 'swr';
@@ -8,6 +8,7 @@ import { Artwork } from '../../types/artwork'
 import { getArtworks } from '../../libs/artworks/artworks';
 import { fetcher } from '../../utils/fetcher';
 import PageTitle from '../../components/ui/PageTitle/PageTitle';
+import Carousel from '../../components/ui/Carousel/Carousel';
 
 const ArtworksPage = ( { artworks }: Props ) => {
 
@@ -22,24 +23,7 @@ const ArtworksPage = ( { artworks }: Props ) => {
       <PageTitle title="Artowrks"/>
       
       <Link href="/">HOME</Link>
-        <ul>
-          {artworksList.map((artwork) => (
-             <Link href={`/artworks/${artwork._id}`} key={artwork._id}>
-            <li>
-              <h3>{artwork.title}</h3>
-              <p>{artwork.author}</p>
-              <p>{artwork.year}</p>
-              <Image src={artwork.image ? artwork.image : ''} alt={artwork.title} height={1260} width={750}></Image>
-               <p>{artwork.area}</p>
-               <p>{artwork.movement}</p>
-              </li>
-              </Link>
-            ))
-          }
-
-        </ul>
-    
-   
+      <Carousel carouselItems={artworks}></Carousel>   
       </Layout>
   
   )

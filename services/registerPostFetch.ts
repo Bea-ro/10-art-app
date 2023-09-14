@@ -17,8 +17,8 @@ export const registerPostFetch = (handleNavigate: (arg0: string) => void, values
       } else {
         setError('');
         const userStored = {
-          email: data.createdUser.email,
-          password: data.createdUser.password
+          email: data.email,
+          password: data.password
         };
         localStorage.setItem('userStored', JSON.stringify(userStored));
         loginPostFetch(handleNavigate, values, setError, setIsAuth);

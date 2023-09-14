@@ -5,32 +5,26 @@ import { HeaderStyled } from './HeaderStyled';
 import { AuthContext } from '../../pages/index';
 
 import Button from '../ui/Button/Button';
-import Container from '../ui/Container/Container';
 
 
 const Header = () => {
 
   const router = useRouter();
   const { action } = router.query;
-  const { isAuth } = useContext(AuthContext) 
+  const { isAuth, setIsAuth } = useContext(AuthContext) 
 
   const handleButtonClick = () => {
-   if ( action === "login" || action === "register") {
-    isAuth && localStorage.removeItem('userStored')
-      router.push('/')  
-    } else if ( action === undefined) {
-      router.push('/user?action=login')
-    } 
+    isAuth && localStorage.removeItem('userStored'); 
+    isAuth && setIsAuth(false)
+    action === undefined && !isAuth? router.push('/user?action=login') : router.push('/')
   };
 
 return (
     <HeaderStyled>
-      <Container> 
   <Button type="button" buttonText={
      action === "register" || action === "login"? "Home" : (isAuth? "Logout" : "Login")
   }
 onClick={handleButtonClick}/>
- </Container>
 </HeaderStyled>
   )
 }

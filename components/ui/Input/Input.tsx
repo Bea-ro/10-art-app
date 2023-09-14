@@ -1,7 +1,9 @@
 import React from 'react'
 import { InputStyled } from './InputStyled'
+import { UseFormRegisterReturn } from 'react-hook-form'
 
-const Input = ( {register, type, placeholder, id, onChange } : Props ) => {
+const Input = ( {register, type, placeholder, id } : Props ) => {
+
   return (
     <>
   <InputStyled
@@ -9,21 +11,28 @@ const Input = ( {register, type, placeholder, id, onChange } : Props ) => {
           type={type}
           placeholder={placeholder}
           id={id}
-          onChange={onChange}
         />
     </>
   )
 }
 
 export type Props = {
-    register: {
-      email: string
-      password: string
-    }
+  register: UseFormRegisterReturn
+    // register: (options:{
+    //   required: boolean
+    //   pattern: {
+    //     value: RegExp
+    //   message: string
+    //   }
+    // }) => void
     type: string
     placeholder: string
     id: string
-    onChange: () => void
 }
 
 export default Input
+
+
+
+
+
