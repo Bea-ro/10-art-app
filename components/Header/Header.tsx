@@ -4,7 +4,6 @@ import { HeaderStyled } from './HeaderStyled';
 
 import { AuthContext } from '../../pages/index';
 
-import Container from '../ui/Container/Container';
 import Button from '../ui/Button/Button';
 import Navbar from '../ui/Navbar/Navbar';
 

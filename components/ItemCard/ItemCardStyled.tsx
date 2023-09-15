@@ -1,5 +1,5 @@
 import { styled } from "styled-components"
 
-export const ArtworkCardStyled = styled.li`
+export const ItemCardStyled = styled.li`
 
 `  

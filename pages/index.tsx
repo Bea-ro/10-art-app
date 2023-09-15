@@ -1,6 +1,5 @@
 import React, {useState, createContext, useEffect} from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 
 import { useRouter } from 'next/router';
 import { GetStaticProps } from 'next';
@@ -15,8 +14,6 @@ import Button from '../components/ui/Button/Button';
 import Message from '../components/ui/Message/Message';
 import Container from '../components/ui/Container/Container';
 import Text from '../components/ui/Text/Text';
-import Carousel from '../components/ui/Carousel/Carousel';
-import ArtworkCard from '../components/ArtworkCard/ArtworkCard';
 import ItemsGrid from '@/components/ui/Grid/ItemsGrid';
 
 
@@ -52,16 +49,15 @@ const Home = ({ artworks, authors }: Props) => {
       description="Find information about artists from all movements and artworks of pinture, sculpture and arquitecture.">
       <PageTitle title="Your Art App"/>
       
-
-
 {isAuth? 
 (
 <>
-<ItemsGrid artworks={artworks}></ItemsGrid>
+<Text fontSize="40px" text="Artworks"/>
+<ItemsGrid items={artworks}></ItemsGrid>
 <Link href="/artworks">See Artworks Detail</Link>
-
-<Carousel carouselItems={authors}></Carousel>
-<Link href="/authors">See all Authors</Link>
+<Text fontSize="40px" text="Artists"/>
+<ItemsGrid items={authors}></ItemsGrid>
+<Link href="/authors">See Artists Detail</Link>
 </>
 )
 :

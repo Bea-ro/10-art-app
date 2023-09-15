@@ -1,17 +1,19 @@
 import { ItemsGridStyled } from './ItemsGridStyled';
 
-import ArtworkCard from '../../ArtworkCard/ArtworkCard';
+import { Item } from '../../../types/item';
 
-const ItemsGrid = ( {artworks} : Props ) => {
+import ItemCard from '../../ItemCard/ItemCard';
+
+const ItemsGrid = ( { items } : Props ) => {
   return (
     <ItemsGridStyled>
-          {artworks.map((artwork) => (
-         <ArtworkCard key={artwork._id} item={artwork} imgHeight={100} imgWidth={100*(16/9)}></ArtworkCard>
+          {items.map((item) => (
+         <ItemCard key={item._id} item={item} imgHeight={100} imgWidth={100*(16/9)}></ItemCard>
 ))}
     </ItemsGridStyled>
   )
 }
 export type Props = {
-    artworks: Artwork[]
+    items: Item[]
 }
 export default ItemsGrid
