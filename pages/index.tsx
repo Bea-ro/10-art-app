@@ -1,4 +1,4 @@
-import React, {useState, createContext, useEffect, useContext} from 'react';
+import React, { useEffect, useContext } from 'react';
 import Link from 'next/link';
 
 import { useRouter } from 'next/router';
@@ -36,7 +36,8 @@ const Home = ({ artworks, authors }: Props) => {
 
   return (
       <Layout title="Art App" 
-      description="Find information about artists from all movements and artworks of pinture, sculpture and arquitecture.">
+      description="Find information about artists from all movements and artworks of pinture, sculpture and arquitecture."
+      >
       <PageTitle title="Your Art App"/>
       
 {isAuth? 
@@ -51,6 +52,7 @@ const Home = ({ artworks, authors }: Props) => {
 <ItemsGrid items={authors}></ItemsGrid>
 <Link href="/authors">See Artists Detail</Link>
 </>
+
 )
 :
 (

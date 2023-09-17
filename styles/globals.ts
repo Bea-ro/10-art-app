@@ -22,6 +22,13 @@ export const Global = createGlobalStyle`
   font-style: normal;
 }
 
+body {
+  background-image: url('https://res.cloudinary.com/dnlceaase/image/upload/v1694962965/art-api/portada_jyuzfq.jpg');
+background-size: cover;
+background-position: center;
+background-color: rgba(255, 255, 255, 0.7);
+}
+
 a {
   text-decoration: none;
 }
