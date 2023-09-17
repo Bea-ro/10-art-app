@@ -1,32 +1,51 @@
 import styled from 'styled-components';
 import { GetStaticProps } from "next"; 
 import { GetStaticPaths } from "next"; 
+import { useContext } from 'react';
+import { AuthContext } from '../_app';
 import { Author } from "../../types/author";
 import Link from "next/link";
+import Image from 'next/image'
+
+import Layout from '../../components/ui/Layout/Layout';
+import PageTitle from '../../components/ui/PageTitle/PageTitle';
+import Text from '../../components/ui/Text/Text';
+import Button from '../../components/ui/Button/Button';
+
+
 
 const AuthorPage = ({ author }: Props) => {
+
+  const { isAuth } = useContext(AuthContext)
+
   return (
-    <>
-      <main>
-        <div>
-          {" "}
-          <h1>{author.name}</h1>
-
-          <ul>
- {author.mainArtworks.map((artwork) => (
-   <li key={artwork._id}>
-    <p>{artwork.title}</p>
-   </li>
- ))}
- </ul> 
-
-<p>{author.area}</p>
-<p>{author.movement}</p>
-
-        </div>
-        <Link href="/authors">BACK</Link>
-      </main>
-    </>
+    <Layout title={`Artist ${author.name}`}
+      description={`Find information about artwork ${author.name}`}>
+      
+      <PageTitle title={author.name}/>
+      {isAuth? 
+      <>
+      <h3>{author.name}</h3>
+      <Button buttonText="Add a new artist" type="button"/>
+      <Button buttonText="Delete" type="button"/>
+      
+      {/* <Image src={author.image || ''} alt={author.name} 
+      height={400} width={400*(16/9)}
+      ></Image> */}
+    
+      <ul>
+             {author.mainArtworks?.map((artwork) => (
+               <li key={artwork._id}>
+                <p>{artwork.title}</p>
+               </li>
+            ))}
+             </ul>                   
+       <p>{author.area}</p>
+       <p>{author.movement}</p>
+       </>
+       : <Text text={`Please, login to discover ${author.name}`}/>}
+      </Layout>
+     
   );
 };              
 

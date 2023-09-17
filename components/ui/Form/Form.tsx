@@ -11,7 +11,7 @@ import { Values } from '../../../types/values'
 import { FormData } from '../../../types/formData'
 import { registerPostFetch } from '../../../services/registerPostFetch';
 import { loginPostFetch } from '../../../services/loginPostFetch';
-import { AuthContext } from '../../../pages/index';
+import { AuthContext } from '../../../pages/_app';
 
 
 const Form = ( {action}: Props) => {

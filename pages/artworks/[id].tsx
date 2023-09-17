@@ -1,26 +1,41 @@
-import styled from 'styled-components';
 import { GetStaticProps } from "next"; 
 import { GetStaticPaths } from "next"; 
+import { useContext } from "react";
+import { AuthContext } from "../_app";
 import { Artwork } from "../../types/artwork";
 import Link from "next/link";
 import Image from 'next/image'
 
+import Layout from '../../components/ui/Layout/Layout';
+import PageTitle from '../../components/ui/PageTitle/PageTitle';
+import Text from '../../components/ui/Text/Text';
+import Button from '../../components/ui/Button/Button';
+
+
 const ArtworkPage = ({ artwork }: Props) => {
+
+  const { isAuth } = useContext(AuthContext)
+
   return (
-    <>
-      <main>
-        <div>
-          {/* {" "} */}
-          <h1>{artwork.title}</h1>
-          <p>{artwork.author}</p>
-          <p>{artwork.year}</p>
-          {/* <Image src={artwork.image ? artwork.image : ''} alt={artwork.title} height={1260} width={750}></Image> */}
-          <p>{artwork.area}</p>
-          <p>{artwork.movement}</p>
-        </div>
-        <Link href="/artworks">BACK</Link>
-      </main>
-    </>
+    
+    <Layout title={`Artwork ${artwork.title}`}
+      description={`Find information about artwork ${artwork.title}`}>
+      
+      <PageTitle title={artwork.title}/>
+      {isAuth? 
+      <>
+      <h3>{artwork.title}</h3>
+      <Button buttonText="Add a new artwork" type="button"/>
+      <Button buttonText="Delete" type="button"/>
+      <p>{`${artwork.author},  ${artwork.year}`} </p>   
+      <Image src={artwork.image || ''} alt={artwork.title} 
+      height={400} width={400*(16/9)}
+      ></Image>
+       <p>{artwork.area}</p>
+       <p>{artwork.movement}</p>
+       </>
+       : <Text text={`Please, login to discover ${artwork.title}`}/>}
+      </Layout>
   );
 };        
 

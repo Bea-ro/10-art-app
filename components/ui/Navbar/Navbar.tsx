@@ -11,8 +11,8 @@ const Navbar = () => {
     <NavbarStyled>
         {currentPath !== '/' && <Link href={'/'}>Home | </Link>}
         {currentPath !== '/artworks' && <Link href={'/artworks'}>Artworks</Link>}
-        {currentPath === '/' &&  <Link href={'/artworks'}> | </Link>}
-        {currentPath !== '/authors' && <Link href={'/authors'}>Authors</Link>}
+        {(currentPath !== '/artworks' && currentPath !== '/authors') &&  <Link href={'/artworks'}> | </Link>}
+        {currentPath !== '/authors' && <Link href={'/authors'}>Artists</Link>}
     </NavbarStyled>
   )
 }

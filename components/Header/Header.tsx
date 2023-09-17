@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { useRouter } from 'next/router';
 import { HeaderStyled } from './HeaderStyled';
 
-import { AuthContext } from '../../pages/index';
+import { AuthContext } from '../../pages/_app';
 
 import Button from '../ui/Button/Button';
 import Navbar from '../ui/Navbar/Navbar';
