@@ -30,7 +30,7 @@ const ArtworksPage = ( { artworks }: Props ) => {
       description="Find information about artists from all movements and artworks of pinture, sculpture and arquitecture.">
       
       <PageTitle title="Artowrks"/>
-      {isAuth? <Carousel carouselItems={artworks}></Carousel> : <Text text="Please, login to discover artworks"/>}         
+      {isAuth? <Carousel carouselItems={artworks}></Carousel> : <Text text="Please, log in to discover artworks."/>}         
       </Layout>
   )
 }

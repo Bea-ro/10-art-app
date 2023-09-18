@@ -43,7 +43,7 @@ const AuthorPage = ({ author }: Props) => {
        <p>{author.area}</p>
        <p>{author.movement}</p>
        </>
-       : <Text text={`Please, login to discover ${author.name}`}/>}
+       : <Text text={`Please, log in to discover ${author.name}.`}/>}
       </Layout>
      
   );

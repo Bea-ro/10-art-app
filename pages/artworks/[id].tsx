@@ -34,7 +34,7 @@ const ArtworkPage = ({ artwork }: Props) => {
        <p>{artwork.area}</p>
        <p>{artwork.movement}</p>
        </>
-       : <Text text={`Please, login to discover ${artwork.title}`}/>}
+       : <Text text={`Please, log in to discover ${artwork.title}.`}/>}
       </Layout>
   );
 };        

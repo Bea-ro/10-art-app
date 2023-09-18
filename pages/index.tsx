@@ -11,11 +11,12 @@ import { AuthContext } from './_app';
 
 import Layout from '../components/ui/Layout/Layout'
 import PageTitle from '../components/ui/PageTitle/PageTitle';
+import Subtitle from '../components/ui/Subtitle/Subtitle';
 import Button from '../components/ui/Button/Button';
 import Message from '../components/ui/Message/Message';
 import Container from '../components/ui/Container/Container';
 import Text from '../components/ui/Text/Text';
-import ItemsGrid from '../components/ui/Grid/ItemsGrid';
+import ItemsGrid from '../components/ui/ItemsGrid/ItemsGrid';
 
 
 const Home = ({ artworks, authors }: Props) => {
@@ -43,25 +44,40 @@ const Home = ({ artworks, authors }: Props) => {
 {isAuth? 
 (
 <>
-<Text fontSize="40px" text="Artworks" color="var(--color-blue)" background="var(--color-beige)"/>
-<Button buttonText="Add new artwork" type="button"/>
+<Subtitle subtitle="Artworks"/>
+<Container>
+<Button buttonText="Add a new artwork" type="button"/>
+<Link href="/artworks"
+// style={{
+//   color: 'var(--color-grey)',
+//   backgroundColor: 'var(--color-light-blue)',
+//   textShadow: '2px 2px 4px var(--color-blue)',
+//   borderRadius: 'var(--border-radius)',
+//   padding: '8px 10px',
+//   margin: '0 10px',
+//   fontSize: '22px',
+//   width: 'fit-content',
+//   alignSelf: 'center'
+// }}
+>See Artworks Detail</Link>
+</Container>
 <ItemsGrid items={artworks}></ItemsGrid>
-<Link href="/artworks">See Artworks Detail</Link>
-<Text fontSize="40px" text="Artists" color="var(--color-blue)" background="var(--color-beige)"/>
-<Button buttonText="Add new artist" type="button"/>
-<ItemsGrid items={authors}></ItemsGrid>
+<Subtitle subtitle="Artists"/>
+<Container>
+<Button buttonText="Add a new artist" type="button"/>
 <Link href="/authors">See Artists Detail</Link>
+</Container>
+<ItemsGrid items={authors}></ItemsGrid>
 </>
-
 )
 :
-(
+(<>
+<Subtitle subtitle="Find your favourite artists and artworks"/>
 <Container direction="column">
-<Text fontSize="40px" text="Find your favourite artists and artworks"/>
 <Text text="Still do not have an account?"></Text>
 <Button type="button" buttonText="Free Register" onClick={handleRegisterNavigation}/>
 </Container>
-)
+</>)
 }
 
 <Message/>
