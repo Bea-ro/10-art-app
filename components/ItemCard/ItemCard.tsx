@@ -3,14 +3,16 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Item } from '../../types/item';
 
-const ItemCard = ( {item, imgHeight, imgWidth}: Props ) => {
+const ItemCard = ( {item }: Props ) => {
 
   return (
 <ItemCardStyled>
      <Link href={item.title? `/artworks/${item._id}`: `/authors/${item._id}`} key={item._id}> 
      <h3>{item.title || item.name}</h3>
      {item.title ? <Image src={item.image || ''} alt={item.title}
-     height={imgHeight} width={imgWidth}
+     layout="responsive" 
+     width={100}
+     height={100} 
      ></Image> : null}
      </Link>  
 </ItemCardStyled>
@@ -19,8 +21,6 @@ const ItemCard = ( {item, imgHeight, imgWidth}: Props ) => {
 
 export type Props = {
     item: Item
-    imgHeight: number
-    imgWidth: number
 }
 
 export default ItemCard

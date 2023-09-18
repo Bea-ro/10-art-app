@@ -48,24 +48,36 @@ const Home = ({ artworks, authors }: Props) => {
 <Container>
 <Button buttonText="Add a new artwork" type="button"/>
 <Link href="/artworks"
-// style={{
-//   color: 'var(--color-grey)',
-//   backgroundColor: 'var(--color-light-blue)',
-//   textShadow: '2px 2px 4px var(--color-blue)',
-//   borderRadius: 'var(--border-radius)',
-//   padding: '8px 10px',
-//   margin: '0 10px',
-//   fontSize: '22px',
-//   width: 'fit-content',
-//   alignSelf: 'center'
-// }}
+style={{
+  color: 'var(--color-grey)',
+  backgroundColor: 'var(--color-light-blue)',
+  textShadow: '2px 2px 4px var(--color-blue)',
+  borderRadius: 'var(--border-radius)',
+  padding: '8px 10px',
+  margin: '0 10px',
+  fontSize: '22px',
+  width: 'fit-content',
+  alignSelf: 'center'
+}}
 >See Artworks Detail</Link>
 </Container>
 <ItemsGrid items={artworks}></ItemsGrid>
 <Subtitle subtitle="Artists"/>
 <Container>
 <Button buttonText="Add a new artist" type="button"/>
-<Link href="/authors">See Artists Detail</Link>
+<Link href="/authors"
+style={{
+  color: 'var(--color-grey)',
+  backgroundColor: 'var(--color-light-blue)',
+  textShadow: '2px 2px 4px var(--color-blue)',
+  borderRadius: 'var(--border-radius)',
+  padding: '8px 10px',
+  margin: '0 10px',
+  fontSize: '22px',
+  width: 'fit-content',
+  alignSelf: 'center'
+}}
+>See Artists Detail</Link>
 </Container>
 <ItemsGrid items={authors}></ItemsGrid>
 </>

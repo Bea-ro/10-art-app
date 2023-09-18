@@ -1,16 +1,15 @@
-import styled from 'styled-components';
 import { GetStaticProps } from "next"; 
 import { GetStaticPaths } from "next"; 
 import { useContext } from 'react';
 import { AuthContext } from '../_app';
 import { Author } from "../../types/author";
-import Link from "next/link";
-import Image from 'next/image'
 
 import Layout from '../../components/ui/Layout/Layout';
 import PageTitle from '../../components/ui/PageTitle/PageTitle';
 import Text from '../../components/ui/Text/Text';
 import Button from '../../components/ui/Button/Button';
+import Container from '../../components/ui/Container/Container';
+import ItemsGrid from '../../components/ui/ItemsGrid/ItemsGrid';
 
 
 
@@ -25,24 +24,17 @@ const AuthorPage = ({ author }: Props) => {
       <PageTitle title={author.name}/>
       {isAuth? 
       <>
-      <h3>{author.name}</h3>
+      <ItemsGrid items={author.mainArtworks}></ItemsGrid>
+             <p>{author.movement}  {
+              (author.area).length > 0 &&
+               (author.area).map((area, index) => (
+      <span key={index}>{area}{index < author.area.length - 1 && ', '}</span>
+    ))}</p>
+       <Container>
       <Button buttonText="Add a new artist" type="button"/>
       <Button buttonText="Delete" type="button"/>
-      
-      {/* <Image src={author.image || ''} alt={author.name} 
-      height={400} width={400*(16/9)}
-      ></Image> */}
-    
-      <ul>
-             {author.mainArtworks?.map((artwork) => (
-               <li key={artwork._id}>
-                <p>{artwork.title}</p>
-               </li>
-            ))}
-             </ul>                   
-       <p>{author.area}</p>
-       <p>{author.movement}</p>
-       </>
+      </Container>
+        </>
        : <Text text={`Please, log in to discover ${author.name}.`}/>}
       </Layout>
      

@@ -10,6 +10,7 @@ import Layout from '../../components/ui/Layout/Layout';
 import PageTitle from '../../components/ui/PageTitle/PageTitle';
 import Text from '../../components/ui/Text/Text';
 import Button from '../../components/ui/Button/Button';
+import Container from '../../components/ui/Container/Container';
 
 
 const ArtworkPage = ({ artwork }: Props) => {
@@ -24,15 +25,17 @@ const ArtworkPage = ({ artwork }: Props) => {
       <PageTitle title={artwork.title}/>
       {isAuth? 
       <>
-      <h3>{artwork.title}</h3>
-      <Button buttonText="Add a new artwork" type="button"/>
-      <Button buttonText="Delete" type="button"/>
+      <Container direction="column">
       <p>{`${artwork.author},  ${artwork.year}`} </p>   
+      <p>{artwork.movement}  {artwork.area}</p>
       <Image src={artwork.image || ''} alt={artwork.title} 
       height={400} width={400*(16/9)}
-      ></Image>
-       <p>{artwork.area}</p>
-       <p>{artwork.movement}</p>
+      ></Image> 
+      </Container>
+      <Container>
+      <Button buttonText="Add a new artwork" type="button"/>
+      <Button buttonText="Delete" type="button"/>
+      </Container>
        </>
        : <Text text={`Please, log in to discover ${artwork.title}.`}/>}
       </Layout>

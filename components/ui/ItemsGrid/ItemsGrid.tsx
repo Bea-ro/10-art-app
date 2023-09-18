@@ -8,7 +8,7 @@ const ItemsGrid = ( { items } : Props ) => {
   return (
     <ItemsGridStyled>
           {items.map((item) => (
-         <ItemCard key={item._id} item={item} imgHeight={100} imgWidth={100*(16/9)}></ItemCard>
+         <ItemCard key={item._id} item={item}></ItemCard>
 ))}
     </ItemsGridStyled>
   )

@@ -17,13 +17,17 @@ export const Global = createGlobalStyle`
   outline: none;
   text-decoration: none;
   font-family: 'Sorts Mill Goudy', serif;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 400;
   font-style: normal;
 }
 
 a {
   text-decoration: none;
+}
+
+ul {
+  padding-left: 0
 }
 
 li {

@@ -20,9 +20,19 @@ const Layout = ( { title, description, children }: Props ) => {
         <meta property="og:description" content={description}/>
         <meta property="og:image" content="URL IMG PREVIW WEB <300KB"/>
       </Head>
+      <div style={{
+position: 'fixed',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  overflow: 'hidden',
+  zIndex: -1
+      }}>
       <Image src='https://res.cloudinary.com/dnlceaase/image/upload/v1694962965/art-api/portada_jyuzfq.jpg'
       alt="creation" layout="fill" style={{opacity: 0.6, zIndex: -1}}
       ></Image>
+      </div>
       <Header></Header>
           <LayoutStyled>
             {children}     
