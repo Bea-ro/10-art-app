@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { AuthContext } from "../_app";
 import { Artwork } from "../../types/artwork";
 import Link from "next/link";
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 
 import Layout from '../../components/ui/Layout/Layout';
 import PageTitle from '../../components/ui/PageTitle/PageTitle';

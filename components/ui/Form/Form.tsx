@@ -24,10 +24,8 @@ const router = useRouter();
         password: ''
       }
       })
-      console.log('formState es', formState)
 
       const [error, setError] = useState<string>('');
-      console.log('error del back', error)
   
       const onSubmitRegister = (values: Values) => { 
        formState.isValid && registerPostFetch(handleNavigate, values, setError, setIsAuth); 

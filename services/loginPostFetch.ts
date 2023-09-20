@@ -1,7 +1,8 @@
 import { Values } from '../types/values'
 
 export const loginPostFetch = (handleNavigate: (arg0: string) => void, values: Values, setError: (arg0: string) => void, setIsAuth: (arg0: boolean) => void) => {
-    fetch('https://complete-server-rtc.onrender.com/api/users/login', {
+  console.log('se ejecuta el loginPostFetch')  
+  fetch('https://complete-server-rtc.onrender.com/api/users/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -22,8 +23,6 @@ export const loginPostFetch = (handleNavigate: (arg0: string) => void, values: V
           localStorage.setItem('userStored', JSON.stringify(userStored));
           handleNavigate('/');
           setIsAuth(true);
-          //cambiar el botón login por otro logout con otra función
-          //buttonText="Logout"
         }
       })
       .catch((error) => {

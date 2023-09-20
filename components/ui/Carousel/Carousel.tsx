@@ -1,12 +1,12 @@
+import { CarouselStyled } from './CarouselStyled';
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 import { Item } from '../../../types/item';
 
 import Container from "../Container/Container"
 import Button from '../Button/Button';
-import ItemCard from '../../../components/ItemCard/ItemCard';
 import ItemsGrid from '../ItemsGrid/ItemsGrid';
 
 

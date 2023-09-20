@@ -21,19 +21,11 @@ import ItemsGrid from '../components/ui/ItemsGrid/ItemsGrid';
 
 const Home = ({ artworks, authors }: Props) => {
 
-  const { isAuth, setIsAuth } = useContext(AuthContext) 
+  const { isAuth } = useContext(AuthContext) 
   const router = useRouter();
 
   const handleRegisterNavigation = () => router.push('/user?action=register')
    
-
-  useEffect(() => {
-    const isClient = typeof window !== 'undefined';
-    if (isClient) {
-      const userStored = localStorage.getItem('userStored')
-      userStored ? setIsAuth(true) : setIsAuth(false);
-      }
-  },[])
 
   return (
       <Layout title="Art App" 
