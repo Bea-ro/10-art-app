@@ -1,12 +1,8 @@
-//import Link from 'next/link'
-//import useSwr from 'swr';
-
 import { GetStaticProps } from 'next';
 import { useContext } from 'react';
 import { AuthContext } from '../_app';
 import { Artwork } from '../../types/artwork'
 import { getArtworks } from '../../libs/artworks/artworks';
-//import { fetcher } from '../../utils/fetcher';
 
 import Layout from '../../components/ui/Layout/Layout'
 import PageTitle from '../../components/ui/PageTitle/PageTitle';
@@ -17,9 +13,6 @@ import Text from '../../components/ui/Text/Text';
 const ArtworksPage = ( { artworks }: Props ) => {
 
   const { isAuth } = useContext(AuthContext)
-
-  // const { data, error } = useSwr('api/artworks', fetcher, {refreshInterval: 30000})
-  // const artworksList = data?.artworks as Artwork[] || artworks
 
   return (
          

@@ -22,7 +22,6 @@ const Header = () => {
 
 return (
     <HeaderStyled>
-    
      <Navbar></Navbar> 
   <Button type="button" buttonText={
      action === "register" || action === "login"? "Home" : (isAuth? "Logout" : "Login")

@@ -25,8 +25,7 @@ const Carousel = ({carouselItems}: Props) => {
     };
    
 return (
-    <>
-<ul>
+<CarouselStyled>
           {carouselItems.map((item, index) => (
                
             <li key={item._id} style={{display: index === currentIndex ? 'block' : 'none'}}>           
@@ -37,12 +36,13 @@ return (
               <Container>
               <Button type="button" buttonText="<" onClick={() => prevItem()}></Button>
               {item.title? <Image src={item.image || ''} alt={item.title || item.name || ''} 
-              layout="responsive" height={400} width={400 * (16 / 9)} 
+              height={400} width={400 * (16 / 9)} 
               ></Image> : null}
+          
 {
   item.mainArtworks && <ItemsGrid items={item.mainArtworks}></ItemsGrid>
   }
-
+  
                <Button type="button" buttonText=">" onClick={() => nextItem()}></Button>
                </Container>
                <p>{item.movement}  {
@@ -58,10 +58,7 @@ return (
               {/* </Link> */}
               </li>             
           ))}
-        </ul>
-       
-       
-        </>
+      </CarouselStyled>
   )
 }
 

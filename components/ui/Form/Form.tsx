@@ -15,7 +15,7 @@ import { AuthContext } from '../../../pages/_app';
 
 
 const Form = ( {action}: Props) => {
-  
+
 const { setIsAuth } = useContext(AuthContext) 
 const router = useRouter();
 
@@ -24,56 +24,47 @@ const router = useRouter();
         password: ''
       }
       })
-
+     
       const [error, setError] = useState<string>('');
-  
-      const onSubmitRegister = (values: Values) => { 
-       formState.isValid && registerPostFetch(handleNavigate, values, setError, setIsAuth); 
-       }
       
       const handleNavigate = (url: string) => {
         router.push(url);
       };
 
-      const onSubmitLogin = (values: Values) => { 
-        formState.isValid && loginPostFetch(handleNavigate, values, setError, setIsAuth); 
+      console.log(formState.isValid)
+      const onSubmit = (values: Values) => { 
+        console.log(formState.errors)
+        console.log(error)
+       formState.isValid && (action === "register" ? registerPostFetch(values, setError, handleNavigate, setIsAuth)
+      : loginPostFetch(values, setError, handleNavigate, setIsAuth))
       }
 
 
   return (
 
-    <FormStyled onSubmit={action === "register" ? handleSubmit(onSubmitRegister): handleSubmit(onSubmitLogin)}>
+    <FormStyled onSubmit={handleSubmit(onSubmit)}>
       <Container direction='column'>
-     <Input
-          register={register("email", {
-          required: true,
-          pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: 'Please, check your email and password and try again.',
-          }}
-          )}
-          type="email"
-          placeholder="email address"
-          id="email"
-        />
-        <Input
-          register={register("password", {
-          required: true,
-          pattern: {
-            value: /^(?=.*?[a-z])(?=.*?[A-Z]).{6,}$/,
-            message: 'Please, check your email and password and try again.',
-          }}
-          )}
-          type="password"
-          placeholder="password"
-          id="password"
-        />
-        {formState.errors.password && (<p>{formState.errors.password.message}</p>) ||
-        formState.errors.email && (<p>{formState.errors.email.message}</p>)}
-        {!formState.errors.password && !formState.errors.email && error && (<p>{error}</p>)}
+        <input type="email" id="email" placeholder="email"
+          {...register('email', {
+            required: true,
+            pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+          }
+            )}
+            />
+        <input type="password" id="password" placeholder="password" 
+          {...register('password', {
+            required: true,
+            pattern: /^(?=.*?[a-z])(?=.*?[A-Z]).{6,}$/
+          }
+            )}
+            />
+     
+        {(formState.errors.email || formState.errors.password) && <p>Please, check your email and password and try again.</p>}
+        <p>{error}</p>
+      
         </Container>
         <Button type="submit" buttonText="Submit" 
-        // disabled={!formState.isValid || formState.isSubmitting}
+        disabled={!formState.isValid || formState.isSubmitting}
         />
    
    </FormStyled>

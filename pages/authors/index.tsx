@@ -1,13 +1,8 @@
-//import Link from 'next/link'
-//import useSwr from 'swr';
-
 import { GetStaticProps } from 'next';
 import { useContext } from 'react';
 import { AuthContext } from '../_app';
 import { Author } from '../../types/author'
 import { getAuthors } from '../../libs/authors/authors';
-//import { fetcher } from '../../utils/fetcher';
-
 
 import Layout from '../../components/ui/Layout/Layout'
 import PageTitle from '../../components/ui/PageTitle/PageTitle';
@@ -18,8 +13,6 @@ import Carousel from '../../components/ui/Carousel/Carousel';
 const AuthorsPage = ( { authors }: Props ) => {
 
   const { isAuth } = useContext(AuthContext)
-  // const { data, error } = useSwr('api/authors', fetcher, {refreshInterval: 30000})
-  // const authorsList = data?.artworks as Author[] || authors
 
   return (
       <Layout title="Authors" 

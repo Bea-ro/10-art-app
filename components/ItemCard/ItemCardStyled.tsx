@@ -13,4 +13,10 @@ h3 {
     font-size: 18px;
     color: black
     }
+
+img {
+    object-fit: cover;
+    object-position: center 30%;
+    border-radius: 2%
+}
 `  

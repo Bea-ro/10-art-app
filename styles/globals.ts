@@ -33,4 +33,10 @@ ul {
 li {
  list-style-type: none;
 }
+
+button:disabled {
+color: var(--color-grey);
+background-color: var(--color-beige);
+box-shadow: 2px 2px 4px var(--color-blue);
+}
 `

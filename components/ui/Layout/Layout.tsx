@@ -30,7 +30,7 @@ position: 'fixed',
   zIndex: -1
       }}>
       <Image src='https://res.cloudinary.com/dnlceaase/image/upload/v1694962965/art-api/portada_jyuzfq.jpg'
-      alt="creation" layout="fill" style={{opacity: 0.6, zIndex: -1}}
+      alt="creation" layout="fill" style={{opacity: 0.6, zIndex: -1}} priority={true}
       ></Image>
       </div>
       <Header></Header>
