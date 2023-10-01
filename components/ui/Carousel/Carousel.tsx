@@ -30,7 +30,7 @@ return (
                
             <li key={item._id} style={{display: index === currentIndex ? 'block' : 'none'}}>           
               {/* <Link href={item.title? `/artworks/${item._id}` : `/authors/${item._id}`} key={item._id}>  */}
-              <h3>{item.title || item.name}</h3>
+              <h2>{item.title || item.name}</h2>
               <p>{item.title ? `${item.author},  ${item.year}` : null} </p>
               
               <Container>
@@ -40,7 +40,9 @@ return (
               ></Image> : null}
           
 {
-  item.mainArtworks && <ItemsGrid items={item.mainArtworks}></ItemsGrid>
+  item.mainArtworks && <ItemsGrid items={item.mainArtworks}
+  flow="column"
+  ></ItemsGrid>
   }
   
                <Button type="button" buttonText=">" onClick={() => nextItem()}></Button>

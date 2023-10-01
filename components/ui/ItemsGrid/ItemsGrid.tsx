@@ -4,9 +4,9 @@ import { Item } from '../../../types/item';
 
 import ItemCard from '../../ItemCard/ItemCard';
 
-const ItemsGrid = ( { items } : Props ) => {
+const ItemsGrid = ( { items, flow } : Props ) => {
   return (
-    <ItemsGridStyled>
+    <ItemsGridStyled flow={flow}>
           {items.map((item) => (
          <ItemCard key={item._id} item={item}></ItemCard>
 ))}
@@ -15,5 +15,7 @@ const ItemsGrid = ( { items } : Props ) => {
 }
 export type Props = {
     items: Item[]
-}
+  flow?: string
+ }
+
 export default ItemsGrid

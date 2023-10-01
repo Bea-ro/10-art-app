@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 export const CarouselStyled = styled.ul` 
-h3 {
+h2 {
   font-weight: bold
 }
 
