@@ -1,8 +1,11 @@
 import { GetStaticProps } from "next"; 
 import { GetStaticPaths } from "next"; 
 import { useContext } from "react";
-import { AuthContext } from "../_app";
+import { AuthContext, ErrorContext } from "../_app";
 import { Artwork } from "../../types/artwork";
+import { useModal } from '../../customHooks/useModal';
+import { deleteFetch } from '../../services/deleteFetch';
+
 import Link from "next/link";
 import Image from 'next/legacy/image'
 
@@ -11,11 +14,15 @@ import PageTitle from '../../components/ui/PageTitle/PageTitle';
 import Text from '../../components/ui/Text/Text';
 import Button from '../../components/ui/Button/Button';
 import Container from '../../components/ui/Container/Container';
+import Modal from '../../components/ui/Modal/Modal';
+
 
 
 const ArtworkPage = ({ artwork }: Props) => {
 
-  const { isAuth } = useContext(AuthContext)
+  const { isAuth, token } = useContext(AuthContext)
+  const { error, setError } = useContext(ErrorContext)
+  const {openModal, closeModal, isModalOpen} = useModal()
 
   return (
     
@@ -34,8 +41,23 @@ const ArtworkPage = ({ artwork }: Props) => {
       </Container>
       <Container>
       <Button buttonText="Add a new artwork" type="button"/>
-      <Button buttonText="Delete" type="button"/>
+      {/* <Modal modal={isModalOpen}>
+                {
+               <EditForm></EditForm> 
+                }
+              </Modal> */}
+      <Button buttonText="Delete" type="button" onClick={openModal}/>
+      <Modal modal={isModalOpen}>
+                {
+                  <>
+                <p>Are you sure you want to delete {artwork.title}?</p>
+                <Button buttonText="Yes" type="button" onClick={() => deleteFetch('/artworks', artwork, token, setError, closeModal)} ></Button>
+                <Button buttonText="No" type="button" onClick={closeModal} ></Button> 
+                </>
+                }
+              </Modal>
       </Container>
+      <p>{error}</p>
        </>
        : <Text text={`Please, log in to discover ${artwork.title}.`}/>}
       </Layout>

@@ -1,7 +1,7 @@
+import { AuthFormData } from '../types/formData';
 import { loginPostFetch } from './loginPostFetch';
-import { Values } from '../types/values'
 
-export const registerPostFetch = async (values: Values, setError: (arg0: string) => void, handleNavigate: (arg0: string) => void, setIsAuth: (arg0: boolean) => void, setToken: (arg0: string) => void) => {
+export const registerPostFetch = async (values: AuthFormData, setError: (arg0: string) => void, handleNavigate: (arg0: string) => void, setIsAuth: (arg0: boolean) => void, setToken: (arg0: string) => void) => {
   await fetch('https://complete-server-rtc.onrender.com/api/users/register', {
     method: 'POST',
     headers: {

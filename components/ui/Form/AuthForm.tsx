@@ -6,20 +6,19 @@ import { useRouter } from 'next/router';
 import Button from '../Button/Button';
 import Container from '../Container/Container';
 
-import { Values } from '../../../types/values'
-import { FormData } from '../../../types/formData'
+import { AuthFormData } from '../../../types/formData'
 import { registerPostFetch } from '../../../services/registerPostFetch';
 import { loginPostFetch } from '../../../services/loginPostFetch';
 import { AuthContext, ErrorContext } from '../../../pages/_app';
 
 
-const Form = ( {action}: Props) => {
+const AuthForm = ( {action}: Props) => {
 
 const { setIsAuth, setToken } = useContext(AuthContext) 
 const {error, setError} = useContext(ErrorContext);
 const router = useRouter();
 
-        const { handleSubmit, register, formState } = useForm<FormData>({defaultValues: 
+        const { handleSubmit, register, formState } = useForm<AuthFormData>({defaultValues: 
         {email: '',
         password: ''
       }
@@ -30,7 +29,7 @@ const router = useRouter();
         router.push(url);
       };
 
-      const onSubmit = (values: Values) => { 
+      const onSubmit = (values: AuthFormData) => { 
        formState.isValid && (action === "register" ? registerPostFetch(values, setError, handleNavigate, setIsAuth, setToken)
       : loginPostFetch(values, setError, handleNavigate, setIsAuth, setToken))
       }
@@ -71,4 +70,4 @@ type Props = {
   action: string | undefined | string[]
 } 
 
-export default Form
+export default AuthForm

@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form'
-import { FormData } from '../../../types/formData'
+import { AuthFormData } from '../../../types/formData'
 
 const Message = () => {
 
-  const { formState } = useForm<FormData>({defaultValues: 
+  const { formState } = useForm<AuthFormData>({defaultValues: 
     {email: '',
     password: ''
   }

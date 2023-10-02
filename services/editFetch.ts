@@ -1,7 +1,7 @@
 import { Item } from '../types/item';
-import { Values } from '../types/values'
+import { EditFormData } from '../types/formData';
 
-export const editFetch = async (currentPath: string, item: Item, token: string, values: Values, setError: (arg0: string) => void) => {
+export const editFetch = async (currentPath: string, item: Item, token: string, values: EditFormData, setError: (arg0: string) => void) => {
   
   await fetch(`https://complete-server-rtc.onrender.com/api${currentPath}/${item._id}`, {
       method: 'PUT',

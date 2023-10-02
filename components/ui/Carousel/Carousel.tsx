@@ -36,14 +36,10 @@ const Carousel = ({carouselItems}: Props) => {
       }
     };
    
-    const deleteItem = (item: Item) => {
-      deleteFetch(currentPath, item, token, setError, closeModal);
-    }
-
-    const editItem = (item: Item) => {
-      editFetch(currentPath, item, token, values, setError);
-    }
-
+  
+    
+    
+    
 return (
 <CarouselStyled>
           {carouselItems.map((item, index) => (
@@ -74,9 +70,9 @@ return (
     ))}</p>
                <Container>
               <Button buttonText="Edit" type="button" onClick={openModal}/>
-              {/* <Modal>
+              {/* <Modal modal={isModalOpen}>
                 {
-                <p>Meter aquí form de edit</p>
+                <EditForm onSubmit={handleSubmit(onEditSubmit)}></EditForm>
                 }
               
               </Modal> */}
@@ -86,7 +82,7 @@ return (
                 {
                   <>
                 <p>Are you sure you want to delete {item.title || item.name}?</p>
-                <Button buttonText="Yes" type="button" onClick={() => deleteItem(item)} ></Button>
+                <Button buttonText="Yes" type="button" onClick={() => deleteFetch(currentPath, item, token, setError, closeModal)} ></Button>
                 <Button buttonText="No" type="button" onClick={closeModal} ></Button> 
                 </>
                 }

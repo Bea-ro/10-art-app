@@ -1,6 +1,6 @@
-import { Values } from '../types/values'
+import { EditFormData } from '../types/formData';
 
-export const addFetch = async (currentPath: string, token: string, values: Values, setError: (arg0: string) => void) => {
+export const addFetch = async (currentPath: string, token: string, values: EditFormData, setError: (arg0: string) => void) => {
   await fetch(`https://complete-server-rtc.onrender.com/api${currentPath}`, {
       method: 'POST',
       headers: {
