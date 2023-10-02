@@ -22,8 +22,6 @@ const AuthorsPage = ( { authors }: Props ) => {
       isAuth?
       <Carousel carouselItems={authors}></Carousel> : <Text text="Please, log in to discover artists."/>
         }
-        
-
       </Layout>
   
   )

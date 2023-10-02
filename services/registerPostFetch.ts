@@ -1,7 +1,7 @@
 import { loginPostFetch } from './loginPostFetch';
 import { Values } from '../types/values'
 
-export const registerPostFetch = async (values: Values, setError: (arg0: string) => void, handleNavigate: (arg0: string) => void, setIsAuth: (arg0: boolean) => void) => {
+export const registerPostFetch = async (values: Values, setError: (arg0: string) => void, handleNavigate: (arg0: string) => void, setIsAuth: (arg0: boolean) => void, setToken: (arg0: string) => void) => {
   await fetch('https://complete-server-rtc.onrender.com/api/users/register', {
     method: 'POST',
     headers: {
@@ -21,7 +21,7 @@ export const registerPostFetch = async (values: Values, setError: (arg0: string)
           password: data.password
         };
         localStorage.setItem('userStored', JSON.stringify(userStored));
-        loginPostFetch(values, setError, handleNavigate, setIsAuth);
+        loginPostFetch(values, setError, handleNavigate, setIsAuth, setToken);
       }
     })
     .catch((error) => {

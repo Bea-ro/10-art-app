@@ -1,16 +1,28 @@
 import { CarouselStyled } from './CarouselStyled';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/legacy/image';
 
+import { deleteFetch } from '../../../services/deleteFetch';
 import { Item } from '../../../types/item';
+import { AuthContext, ErrorContext } from '../../../pages/_app';
+import { useModal } from '../../../customHooks/useModal'
 
 import Container from "../Container/Container"
 import Button from '../Button/Button';
 import ItemsGrid from '../ItemsGrid/ItemsGrid';
+import Modal from '../Modal/Modal';
 
 
 const Carousel = ({carouselItems}: Props) => {
+
+  const router = useRouter();
+  const currentPath = router.pathname
+
+  const {error, setError} = useContext(ErrorContext)
+  const {token} = useContext(AuthContext)
+  const {openModal, closeModal, isModalOpen} = useModal()
     
     const [currentIndex, setCurrentIndex] = useState(0);
     const prevItem = () => {
@@ -24,6 +36,14 @@ const Carousel = ({carouselItems}: Props) => {
       }
     };
    
+    const deleteItem = (item: Item) => {
+      deleteFetch(currentPath, item, token, setError, closeModal);
+    }
+
+    const editItem = (item: Item) => {
+      editFetch(currentPath, item, token, values, setError);
+    }
+
 return (
 <CarouselStyled>
           {carouselItems.map((item, index) => (
@@ -53,10 +73,27 @@ return (
       <span key={index}>{area}{index < item.area.length - 1 && ', '}</span>
     ))}</p>
                <Container>
-              <Button buttonText="Edit" type="button"/>
-              <Button buttonText="Delete" type="button"/>
-              </Container>
+              <Button buttonText="Edit" type="button" onClick={openModal}/>
+              {/* <Modal>
+                {
+                <p>Meter aquí form de edit</p>
+                }
               
+              </Modal> */}
+              <Button buttonText="Delete" type="button" onClick={openModal}/>
+              
+              <Modal modal={isModalOpen}>
+                {
+                  <>
+                <p>Are you sure you want to delete {item.title || item.name}?</p>
+                <Button buttonText="Yes" type="button" onClick={() => deleteItem(item)} ></Button>
+                <Button buttonText="No" type="button" onClick={closeModal} ></Button> 
+                </>
+                }
+              </Modal>
+
+              </Container>
+              <p>{error}</p>
               {/* </Link> */}
               </li>             
           ))}

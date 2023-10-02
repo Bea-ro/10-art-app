@@ -6,7 +6,7 @@ const response = await fetch('https://complete-server-rtc.onrender.com/api/autho
 return response
 }
 
-export const getAuthorById = async (id): Promise<Author> => {
+export const getAuthorById = async (id: string): Promise<Author> => {
     const response = await fetch(`https://complete-server-rtc.onrender.com/api/authors/${id}`)
     .then((res) => res.json())
     return response

@@ -1,10 +1,11 @@
 import { Values } from '../types/values'
 
-export const addPostFetch = async (values: Values, setError: (arg0: string) => void, handleNavigate: (arg0: string) => void, setIsAuth: (arg0: boolean) => void) => {
-  await fetch('https://complete-server-rtc.onrender.com/api/authors', {
+export const addFetch = async (currentPath: string, token: string, values: Values, setError: (arg0: string) => void) => {
+  await fetch(`https://complete-server-rtc.onrender.com/api${currentPath}`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
       },
       body: JSON.stringify(values)
     })
@@ -14,8 +15,8 @@ export const addPostFetch = async (values: Values, setError: (arg0: string) => v
         if (data.message) {
           setError(data.message);
         } else {
-          setError('');
-         //mostrar mensaje de artista/obra creado
+          setError(`Your ${currentPath} has been added.`);
+       
         }
       })
       .catch((error) => {

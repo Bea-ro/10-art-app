@@ -1,6 +1,6 @@
 import { Values } from '../types/values'
 
-export const loginPostFetch = async (values: Values, setError: (arg0: string) => void, handleNavigate: (arg0: string) => void, setIsAuth: (arg0: boolean) => void) => {
+export const loginPostFetch = async (values: Values, setError: (arg0: string) => void, handleNavigate: (arg0: string) => void, setIsAuth: (arg0: boolean) => void, setToken: (arg0:string) => void) => {
   console.log('se ejecuta el loginPostFetch')  
   await fetch('https://complete-server-rtc.onrender.com/api/users/login', {
       method: 'POST',
@@ -24,6 +24,7 @@ export const loginPostFetch = async (values: Values, setError: (arg0: string) =>
           localStorage.setItem('userStored', JSON.stringify(userStored));
           handleNavigate('/');
           setIsAuth(true);
+          setToken(data.token)
         }
       })
       .catch((error) => {

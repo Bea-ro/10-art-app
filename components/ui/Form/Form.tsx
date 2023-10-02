@@ -1,9 +1,8 @@
-import React, { useContext, useState }  from 'react'
+import React, { useContext }  from 'react'
 import { FormStyled } from './FormStyled';
 import { useForm} from 'react-hook-form'
 import { useRouter } from 'next/router';
 
-import Input from '../Input/Input';
 import Button from '../Button/Button';
 import Container from '../Container/Container';
 
@@ -11,12 +10,13 @@ import { Values } from '../../../types/values'
 import { FormData } from '../../../types/formData'
 import { registerPostFetch } from '../../../services/registerPostFetch';
 import { loginPostFetch } from '../../../services/loginPostFetch';
-import { AuthContext } from '../../../pages/_app';
+import { AuthContext, ErrorContext } from '../../../pages/_app';
 
 
 const Form = ( {action}: Props) => {
 
-const { setIsAuth } = useContext(AuthContext) 
+const { setIsAuth, setToken } = useContext(AuthContext) 
+const {error, setError} = useContext(ErrorContext);
 const router = useRouter();
 
         const { handleSubmit, register, formState } = useForm<FormData>({defaultValues: 
@@ -25,18 +25,14 @@ const router = useRouter();
       }
       })
      
-      const [error, setError] = useState<string>('');
       
       const handleNavigate = (url: string) => {
         router.push(url);
       };
 
-      console.log(formState.isValid)
       const onSubmit = (values: Values) => { 
-        console.log(formState.errors)
-        console.log(error)
-       formState.isValid && (action === "register" ? registerPostFetch(values, setError, handleNavigate, setIsAuth)
-      : loginPostFetch(values, setError, handleNavigate, setIsAuth))
+       formState.isValid && (action === "register" ? registerPostFetch(values, setError, handleNavigate, setIsAuth, setToken)
+      : loginPostFetch(values, setError, handleNavigate, setIsAuth, setToken))
       }
 
 
