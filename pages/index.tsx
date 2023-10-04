@@ -8,6 +8,7 @@ import { Author } from '../types/author'
 import { getArtworks } from '../libs/artworks/artworks';
 import { getAuthors } from '../libs/authors/authors';
 import { AuthContext } from './_app';
+import { useModal } from '../customHooks/useModal';
 
 import Layout from '../components/ui/Layout/Layout'
 import PageTitle from '../components/ui/PageTitle/PageTitle';
@@ -17,15 +18,25 @@ import Message from '../components/ui/Message/Message';
 import Container from '../components/ui/Container/Container';
 import Text from '../components/ui/Text/Text';
 import ItemsGrid from '../components/ui/ItemsGrid/ItemsGrid';
+import Modal from '../components/ui/Modal/Modal';
+import AddForm from '../components/ui/Form/AddForm'
+
 
 
 const Home = ({ artworks, authors }: Props) => {
 
   const { isAuth } = useContext(AuthContext) 
   const router = useRouter();
+  const currentPath = router.pathname
+  const {openModal, closeModal, isModalOpen, modalContent, setModalContent} = useModal();
+
 
   const handleRegisterNavigation = () => router.push('/user?action=register')
-   
+  
+  const handleAddModal = (itemType: string) => {
+    setModalContent(<AddForm itemType={itemType}/>);
+    openModal()
+  }
 
   return (
       <Layout title="Art App" 
@@ -38,7 +49,10 @@ const Home = ({ artworks, authors }: Props) => {
 <>
 <Subtitle subtitle="Artworks"/>
 <Container>
-<Button buttonText="Add a new artwork" type="button"/>
+<Button buttonText="Add a new artwork" type="button" onClick={()=>handleAddModal('artwork')}/>
+<Modal modal={isModalOpen}>{modalContent}</Modal>
+
+
 <Link href="/artworks"
 style={{
   color: 'var(--color-grey)',
@@ -57,7 +71,8 @@ style={{
 <ItemsGrid items={artworks}></ItemsGrid>
 <Subtitle subtitle="Artists"/>
 <Container>
-<Button buttonText="Add a new artist" type="button"/>
+<Button buttonText="Add a new artist" type="button" onClick={()=>handleAddModal('artist')}/>
+<Modal modal={isModalOpen}>{modalContent}</Modal>
 <Link href="/authors"
 style={{
   color: 'var(--color-grey)',

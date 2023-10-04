@@ -23,7 +23,7 @@ const Carousel = ({carouselItems}: Props) => {
 
   const {error, setError} = useContext(ErrorContext)
   const {token} = useContext(AuthContext)
-  const {openModal, closeModal, isModalOpen} = useModal()
+  const {openModal, closeModal, isModalOpen, modalContent, setModalContent} = useModal()
     
     const [currentIndex, setCurrentIndex] = useState(0);
     const prevItem = () => {
@@ -36,8 +36,22 @@ const Carousel = ({carouselItems}: Props) => {
         setCurrentIndex(currentIndex + 1);
       }
     };
+    
+    const handleEditModal = (item: Item) => {
+      setModalContent(<EditForm item={item} currentPath={currentPath}/>);
+      openModal()
+    }
 
-
+    const handleDeleteModal = (item: Item) => {
+      setModalContent(
+        <>
+            <p>Are you sure you want to delete {item.title || item.name}?</p>
+            <Button buttonText="Yes" type="button" onClick={() => deleteFetch(currentPath, item, token, setError, closeModal)} ></Button>
+            <Button buttonText="No" type="button" onClick={closeModal} ></Button> 
+            </>
+      )
+      openModal(); 
+    }
     
 return (
 <CarouselStyled>
@@ -68,21 +82,9 @@ return (
       <span key={index}>{area}{index < item.area.length - 1 && ', '}</span>
     ))}</p>
                <Container>
-              <Button buttonText="Edit" type="button" onClick={openModal}/>
-              <Button buttonText="Delete" type="button" onClick={openModal}/>
-              
-              <Modal modal={isModalOpen} buttonText="Edit">
-              {buttonText === "Edit" && <EditForm item={item} currentPath={currentPath}/>}
-                </Modal>  
-
-                <Modal modal={isModalOpen} buttonText="Delete">
-                {buttonText === "Delete" && 
-                    <>
-                    <p>Are you sure you want to delete {item.title || item.name}?</p>
-                    <Button buttonText="Yes" type="button" onClick={() => deleteFetch(currentPath, item, token, setError, closeModal)} ></Button>
-                    <Button buttonText="No" type="button" onClick={closeModal} ></Button> 
-                    </>}
-              </Modal>
+              <Button buttonText="Edit" type="button" onClick={()=>handleEditModal(item)}/>
+              <Button buttonText="Delete" type="button" onClick={()=>handleDeleteModal(item)}/>
+              <Modal modal={isModalOpen}>{modalContent}</Modal>
 
               </Container>
               <p>{error}</p>

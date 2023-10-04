@@ -1,115 +1,127 @@
 import React, { useContext }  from 'react'
 import { FormStyled } from './FormStyled';
 import { useForm} from 'react-hook-form'
-import { useRouter } from 'next/router';
 
 import Button from '../Button/Button';
 import Container from '../Container/Container';
 
 import { AuthContext, ErrorContext } from '../../../pages/_app';
 import { addFetch } from '../../../services/addFetch';
-import { EditFormData } from '../../../types/formData';
 import { Item } from '../../../types/item';
 
 
 
-const EditForm = ({item, currentPath}: Props) => {
+const AddForm = ( {itemType} : Props) => {
 
 const { token } = useContext(AuthContext) 
 const {error, setError} = useContext(ErrorContext);
 
+const defaultValues = itemType === 'artwork' ? {
+      title: '',
+      author: '',
+      year: undefined,
+      area: [],
+      movement: '',
+      image: ''
+    }
+  : {
+      name: '',
+      movement: '',
+      area: []
+    }
+  
+const { handleSubmit, register, formState } = useForm<Item>({
+  defaultValues,
+});
 
-        const { handleSubmit, register, formState } = useForm<EditFormData>({defaultValues: 
-        {name: '',
-        movement: '',
-        area: []
-      }
-      })
      
-      const onEditSubmit = (values: EditFormData) => { 
-        formState.isValid && addFetch(currentPath, token, values, setError)
+      const onSubmit = (values: Item) => { 
+        formState.isValid && addFetch(itemType, token, values, setError)
             }
 
 
   return (
 
-    <FormStyled onSubmit={handleSubmit(onEditSubmit)}>
+    <FormStyled onSubmit={handleSubmit(onSubmit)}>
       <Container direction='column'>
 
-     {item.name && ( 
-        <>
-        <input type="text" id="name" placeholder="name"
-          {...register('name', {
-            required: true,
-            pattern: //que sea string
-          }
-            )}
-            />
-        <input type="text" id="movement" placeholder="movement" 
-          {...register('movement', {
-            required: true,
-            pattern: //string
-          }
-            )}
-            />
-
-            <select id="area">
-                <option>arquitecture</option>
-                <option>painting</option>
-                <option>sculpture</option>
-            </select>
-
-{/* otro checkbox que muestre las obras para quitarle? */}
-
-        {(formState.errors.name || formState.errors.movement || formState.errors.area) && <p>Please, check your data and try again.</p>}
-        <p>{error}</p>
-        </>)}
-
-        {item.title && ( 
+        {itemType === 'artwork' && ( 
         <>
          <input type="text" id="title" placeholder="title" 
           {...register('title', {
-            required: true,
-            pattern: //string
+            required: true
           }
           )}
           />
    <input type="text" id="author" placeholder="author" 
           {...register('author', {
-            required: true,
-            pattern: //string
+            required: true
           }
           )}
           />
  <input type="number" id="year" placeholder="year" 
           {...register('year', {
             required: true,
-            pattern: //3-4 dígitos sin puntos
+            pattern: {
+              value: /^\d{3,4}$/,
+              message: 'Please, do not use dots.'
+            }
           }
           )}
           />
-  <select id="area">
-                <option>arquitecture</option>
-                <option>painting</option>
-                <option>sculpture</option>
+  <select id="area" {...register('area', {
+            required: true
+          })}
+          >
+  <option value="">Area</option>
+                <option value="arquitecture">arquitecture</option>
+                <option value="painting">painting</option>
+                <option value="sculpture">sculpture</option>
             </select>
-<input type="text" id="movement" placeholder="movement" 
+            <input type="text" id="movement" placeholder="movement" 
           {...register('movement', {
-            required: true,
-            pattern: //string
+            required: true
           }
           )}
           />
-<input type="file" id="image" placeholder="image" 
+<input type="file" id="image" accept=".jpeg, .png, .gif, .webp"
           {...register('image', {
-            required: false,
-            pattern: //movida
+            required: false
           }
           )}
-          />
-        </>
+          />        </>
         )}
-        
+      {itemType === 'author' && (
+        <>
+        <input type="text" id="name" placeholder="name"
+          {...register('name', {
+            required: true
+          }
+            )}
+            />
+        <input type="text" id="movement" placeholder="movement" 
+          {...register('movement', {
+            required: true
+          }
+            )}
+            />
+
+<select id="area" {...register('area', {
+            required: true
+          })}>
+            <option value="">Área</option>
+                <option value="arquitecture">arquitecture</option>
+                <option value="painting">painting</option>
+                <option value="sculpture">sculpture</option>
+            </select>
+
+
+{/* obras */}
+
+        {(formState.errors.name || formState.errors.movement || formState.errors.area) && <p>Please, check your data and try again.</p>}
+        <p>{error}</p>
+        </>)}
+  
         </Container>
         <Button type="submit" buttonText="Submit" 
         disabled={!formState.isValid || formState.isSubmitting}
@@ -120,12 +132,11 @@ const {error, setError} = useContext(ErrorContext);
 }
 
 export type Props = {
-    item: Item
-    currentPath: string
+  itemType: string
 }
 
 
-export default EditForm
+export default AddForm
 
 
 

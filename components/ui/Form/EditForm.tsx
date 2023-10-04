@@ -7,9 +7,7 @@ import Container from '../Container/Container';
 
 import { AuthContext, ErrorContext } from '../../../pages/_app';
 import { editFetch } from '../../../services/editFetch';
-import { EditFormData } from '../../../types/formData';
 import { Item } from '../../../types/item';
-
 
 
 const EditForm = ({item, currentPath}: Props) => {
@@ -17,15 +15,26 @@ const EditForm = ({item, currentPath}: Props) => {
 const { token } = useContext(AuthContext) 
 const {error, setError} = useContext(ErrorContext);
 
+const defaultValues = currentPath === '/artworks' ? {
+  title: '',
+  author: '',
+  year: undefined,
+  area: [],
+  movement: '',
+  image: ''
+}
+: {
+  name: '',
+  movement: '',
+  area: []
+}
 
-        const { handleSubmit, register, formState } = useForm<EditFormData>({defaultValues: 
-        {name: '',
-        movement: '',
-        area: []
-      }
-      })
-     
-      const onSubmit = (values: EditFormData) => { 
+const { handleSubmit, register, formState } = useForm<Item>({
+defaultValues,
+});
+
+
+      const onSubmit = (values: Item) => { 
        formState.isValid && editFetch(currentPath, item, token, values, setError)
       }
 
@@ -59,7 +68,7 @@ const {error, setError} = useContext(ErrorContext);
                 <option value="sculpture">sculpture</option>
             </select>
 
-            <label htmlFor={item.mainArtworks} id="artworks">
+            <label htmlFor={(item.mainArtworks)?.map((artwork) => artwork._id)} id="artworks">
         Main artworks
       </label>
       
@@ -73,7 +82,7 @@ const {error, setError} = useContext(ErrorContext);
             // onChange={handleCheckbox}
             // checked={selectedTypes.includes(option) 
             />
-            <label htmlFor={artwork.title}>{artwork.title}</label>            
+            <label htmlFor={artwork._id}>{artwork._id}</label>            
             </div>
       ))}
       
