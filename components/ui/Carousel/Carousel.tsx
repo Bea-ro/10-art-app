@@ -13,6 +13,7 @@ import Container from "../Container/Container"
 import Button from '../Button/Button';
 import ItemsGrid from '../ItemsGrid/ItemsGrid';
 import Modal from '../Modal/Modal';
+import EditForm from '../Form/EditForm';
 
 
 const Carousel = ({carouselItems}: Props) => {
@@ -35,10 +36,8 @@ const Carousel = ({carouselItems}: Props) => {
         setCurrentIndex(currentIndex + 1);
       }
     };
-   
-  
-    
-    
+
+
     
 return (
 <CarouselStyled>
@@ -70,22 +69,19 @@ return (
     ))}</p>
                <Container>
               <Button buttonText="Edit" type="button" onClick={openModal}/>
-              {/* <Modal modal={isModalOpen}>
-                {
-                <EditForm onSubmit={handleSubmit(onEditSubmit)}></EditForm>
-                }
-              
-              </Modal> */}
               <Button buttonText="Delete" type="button" onClick={openModal}/>
               
-              <Modal modal={isModalOpen}>
-                {
-                  <>
-                <p>Are you sure you want to delete {item.title || item.name}?</p>
-                <Button buttonText="Yes" type="button" onClick={() => deleteFetch(currentPath, item, token, setError, closeModal)} ></Button>
-                <Button buttonText="No" type="button" onClick={closeModal} ></Button> 
-                </>
-                }
+              <Modal modal={isModalOpen} buttonText="Edit">
+              {buttonText === "Edit" && <EditForm item={item} currentPath={currentPath}/>}
+                </Modal>  
+
+                <Modal modal={isModalOpen} buttonText="Delete">
+                {buttonText === "Delete" && 
+                    <>
+                    <p>Are you sure you want to delete {item.title || item.name}?</p>
+                    <Button buttonText="Yes" type="button" onClick={() => deleteFetch(currentPath, item, token, setError, closeModal)} ></Button>
+                    <Button buttonText="No" type="button" onClick={closeModal} ></Button> 
+                    </>}
               </Modal>
 
               </Container>
