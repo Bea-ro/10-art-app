@@ -16,7 +16,7 @@ export const editFetch = async (currentPath: string, item: Item, token: string, 
         if (data.message) {
           setError('Your changes were not saved.');
         } else {
-          setError(`${item.title || item.name} was successfully modified.`);       
+          setError(`${item.title || item.name} was successfully updated.`);       
         }
       })
       .catch((error) => {

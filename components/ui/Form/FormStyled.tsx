@@ -7,8 +7,8 @@ align-items: center;
 gap: 12px;
 justify-content: center;
 
-input {
-    background-color: var(--color-grey);
+input, select {
+background-color: var(--color-grey);
 border-radius: var(--border-radius);
 padding: 8px 10px
 }

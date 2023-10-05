@@ -9,7 +9,7 @@ const ItemCard = ( {item }: Props ) => {
 <ItemCardStyled>
      <Link href={item.title? `/artworks/${item._id}`: `/authors/${item._id}`} key={item._id}> 
      <h3>{item.title || item.name}</h3>
-     {item.title ? <Image src={item.image || ''} alt={item.title}
+     {item.title ? <Image src={item.image} alt={item.title}
      height={100} 
      width={100* (16 / 9)}
      ></Image> : null}

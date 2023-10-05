@@ -22,10 +22,11 @@ const Carousel = ({carouselItems}: Props) => {
   const currentPath = router.pathname
 
   const {error, setError} = useContext(ErrorContext)
+  const [display, setDisplay] = useState<boolean>(true)
   const {token} = useContext(AuthContext)
   const {openModal, closeModal, isModalOpen, modalContent, setModalContent} = useModal()
     
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState<number>(0);
     const prevItem = () => {
       if (currentIndex > 0) {
         setCurrentIndex(currentIndex - 1);
@@ -39,18 +40,24 @@ const Carousel = ({carouselItems}: Props) => {
     
     const handleEditModal = (item: Item) => {
       setModalContent(<EditForm item={item} currentPath={currentPath}/>);
-      openModal()
+      openModal();
+      setDisplay(false)
     }
 
     const handleDeleteModal = (item: Item) => {
       setModalContent(
-        <>
+        <Container direction="column">
+            
             <p>Are you sure you want to delete {item.title || item.name}?</p>
+            <Container>
             <Button buttonText="Yes" type="button" onClick={() => deleteFetch(currentPath, item, token, setError, closeModal)} ></Button>
             <Button buttonText="No" type="button" onClick={closeModal} ></Button> 
-            </>
-      )
+            </Container>
+            
+            </Container>
+            )
       openModal(); 
+      setDisplay(false)
     }
     
 return (
@@ -82,8 +89,8 @@ return (
       <span key={index}>{area}{index < item.area.length - 1 && ', '}</span>
     ))}</p>
                <Container>
-              <Button buttonText="Edit" type="button" onClick={()=>handleEditModal(item)}/>
-              <Button buttonText="Delete" type="button" onClick={()=>handleDeleteModal(item)}/>
+               {display && <Button buttonText="Edit" type="button" onClick={()=>handleEditModal(item)}/>}
+               {display && <Button buttonText="Delete" type="button" onClick={()=>handleDeleteModal(item)}/>}
               <Modal modal={isModalOpen}>{modalContent}</Modal>
 
               </Container>

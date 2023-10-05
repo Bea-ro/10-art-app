@@ -1,21 +1,33 @@
-import { Item } from '../types/formData';
+import { Item } from '../types/item';
 
 export const addFetch = async (itemType: string, token: string, values: Item, setError: (arg0: string) => void) => {
-  await fetch(`https://complete-server-rtc.onrender.com/api/${item}`, {
+  // const formData = new FormData();
+
+//   if (itemType === 'artworks') {
+//     if (values.image) {
+//     formData.append("files", values.image[0]);
+//     values = { ...values, image: values.image[0].name };
+//   }
+//     formData.append("artwork", JSON.stringify(values));
+// } else {
+//   formData.append("author", JSON.stringify(values));
+// }
+
+  await fetch(`https://complete-server-rtc.onrender.com/api/${itemType}`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json', //'multipart/form-data'
         Authorization: `Bearer ${token}`
       },
       body: JSON.stringify(values)
     })
       .then((response) => response.json())
       .then((data) => {
-        
+        console.log(data)
         if (data.message) {
           setError(data.message);
         } else {
-          setError(`Your ${currentPath} has been added.`);
+          setError(`Your ${itemType} has been added.`);
        
         }
       })

@@ -12,8 +12,8 @@ export const deleteFetch = async (currentPath: string, item: Item, token: string
       .then((response) => response.json())
       .then((data) => {
         console.log('data en delete', data)
-        if (data === 'Authentication failed') {
-          setError('This item could not been removed.');
+        if (data) {
+          setError(data);
         } else {
           setError(`${item.title || item.name} was removed.`);
           closeModal()      

@@ -27,7 +27,7 @@ const Home = ({ artworks, authors }: Props) => {
 
   const { isAuth } = useContext(AuthContext) 
   const router = useRouter();
-  const currentPath = router.pathname
+
   const {openModal, closeModal, isModalOpen, modalContent, setModalContent} = useModal();
 
 
@@ -49,8 +49,8 @@ const Home = ({ artworks, authors }: Props) => {
 <>
 <Subtitle subtitle="Artworks"/>
 <Container>
-<Button buttonText="Add a new artwork" type="button" onClick={()=>handleAddModal('artwork')}/>
-<Modal modal={isModalOpen}>{modalContent}</Modal>
+<Button buttonText="Add a new artwork" type="button" onClick={()=>handleAddModal('artworks')}/>
+<Modal modal={isModalOpen}>{modalContent}</Modal> 
 
 
 <Link href="/artworks"
@@ -71,7 +71,7 @@ style={{
 <ItemsGrid items={artworks}></ItemsGrid>
 <Subtitle subtitle="Artists"/>
 <Container>
-<Button buttonText="Add a new artist" type="button" onClick={()=>handleAddModal('artist')}/>
+<Button buttonText="Add a new artist" type="button" onClick={()=>handleAddModal('authors')}/>
 <Modal modal={isModalOpen}>{modalContent}</Modal>
 <Link href="/authors"
 style={{

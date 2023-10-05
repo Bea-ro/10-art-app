@@ -1,10 +1,10 @@
 import { ButtonStyled } from './ButtonStyled';
 
-const Button = ({type, buttonText, onClick, disabled} : Props) => {
+const Button = ({type, buttonText, onClick, disabled, display} : Props) => {
 
 return (
     <>
-        <ButtonStyled type={type} onClick={onClick} disabled={disabled}>{buttonText}</ButtonStyled>
+        <ButtonStyled type={type} onClick={onClick} disabled={disabled} display={display}>{buttonText}</ButtonStyled>
     </>
   )
 }
@@ -14,6 +14,7 @@ export type Props = {
   buttonText: string 
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
   disabled?: boolean
+  display?: string
  }
 
 export default Button

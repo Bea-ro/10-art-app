@@ -9,7 +9,7 @@ const Modal = ( { children, modal}: Props ) => {
 
 export type Props = {
     children: React.ReactNode
-    modal?: boolean | undefined
+    modal: boolean
   };
 
 export default Modal

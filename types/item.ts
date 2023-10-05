@@ -8,7 +8,7 @@ export type Item = {
     area?:  string | string[],
     // area: 'pinture' | 'sculpture' | 'arquitecture',
     movement?: string,
-   image?: string | undefined,
+   image?: string,
    name?: string,
     mainArtworks?: Artwork | Artwork[],
 }

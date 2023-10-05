@@ -16,13 +16,13 @@ const AddForm = ( {itemType} : Props) => {
 const { token } = useContext(AuthContext) 
 const {error, setError} = useContext(ErrorContext);
 
-const defaultValues = itemType === 'artwork' ? {
+const defaultValues = itemType === 'artworks' ? {
       title: '',
       author: '',
       year: undefined,
       area: [],
       movement: '',
-      image: ''
+      image: 'https://'
     }
   : {
       name: '',
@@ -42,10 +42,11 @@ const { handleSubmit, register, formState } = useForm<Item>({
 
   return (
 
-    <FormStyled onSubmit={handleSubmit(onSubmit)}>
+    <FormStyled onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
+      <h1>Add a new {itemType}</h1>
       <Container direction='column'>
 
-        {itemType === 'artwork' && ( 
+        {itemType === 'artworks' && ( 
         <>
          <input type="text" id="title" placeholder="title" 
           {...register('title', {
@@ -84,14 +85,14 @@ const { handleSubmit, register, formState } = useForm<Item>({
           }
           )}
           />
-<input type="file" id="image" accept=".jpeg, .png, .gif, .webp"
+<input type="file" id="image" accept=".jpg, .png, .gif, .webp"
           {...register('image', {
             required: false
           }
           )}
           />        </>
         )}
-      {itemType === 'author' && (
+      {itemType === 'authors' && (
         <>
         <input type="text" id="name" placeholder="name"
           {...register('name', {
