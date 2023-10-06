@@ -14,6 +14,7 @@ import Button from '../Button/Button';
 import ItemsGrid from '../ItemsGrid/ItemsGrid';
 import Modal from '../Modal/Modal';
 import EditForm from '../Form/EditForm';
+import DeleteButton from '../Button/DeleteButton';
 
 
 const Carousel = ({carouselItems}: Props) => {
@@ -22,49 +23,48 @@ const Carousel = ({carouselItems}: Props) => {
   const currentPath = router.pathname
 
   const {error, setError} = useContext(ErrorContext)
-  const [display, setDisplay] = useState<boolean>(true)
   const {token} = useContext(AuthContext)
-  const {openModal, closeModal, isModalOpen, modalContent, setModalContent} = useModal()
+  const {openModal, closeModal, isModalOpen, modalContent, setModalContent, display} = useModal()
     
     const [currentIndex, setCurrentIndex] = useState<number>(0);
     const prevItem = () => {
       if (currentIndex > 0) {
         setCurrentIndex(currentIndex - 1);
+        closeModal()
       }
     };
     const nextItem = () => {
       if (currentIndex < carouselItems.length - 1) {
         setCurrentIndex(currentIndex + 1);
+        closeModal()
       }
     };
     
     const handleEditModal = (item: Item) => {
       setModalContent(<EditForm item={item} currentPath={currentPath}/>);
       openModal();
-      setDisplay(false)
     }
-
+    
     const handleDeleteModal = (item: Item) => {
       setModalContent(
-        <Container direction="column">
-            
+        <>
             <p>Are you sure you want to delete {item.title || item.name}?</p>
             <Container>
             <Button buttonText="Yes" type="button" onClick={() => deleteFetch(currentPath, item, token, setError, closeModal)} ></Button>
-            <Button buttonText="No" type="button" onClick={closeModal} ></Button> 
+            <Button buttonText="No" type="button" onClick={closeModal}></Button> 
             </Container>
-            
-            </Container>
+          </>
             )
       openModal(); 
-      setDisplay(false)
     }
     
 return (
 <CarouselStyled>
           {carouselItems.map((item, index) => (
                
-            <li key={item._id} style={{display: index === currentIndex ? 'block' : 'none'}}>           
+            <li key={item._id} style={{display: index === currentIndex ? 'flex' : 'none',
+            flexDirection: 'column'
+            }}>           
               {/* <Link href={item.title? `/artworks/${item._id}` : `/authors/${item._id}`} key={item._id}>  */}
               <h2>{item.title || item.name}</h2>
               <p>{item.title ? `${item.author},  ${item.year}` : null} </p>
@@ -91,9 +91,8 @@ return (
                <Container>
                {display && <Button buttonText="Edit" type="button" onClick={()=>handleEditModal(item)}/>}
                {display && <Button buttonText="Delete" type="button" onClick={()=>handleDeleteModal(item)}/>}
-              <Modal modal={isModalOpen}>{modalContent}</Modal>
-
               </Container>
+              <Modal modal={isModalOpen}>{modalContent}</Modal>
               <p>{error}</p>
               {/* </Link> */}
               </li>             

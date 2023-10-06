@@ -23,12 +23,11 @@ export const addFetch = async (itemType: string, token: string, values: Item, se
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
-        if (data.message) {
-          setError(data.message);
+        console.log('data es', data)
+        if (data === 'Authentication failed. Please, login again.') {
+          setError(data);
         } else {
-          setError(`Your ${itemType} has been added.`);
-       
+          setError(`Your ${itemType.slice(0,-1)} has been added.`);
         }
       })
       .catch((error) => {

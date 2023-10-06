@@ -8,12 +8,14 @@ import Container from '../Container/Container';
 import { AuthContext, ErrorContext } from '../../../pages/_app';
 import { editFetch } from '../../../services/editFetch';
 import { Item } from '../../../types/item';
+import { useModal } from '@/customHooks/useModal';
 
 
 const EditForm = ({item, currentPath}: Props) => {
 
 const { token } = useContext(AuthContext) 
 const {error, setError} = useContext(ErrorContext);
+const {closeModal} = useModal()
 
 const defaultValues = currentPath === '/artworks' ? {
   title: '',
@@ -42,6 +44,7 @@ defaultValues,
   return (
 
     <FormStyled onSubmit={handleSubmit(onSubmit)}>
+        <h1>Please, fill in the field/s you want to update.</h1>
       <Container direction='column'>
 
      {item.name && ( 
@@ -141,10 +144,12 @@ defaultValues,
         )}
         
         </Container>
-        <Button type="submit" buttonText="Submit" 
+        <Container>
+        <Button type="submit" buttonText="Save" 
         disabled={!formState.isValid || formState.isSubmitting}
         />
-   
+    <Button type="button" buttonText="Cancel" onClick={closeModal}/>
+    </Container>
    </FormStyled>
      )
 }

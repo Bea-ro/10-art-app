@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import Link from 'next/link';
 
 import { useRouter } from 'next/router';
 import { GetStaticProps } from 'next';
@@ -17,10 +16,7 @@ import Button from '../components/ui/Button/Button';
 import Message from '../components/ui/Message/Message';
 import Container from '../components/ui/Container/Container';
 import Text from '../components/ui/Text/Text';
-import ItemsGrid from '../components/ui/ItemsGrid/ItemsGrid';
-import Modal from '../components/ui/Modal/Modal';
-import AddForm from '../components/ui/Form/AddForm'
-
+import ItemsInHome from '../components/ui/ItemsInHome/ItemsInHome';
 
 
 const Home = ({ artworks, authors }: Props) => {
@@ -28,16 +24,12 @@ const Home = ({ artworks, authors }: Props) => {
   const { isAuth } = useContext(AuthContext) 
   const router = useRouter();
 
-  const {openModal, closeModal, isModalOpen, modalContent, setModalContent} = useModal();
+  const {openModal, isModalOpen, modalContent, setModalContent, display} = useModal();
 
 
   const handleRegisterNavigation = () => router.push('/user?action=register')
   
-  const handleAddModal = (itemType: string) => {
-    setModalContent(<AddForm itemType={itemType}/>);
-    openModal()
-  }
-
+  
   return (
       <Layout title="Art App" 
       description="Find information about artists from all movements and artworks of pinture, sculpture and arquitecture."
@@ -46,50 +38,10 @@ const Home = ({ artworks, authors }: Props) => {
       
 {isAuth? 
 (
-<>
-<Subtitle subtitle="Artworks"/>
-<Container>
-<Button buttonText="Add a new artwork" type="button" onClick={()=>handleAddModal('artworks')}/>
-<Modal modal={isModalOpen}>{modalContent}</Modal> 
-
-
-<Link href="/artworks"
-style={{
-  color: 'var(--color-grey)',
-  backgroundColor: 'var(--color-light-blue)',
-  textShadow: '2px 2px 4px var(--color-blue)',
-  boxShadow: '2px 2px 4px var(--color-grey)',
-  borderRadius: 'var(--border-radius)',
-  padding: '8px 10px',
-  margin: '0 10px',
-  fontSize: '22px',
-  width: 'fit-content',
-  alignSelf: 'center'
-}}
->See Artworks Detail</Link>
-</Container>
-<ItemsGrid items={artworks}></ItemsGrid>
-<Subtitle subtitle="Artists"/>
-<Container>
-<Button buttonText="Add a new artist" type="button" onClick={()=>handleAddModal('authors')}/>
-<Modal modal={isModalOpen}>{modalContent}</Modal>
-<Link href="/authors"
-style={{
-  color: 'var(--color-grey)',
-  backgroundColor: 'var(--color-light-blue)',
-  textShadow: '2px 2px 4px var(--color-blue)',
-  boxShadow: '2px 2px 4px var(--color-grey)',
-  borderRadius: 'var(--border-radius)',
-  padding: '8px 10px',
-  margin: '0 10px',
-  fontSize: '22px',
-  width: 'fit-content',
-  alignSelf: 'center'
-}}
->See Artists Detail</Link>
-</Container>
-<ItemsGrid items={authors}></ItemsGrid>
-</>
+ <>
+ <ItemsInHome items={artworks} itemType='artworks'></ItemsInHome>
+<ItemsInHome items={authors} itemType='authors'></ItemsInHome>
+</> 
 )
 :
 (<>
@@ -103,7 +55,6 @@ style={{
 
 <Message/>
 </Layout>
-   
   )
 }
 

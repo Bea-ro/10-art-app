@@ -8,6 +8,7 @@ import Container from '../Container/Container';
 import { AuthContext, ErrorContext } from '../../../pages/_app';
 import { addFetch } from '../../../services/addFetch';
 import { Item } from '../../../types/item';
+import { useModal } from '../../../customHooks/useModal';
 
 
 
@@ -15,6 +16,7 @@ const AddForm = ( {itemType} : Props) => {
 
 const { token } = useContext(AuthContext) 
 const {error, setError} = useContext(ErrorContext);
+const {closeModal} = useModal()
 
 const defaultValues = itemType === 'artworks' ? {
       title: '',
@@ -36,14 +38,16 @@ const { handleSubmit, register, formState } = useForm<Item>({
 
      
       const onSubmit = (values: Item) => { 
-        formState.isValid && addFetch(itemType, token, values, setError)
-            }
-
-
+        if (formState.isValid) {
+          closeModal();
+          addFetch(itemType, token, values, setError);
+      }
+      }
+      console.log('error es', error)
   return (
 
     <FormStyled onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
-      <h1>Add a new {itemType}</h1>
+      <h1>Add a new {itemType.slice(0, -1)}</h1>
       <Container direction='column'>
 
         {itemType === 'artworks' && ( 
@@ -124,10 +128,12 @@ const { handleSubmit, register, formState } = useForm<Item>({
         </>)}
   
         </Container>
-        <Button type="submit" buttonText="Submit" 
+        <Container>
+        <Button type="submit" buttonText="Save" 
         disabled={!formState.isValid || formState.isSubmitting}
         />
-   
+    <Button buttonText="Cancel" type="button" onClick={closeModal}/>
+    </Container>
    </FormStyled>
      )
 }

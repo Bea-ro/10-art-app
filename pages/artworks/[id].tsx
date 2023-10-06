@@ -15,14 +15,32 @@ import Text from '../../components/ui/Text/Text';
 import Button from '../../components/ui/Button/Button';
 import Container from '../../components/ui/Container/Container';
 import Modal from '../../components/ui/Modal/Modal';
-
+import AddForm from "../../components/ui/Form/AddForm";
 
 
 const ArtworkPage = ({ artwork }: Props) => {
 
   const { isAuth, token } = useContext(AuthContext)
   const { error, setError } = useContext(ErrorContext)
-  const {openModal, closeModal, isModalOpen} = useModal()
+  const {openModal, closeModal, isModalOpen, setModalContent, display, modalContent} = useModal()
+
+  const handleAddModal = () => {
+    setModalContent(<AddForm itemType={'artworks'}/>);
+    openModal()
+  }
+
+  const handleDeleteModal = (artwork: Artwork) => {
+    setModalContent(
+      <>
+          <p>Are you sure you want to delete {artwork.title}?</p>
+          <Container>
+          <Button buttonText="Yes" type="button" onClick={() => deleteFetch('/artworks', artwork, token, setError, closeModal)} ></Button>
+          <Button buttonText="No" type="button" onClick={closeModal}></Button> 
+          </Container>
+        </>
+          )
+    openModal(); 
+  }
 
   return (
     
@@ -40,23 +58,10 @@ const ArtworkPage = ({ artwork }: Props) => {
       ></Image> 
       </Container>
       <Container>
-      <Button buttonText="Add a new artwork" type="button"/>
-      {/* <Modal modal={isModalOpen}>
-                {
-               <EditForm></EditForm> 
-                }
-              </Modal> */}
-      <Button buttonText="Delete" type="button" onClick={openModal}/>
-      <Modal modal={isModalOpen}>
-                {
-                  <>
-                <p>Are you sure you want to delete {artwork.title}?</p>
-                <Button buttonText="Yes" type="button" onClick={() => deleteFetch('/artworks', artwork, token, setError, closeModal)} ></Button>
-                <Button buttonText="No" type="button" onClick={closeModal} ></Button> 
-                </>
-                }
-              </Modal>
+      {display && <Button buttonText="Add a new artwork" type="button" onClick={handleAddModal}/>}
+      {display && <Button buttonText="Delete" type="button" onClick={()=>handleDeleteModal(artwork)}/>}
       </Container>
+      <Modal modal={isModalOpen}>{modalContent}</Modal>
       <p>{error}</p>
        </>
        : <Text text={`Please, log in to discover ${artwork.title}.`}/>}
