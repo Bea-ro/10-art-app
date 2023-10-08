@@ -16,17 +16,19 @@ const ItemsInHome = ( { items, itemType } : Props ) => {
 
 const {isModalOpen, display, modalContent, setModalContent, openModal} = useModal()
 
+
 const handleAddModal = (itemType: string) => {
     setModalContent(<AddForm itemType={itemType}/>);
     openModal()
   }
+
 
     return (
 <ItemsInHomeStyled>
 <Subtitle subtitle={itemType}/>
 <Container>
 {display && <Button buttonText={`Add a new ${itemType.slice(0, -1)}`} type="button" onClick={()=>handleAddModal(itemType)}/>}
-{display && <Link href={`/${itemType}`}>See {itemType} Detail</Link>}
+{display && <Link className="button" href={`/${itemType}`}>See {itemType} Detail</Link>}
 <Modal modal={isModalOpen}>{modalContent}</Modal>
 </Container>
 <ItemsGrid items={items}></ItemsGrid>

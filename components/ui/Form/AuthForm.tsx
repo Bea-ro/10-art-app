@@ -10,12 +10,13 @@ import { AuthFormData } from '../../../types/formData'
 import { registerPostFetch } from '../../../services/registerPostFetch';
 import { loginPostFetch } from '../../../services/loginPostFetch';
 import { AuthContext, ErrorContext } from '../../../pages/_app';
+import Message from '../Message/Message';
 
 
 const AuthForm = ( {action}: Props) => {
 
 const { setIsAuth, setToken } = useContext(AuthContext) 
-const {error, setError} = useContext(ErrorContext);
+const {setError} = useContext(ErrorContext);
 const router = useRouter();
 
         const { handleSubmit, register, formState } = useForm<AuthFormData>({defaultValues: 
@@ -54,9 +55,9 @@ const router = useRouter();
             )}
             />
      
-        {(formState.errors.email || formState.errors.password) && <p>Please, check your email and password and try again.</p>}
-        <p>{error}</p>
-      
+        {/* {(formState.errors.email || formState.errors.password) && <p>Please, check your email and password and try again.</p>}
+        <p>{error}</p> */}
+      <Message formState={formState} action={action}></Message>
         </Container>
         <Button type="submit" buttonText="Submit" 
         disabled={!formState.isValid || formState.isSubmitting}
@@ -67,7 +68,7 @@ const router = useRouter();
 }
 
 type Props = {
-  action: string | undefined | string[]
+  action: string
 } 
 
 export default AuthForm

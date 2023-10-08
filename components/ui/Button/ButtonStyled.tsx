@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 
-export const ButtonStyled = styled.button` 
+export const ButtonStyled = styled.button<{display?: string}>` 
+display: ${(props) => props.display || 'block'};
 color: var(--color-grey);
 background-color: var(--color-light-blue);
 text-shadow: 2px 2px 4px var(--color-blue);

@@ -11,7 +11,7 @@ export const loginPostFetch = async (values: AuthFormData, setError: (arg0: stri
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log('data en login', data)
+       
         if (data.message) {
           setError(data.message);
         } else {
@@ -20,7 +20,7 @@ export const loginPostFetch = async (values: AuthFormData, setError: (arg0: stri
             email: data.userDB.email,
             token: data.token
           };
-          console.log('userStored', userStored)
+          
           localStorage.setItem('userStored', JSON.stringify(userStored));
           handleNavigate('/');
           setIsAuth(true);

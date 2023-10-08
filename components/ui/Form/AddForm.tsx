@@ -38,12 +38,10 @@ const { handleSubmit, register, formState } = useForm<Item>({
 
      
       const onSubmit = (values: Item) => { 
-        if (formState.isValid) {
-          closeModal();
-          addFetch(itemType, token, values, setError);
+        formState.isValid && addFetch(itemType, token, values, setError, closeModal);
       }
-      }
-      console.log('error es', error)
+  
+     
   return (
 
     <FormStyled onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">

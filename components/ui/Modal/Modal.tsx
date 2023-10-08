@@ -1,7 +1,8 @@
+import { useModal } from '@/customHooks/useModal';
 import { ModalStyled } from './ModalStyled'
 
 const Modal = ( { children, modal}: Props ) => {
-
+  
   return (
         <ModalStyled modal={modal}>{children}</ModalStyled>        
   )

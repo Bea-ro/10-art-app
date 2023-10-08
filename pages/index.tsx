@@ -6,28 +6,21 @@ import { Artwork } from '../types/artwork'
 import { Author } from '../types/author'
 import { getArtworks } from '../libs/artworks/artworks';
 import { getAuthors } from '../libs/authors/authors';
-import { AuthContext } from './_app';
-import { useModal } from '../customHooks/useModal';
+import { AuthContext, ErrorContext } from './_app';
 
 import Layout from '../components/ui/Layout/Layout'
 import PageTitle from '../components/ui/PageTitle/PageTitle';
 import Subtitle from '../components/ui/Subtitle/Subtitle';
-import Button from '../components/ui/Button/Button';
-import Message from '../components/ui/Message/Message';
 import Container from '../components/ui/Container/Container';
 import Text from '../components/ui/Text/Text';
 import ItemsInHome from '../components/ui/ItemsInHome/ItemsInHome';
+import Link from 'next/link';
 
 
 const Home = ({ artworks, authors }: Props) => {
 
   const { isAuth } = useContext(AuthContext) 
-  const router = useRouter();
-
-  const {openModal, isModalOpen, modalContent, setModalContent, display} = useModal();
-
-
-  const handleRegisterNavigation = () => router.push('/user?action=register')
+  const {setError} = useContext(ErrorContext)
   
   
   return (
@@ -48,12 +41,10 @@ const Home = ({ artworks, authors }: Props) => {
 <Subtitle subtitle="Find your favourite artists and artworks"/>
 <Container direction="column">
 <Text text="Still do not have an account?"></Text>
-<Button type="button" buttonText="Free Register" onClick={handleRegisterNavigation}/>
+<Link className="button" href="/user?action=register" onClick={() => setError('')}>Free Register</Link>
 </Container>
 </>)
 }
-
-<Message/>
 </Layout>
   )
 }

@@ -7,7 +7,7 @@ export const useModal = () => {
 
   const openModal = () => {
       setIsModalOpen(true);
-      setDisplay(false)
+      setDisplay(false);
   };
 
   const closeModal = () => {
@@ -15,7 +15,7 @@ export const useModal = () => {
     setDisplay(true)
   };
 
-  return { isModalOpen, setIsModalOpen, openModal, closeModal, modalContent, setModalContent, display};
+  return { isModalOpen, setIsModalOpen, openModal, closeModal, modalContent, setModalContent, display, setDisplay};
 };
 
 export type useModal = {
@@ -26,4 +26,5 @@ export type useModal = {
   modalContent: React.ReactNode
   setModalContent: (arg0: React.ReactNode) => void
   display: boolean
+  setModalDisplay: (arg0: boolean) => void
  }

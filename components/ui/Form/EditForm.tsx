@@ -2,20 +2,20 @@ import React, { useContext }  from 'react'
 import { FormStyled } from './FormStyled';
 import { useForm} from 'react-hook-form'
 
-import Button from '../Button/Button';
-import Container from '../Container/Container';
-
 import { AuthContext, ErrorContext } from '../../../pages/_app';
 import { editFetch } from '../../../services/editFetch';
 import { Item } from '../../../types/item';
-import { useModal } from '@/customHooks/useModal';
+import { useModal } from '../../../customHooks/useModal';
+
+import Button from '../Button/Button';
+import Container from '../Container/Container';
 
 
-const EditForm = ({item, currentPath}: Props) => {
+const EditForm = ({item, currentPath, closeModal}: Props) => {
 
 const { token } = useContext(AuthContext) 
 const {error, setError} = useContext(ErrorContext);
-const {closeModal} = useModal()
+// const {closeModal} = useModal()
 
 const defaultValues = currentPath === '/artworks' ? {
   title: '',
@@ -37,9 +37,10 @@ defaultValues,
 
 
       const onSubmit = (values: Item) => { 
-       formState.isValid && editFetch(currentPath, item, token, values, setError)
+       formState.isValid && editFetch(currentPath, item, token, values, setError, closeModal)
       }
 
+      
 
   return (
 
@@ -157,6 +158,7 @@ defaultValues,
 export type Props = {
     item: Item
     currentPath: string
+    closeModal: () => void
 }
 
 
