@@ -1,7 +1,7 @@
 import { AuthFormData } from '../types/formData';
 import { loginPostFetch } from './loginPostFetch';
 
-export const registerPostFetch = async (values: AuthFormData, setError: (arg0: string) => void, handleNavigate: (arg0: string) => void, setIsAuth: (arg0: boolean) => void, setToken: (arg0: string) => void) => {
+export const registerPostFetch = async (values: AuthFormData, setMessage: (arg0: string) => void, handleNavigate: (arg0: string) => void, setIsAuth: (arg0: boolean) => void, setToken: (arg0: string) => void) => {
   await fetch('https://complete-server-rtc.onrender.com/api/users/register', {
     method: 'POST',
     headers: {
@@ -13,15 +13,15 @@ export const registerPostFetch = async (values: AuthFormData, setError: (arg0: s
     .then((data) => {
       console.log('data en register', data)
       if (data.message) {
-        setError(data.message);
+        setMessage(data.message);
       } else {
-        setError('');
+        setMessage('');
         const userStored = {
           email: data.email,
           password: data.password
         };
         localStorage.setItem('userStored', JSON.stringify(userStored));
-        loginPostFetch(values, setError, handleNavigate, setIsAuth, setToken);
+        loginPostFetch(values, setMessage, handleNavigate, setIsAuth, setToken);
       }
     })
     .catch((error) => {

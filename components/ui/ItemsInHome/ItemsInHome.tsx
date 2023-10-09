@@ -29,7 +29,7 @@ const handleAddModal = (itemType: string) => {
 <Container>
 {display && <Button buttonText={`Add a new ${itemType.slice(0, -1)}`} type="button" onClick={()=>handleAddModal(itemType)}/>}
 {display && <Link className="button" href={`/${itemType}`}>See {itemType} Detail</Link>}
-<Modal modal={isModalOpen}>{modalContent}</Modal>
+{isModalOpen && <Modal>{modalContent}</Modal>}
 </Container>
 <ItemsGrid items={items}></ItemsGrid>
 </ItemsInHomeStyled>

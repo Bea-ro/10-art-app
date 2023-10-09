@@ -1,25 +1,34 @@
+import { MessageStyled } from './MessageStyled';
 import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { AuthFormData } from '../../../types/formData'
-import { ErrorContext } from '../../../pages/_app';
+import { MessageContext } from '../../../pages/_app';
 
-const Message = ({formState, action}: Props) => {
+const Message = ({formState, action, padding, shadow}: Props) => {
   
-  const {error} = useContext(ErrorContext);
+  const {message} = useContext(MessageContext);
 
-    return (
-<>
-{action === "login" && (formState.errors.email || formState.errors.password) && <p>Please, check your email and password and try again.</p>}
-{action === "register" && formState.errors.password && <p>Password must be at least six characters long and contain both uppercase and lowercase letters.</p>}
-{action === "register" && formState.errors.email && <p>User already exists.</p>}
-<p>{error}</p>
-</>
+  const otherMessage = () => {
+if (action === "login" && (formState.errors.email || formState.errors.password)) {
+"Please, check your email and password and try again."
+//este parece que sale bien con mensaje a secas (viene del backend)
+//el de eliminar también sale bien del backend
+} else if (action === "register" && formState.errors.password) {
+  "Password must be at least six characters long and contain both uppercase and lowercase letters."
+} else if (action === "register" && formState.errors.email) {
+  "User already exists."}
+  }
+  
+  return (
+<MessageStyled padding={padding} shadow={shadow}>{message}</MessageStyled>
     );
   };
 
   export type Props = {
-    formState: AuthFormData
-    action: string
+    formState?: AuthFormData
+    action?: string
+    padding?: string
+    shadow?: string
   } 
 
   // export type Props = {

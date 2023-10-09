@@ -2,7 +2,7 @@ import React, { useContext }  from 'react'
 import { FormStyled } from './FormStyled';
 import { useForm} from 'react-hook-form'
 
-import { AuthContext, ErrorContext } from '../../../pages/_app';
+import { AuthContext, MessageContext } from '../../../pages/_app';
 import { editFetch } from '../../../services/editFetch';
 import { Item } from '../../../types/item';
 import { useModal } from '../../../customHooks/useModal';
@@ -14,8 +14,7 @@ import Container from '../Container/Container';
 const EditForm = ({item, currentPath, closeModal}: Props) => {
 
 const { token } = useContext(AuthContext) 
-const {error, setError} = useContext(ErrorContext);
-// const {closeModal} = useModal()
+const {message, setMessage} = useContext(MessageContext);
 
 const defaultValues = currentPath === '/artworks' ? {
   title: '',
@@ -37,7 +36,7 @@ defaultValues,
 
 
       const onSubmit = (values: Item) => { 
-       formState.isValid && editFetch(currentPath, item, token, values, setError, closeModal)
+       formState.isValid && editFetch(currentPath, item, token, values, setMessage, closeModal)
       }
 
       
@@ -50,13 +49,13 @@ defaultValues,
 
      {item.name && ( 
         <>
-        <input type="text" id="name" placeholder="name"
+        <input type="text" id="name" placeholder="Name"
           {...register('name', {
             required: false
           }
             )}
             />
-        <input type="text" id="movement" placeholder="movement" 
+        <input type="text" id="movement" placeholder="Movement" 
           {...register('movement', {
             required: false
           }
@@ -72,45 +71,42 @@ defaultValues,
                 <option value="sculpture">sculpture</option>
             </select>
 
-            <label htmlFor={(item.mainArtworks)?.map((artwork) => artwork._id)} id="artworks">
+            {/* <label htmlFor={(item.mainArtworks)?.map((artwork) => artwork._id)} id="artworks">
         Main artworks
       </label>
       
-      {item.mainArtworks && (item.mainArtworks).map((artwork) => (
-        <div key={artwork._id}>
+      {item.mainArtworks && (item.mainArtworks).map((artwork) => (  
           <input
+          key={artwork._id}
             type="checkbox"
             id={artwork._id}
             name="main artworks"
             value={artwork.title}
-            // onChange={handleCheckbox}
-            // checked={selectedTypes.includes(option) 
+            // onChange={evento lo que sea}
             />
-            <label htmlFor={artwork._id}>{artwork._id}</label>            
-            </div>
-      ))}
+          ))} */}
       
 
         {(formState.errors.name || formState.errors.movement || formState.errors.area) && <p>Please, check your data and try again.</p>}
-        <p>{error}</p>
+        <p>{message}</p>
         
         </>)}
 
         {item.title && ( 
         <>
-         <input type="text" id="title" placeholder="title" 
+         <input type="text" id="title" placeholder="Title" 
           {...register('title', {
             required: false
           }
           )}
           />
-   <input type="text" id="author" placeholder="author" 
+   <input type="text" id="author" placeholder="Author" 
           {...register('author', {
             required: false
           }
           )}
           />
- <input type="number" id="year" placeholder="year" 
+ <input type="number" id="year" placeholder="Year" 
           {...register('year', {
             required: false,
             pattern: {
@@ -129,12 +125,13 @@ defaultValues,
                 <option value="painting">painting</option>
                 <option value="sculpture">sculpture</option>
             </select>
-<input type="text" id="movement" placeholder="movement" 
+<input type="text" id="movement" placeholder="Movement" 
           {...register('movement', {
             required: false
           }
           )}
           />
+          <label htmlFor="image" id="input-label">Upload Image</label>
 <input type="file" id="image" accept=".jpeg, .png, .gif, .webp"
           {...register('image', {
             required: false

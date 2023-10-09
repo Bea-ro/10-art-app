@@ -1,7 +1,7 @@
 import { GetStaticProps } from "next"; 
 import { GetStaticPaths } from "next"; 
 import { useContext } from "react";
-import { AuthContext, ErrorContext } from "../_app";
+import { AuthContext, MessageContext } from "../_app";
 import { Artwork } from "../../types/artwork";
 import { useModal } from '../../customHooks/useModal';
 import { deleteFetch } from '../../services/deleteFetch';
@@ -16,16 +16,17 @@ import Button from '../../components/ui/Button/Button';
 import Container from '../../components/ui/Container/Container';
 import Modal from '../../components/ui/Modal/Modal';
 import AddForm from "../../components/ui/Form/AddForm";
+import Message from "../../components/ui/Message/Message";
 
 
 const ArtworkPage = ({ artwork }: Props) => {
 
   const { isAuth, token } = useContext(AuthContext)
-  const { error, setError } = useContext(ErrorContext)
+  const { message, setMessage } = useContext(MessageContext)
   const {openModal, closeModal, isModalOpen, setModalContent, display, modalContent} = useModal()
 
   const handleAddModal = () => {
-    setModalContent(<AddForm itemType={'artworks'}/>);
+    setModalContent(<AddForm itemType={'artworks'} closeModal={closeModal}/>);
     openModal()
   }
 
@@ -34,9 +35,10 @@ const ArtworkPage = ({ artwork }: Props) => {
       <>
           <p>Are you sure you want to delete {artwork.title}?</p>
           <Container>
-          <Button buttonText="Yes" type="button" onClick={() => deleteFetch('/artworks', artwork, token, setError, closeModal)} ></Button>
+          <Button buttonText="Yes" type="button" onClick={() => deleteFetch('/artworks', artwork, token, setMessage, closeModal)} ></Button>
           <Button buttonText="No" type="button" onClick={closeModal}></Button> 
           </Container>
+          <Message shadow="transparent"></Message> 
         </>
           )
     openModal(); 
@@ -57,12 +59,13 @@ const ArtworkPage = ({ artwork }: Props) => {
       height={400} width={400*(16/9)}
       ></Image> 
       </Container>
-      <Container>
-      {display && <Button buttonText="Add a new artwork" type="button" onClick={handleAddModal}/>}
-      {display && <Button buttonText="Delete" type="button" onClick={()=>handleDeleteModal(artwork)}/>}
-      </Container>
-      <Modal modal={isModalOpen}>{modalContent}</Modal>
-      <p>{error}</p>
+      
+      {display && <Container>
+      <Button buttonText="Add a new artwork" type="button" onClick={handleAddModal}/>
+      <Button buttonText="Delete" type="button" onClick={()=>handleDeleteModal(artwork)}/>
+      </Container>}
+
+      {isModalOpen && <Modal>{modalContent}</Modal>}
        </>
        : <Text text={`Please, log in to discover ${artwork.title}.`}/>}
       </Layout>

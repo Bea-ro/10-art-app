@@ -10,10 +10,13 @@ export const handler = (
   ) => {
     const id = req.query.id as string
     const author = getAuthorById(id)
+    .then((response) => {
     if (!author) {
         res.status(404).json({message: 'Author not found'})      
         return
     }
   res.status(200).json(author)
+  })
+  .catch((err) => res.status(500).json({message: err}))    
   }
 

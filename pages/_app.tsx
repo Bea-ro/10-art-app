@@ -9,15 +9,15 @@ export const AuthContext = createContext<AuthContextType>({
   setToken: () => {}
 })
 
-export const ErrorContext = createContext<ErrorContextType>({
-  error: '',
-  setError: () => {}
+export const MessageContext = createContext<MessageContextType>({
+  message: '',
+  setMessage: () => {}
 })
 
 export default function App({ Component, pageProps }: AppProps) {
 
   const [isAuth, setIsAuth] = useState<boolean>(false);
-  const [error, setError] = useState<string>('');
+  const [message, setMessage] = useState<string>('');
   const [token, setToken] = useState<string>('')
 
   useEffect(() => {
@@ -38,16 +38,16 @@ export default function App({ Component, pageProps }: AppProps) {
           setToken: setToken
         }}
       >
-        <ErrorContext.Provider
+        <MessageContext.Provider
         value={{
-          error: error,
-          setError: setError
+          message: message,
+          setMessage: setMessage
         }}
       >
 
 <Global />
 <Component {...pageProps} />
-</ErrorContext.Provider>
+</MessageContext.Provider>
 </AuthContext.Provider>
 </>
     )
@@ -60,7 +60,7 @@ export type AuthContextType = {
   setToken: (arg0: string) => void
  }
 
-export type ErrorContextType = {
-  error: string | undefined
-  setError: (arg0: string) => void
+export type MessageContextType = {
+  message: string | undefined
+  setMessage: (arg0: string) => void
  }

@@ -9,14 +9,14 @@ import Container from '../Container/Container';
 import { AuthFormData } from '../../../types/formData'
 import { registerPostFetch } from '../../../services/registerPostFetch';
 import { loginPostFetch } from '../../../services/loginPostFetch';
-import { AuthContext, ErrorContext } from '../../../pages/_app';
+import { AuthContext, MessageContext } from '../../../pages/_app';
 import Message from '../Message/Message';
 
 
 const AuthForm = ( {action}: Props) => {
 
 const { setIsAuth, setToken } = useContext(AuthContext) 
-const {setError} = useContext(ErrorContext);
+const {setMessage} = useContext(MessageContext);
 const router = useRouter();
 
         const { handleSubmit, register, formState } = useForm<AuthFormData>({defaultValues: 
@@ -31,8 +31,8 @@ const router = useRouter();
       };
 
       const onSubmit = (values: AuthFormData) => { 
-       formState.isValid && (action === "register" ? registerPostFetch(values, setError, handleNavigate, setIsAuth, setToken)
-      : loginPostFetch(values, setError, handleNavigate, setIsAuth, setToken))
+       formState.isValid && (action === "register" ? registerPostFetch(values, setMessage, handleNavigate, setIsAuth, setToken)
+      : loginPostFetch(values, setMessage, handleNavigate, setIsAuth, setToken))
       }
 
 
@@ -68,7 +68,7 @@ const router = useRouter();
 }
 
 type Props = {
-  action: string
+  action: string | undefined
 } 
 
 export default AuthForm

@@ -6,7 +6,7 @@ import { Artwork } from '../types/artwork'
 import { Author } from '../types/author'
 import { getArtworks } from '../libs/artworks/artworks';
 import { getAuthors } from '../libs/authors/authors';
-import { AuthContext, ErrorContext } from './_app';
+import { AuthContext, MessageContext } from './_app';
 
 import Layout from '../components/ui/Layout/Layout'
 import PageTitle from '../components/ui/PageTitle/PageTitle';
@@ -20,7 +20,7 @@ import Link from 'next/link';
 const Home = ({ artworks, authors }: Props) => {
 
   const { isAuth } = useContext(AuthContext) 
-  const {setError} = useContext(ErrorContext)
+  const {setMessage} = useContext(MessageContext)
   
   
   return (
@@ -40,8 +40,8 @@ const Home = ({ artworks, authors }: Props) => {
 (<>
 <Subtitle subtitle="Find your favourite artists and artworks"/>
 <Container direction="column">
-<Text text="Still do not have an account?"></Text>
-<Link className="button" href="/user?action=register" onClick={() => setError('')}>Free Register</Link>
+<Text text="Still without account?"></Text>
+<Link className="button" href="/user?action=register" onClick={() => setMessage('')}>Free Register</Link>
 </Container>
 </>)
 }

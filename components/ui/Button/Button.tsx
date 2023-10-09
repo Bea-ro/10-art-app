@@ -3,9 +3,7 @@ import { ButtonStyled } from './ButtonStyled';
 const Button = ({type, buttonText, onClick, disabled, display} : Props) => {
 
 return (
-    <>
         <ButtonStyled type={type} onClick={onClick} disabled={disabled} display={display}>{buttonText}</ButtonStyled>
-    </>
   )
 }
 

@@ -1,6 +1,6 @@
 import { Item } from '../types/item';
 
-export const addFetch = async (itemType: string, token: string, values: Item, setError: (arg0: string) => void, closeModal: () => void) => {
+export const addFetch = async (itemType: string, token: string, values: Item, setMessage: (arg0: string) => void, closeModal: () => void) => {
   // const formData = new FormData();
 
 //   if (itemType === 'artworks') {
@@ -25,13 +25,14 @@ export const addFetch = async (itemType: string, token: string, values: Item, se
       .then((data) => {
         console.log('data es', data)
         if (data === 'Authentication failed. Please, login again.') {
-          setError(data);
+          setMessage(data);
         } else {
-          setError(`Your ${itemType.slice(0,-1)} has been added.`);
+          setMessage(`Your ${itemType.slice(0,-1)} has been added.`);
           closeModal()
         }
       })
       .catch((error) => {
         console.log('error:', error.message);
+        setMessage('Your changes were not saved.');
       });
   };

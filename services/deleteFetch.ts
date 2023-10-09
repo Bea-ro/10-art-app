@@ -1,6 +1,6 @@
 import { Item } from '../types/item'
 
-export const deleteFetch = async (currentPath: string, item: Item, token: string, setError: (arg0: string) => void, closeModal: () => void) => {
+export const deleteFetch = async (currentPath: string, item: Item, token: string, setMessage: (arg0: string) => void, nextItem: () => void) => {
 
   await fetch(`https://complete-server-rtc.onrender.com/api${currentPath}/${item._id}`, {
       method: 'DELETE',
@@ -11,16 +11,11 @@ export const deleteFetch = async (currentPath: string, item: Item, token: string
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log('data en delete', data)
-        if (data) {
-          setError(data);
-        } else {
-          setError(`${item.title || item.name} was removed.`);
-          closeModal()      
-        }
+        console.log('data en delete', data)       
+          setMessage(data);
       })
       .catch((error) => {
         console.log('error:', error.message);
-        setError('This item could not been deleted.');
+        setMessage('This item could not been deleted.');
       });
   };

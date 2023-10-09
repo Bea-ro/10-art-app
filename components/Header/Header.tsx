@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { useRouter } from 'next/router';
 import { HeaderStyled } from './HeaderStyled';
 
-import { AuthContext, ErrorContext } from '../../pages/_app';
+import { AuthContext, MessageContext } from '../../pages/_app';
 
 import Link from 'next/link';
 import Navbar from '../ui/Navbar/Navbar';
@@ -13,12 +13,12 @@ const Header = () => {
   const router = useRouter();
   const { action } = router.query;
   const { isAuth, setIsAuth } = useContext(AuthContext) 
-  const {setError} = useContext(ErrorContext)
+  const {setMessage} = useContext(MessageContext)
 
   const handleButtonClick = () => {
     isAuth && localStorage.removeItem('userStored'); 
     isAuth && setIsAuth(false)
-    setError('')
+    setMessage('')
   };
 
 return (

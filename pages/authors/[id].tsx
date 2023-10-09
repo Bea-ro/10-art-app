@@ -1,8 +1,11 @@
 import { GetStaticProps } from "next"; 
 import { GetStaticPaths } from "next"; 
 import { useContext } from 'react';
-import { AuthContext } from '../_app';
+import { AuthContext, MessageContext } from '../_app';
 import { Author } from "../../types/author";
+
+import { useModal } from '../../customHooks/useModal';
+import { deleteFetch } from '../../services/deleteFetch';
 
 import Layout from '../../components/ui/Layout/Layout';
 import PageTitle from '../../components/ui/PageTitle/PageTitle';
@@ -10,16 +13,40 @@ import Text from '../../components/ui/Text/Text';
 import Button from '../../components/ui/Button/Button';
 import Container from '../../components/ui/Container/Container';
 import ItemsGrid from '../../components/ui/ItemsGrid/ItemsGrid';
+import Message from '../../components/ui/Message/Message';
+import AddForm from '../../components/ui/Form/AddForm';
+import Modal from '../../components/ui/Modal/Modal';
 
 
 
 const AuthorPage = ({ author }: Props) => {
 
-  const { isAuth } = useContext(AuthContext)
+  const { isAuth, token } = useContext(AuthContext);
+  const { message, setMessage } = useContext(MessageContext);
+  const {openModal, closeModal, isModalOpen, setModalContent, display, modalContent} = useModal()
+
+  const handleAddModal = () => {
+    setModalContent(<AddForm itemType={'authors'} closeModal={closeModal}/>);
+    openModal()
+  }
+
+  const handleDeleteModal = (author: Author) => {
+    setModalContent(
+      <>
+          <p>Are you sure you want to delete {author.name}?</p>
+          <Container>
+          <Button buttonText="Yes" type="button" onClick={() => deleteFetch('/authors', author, token, setMessage, closeModal)} ></Button>
+          <Button buttonText="No" type="button" onClick={closeModal}></Button> 
+          </Container>
+          <Message shadow="transparent"></Message> 
+        </>
+          )
+    openModal(); 
+  }
 
   return (
     <Layout title={`Artist ${author.name}`}
-      description={`Find information about artwork ${author.name}`}>
+      description={`Find information about artist ${author.name}`}>
       
       <PageTitle title={author.name}/>
       {isAuth? 
@@ -30,10 +57,11 @@ const AuthorPage = ({ author }: Props) => {
                (author.area).map((area, index) => (
       <span key={index}>{area}{index < author.area.length - 1 && ', '}</span>
     ))}</p>
-       <Container>
-      <Button buttonText="Add a new artist" type="button"/>
-      <Button buttonText="Delete" type="button"/>
-      </Container>
+        {display && <Container>
+          <Button buttonText="Add a new artist" type="button" onClick={handleAddModal}/>
+      <Button buttonText="Delete" type="button" onClick={()=>handleDeleteModal(author)}/>
+      </Container>}
+      {isModalOpen && <Modal>{modalContent}</Modal>}
         </>
        : <Text text={`Please, log in to discover ${author.name}.`}/>}
       </Layout>

@@ -1,16 +1,16 @@
 import { useModal } from '@/customHooks/useModal';
 import { ModalStyled } from './ModalStyled'
 
-const Modal = ( { children, modal}: Props ) => {
+const Modal = ( { children}: Props ) => {
   
   return (
-        <ModalStyled modal={modal}>{children}</ModalStyled>        
+        <ModalStyled>{children}</ModalStyled>        
   )
 }
 
 export type Props = {
     children: React.ReactNode
-    modal: boolean
+    // modal: string
   };
 
 export default Modal

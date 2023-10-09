@@ -5,18 +5,16 @@ import { useForm} from 'react-hook-form'
 import Button from '../Button/Button';
 import Container from '../Container/Container';
 
-import { AuthContext, ErrorContext } from '../../../pages/_app';
+import { AuthContext, MessageContext } from '../../../pages/_app';
 import { addFetch } from '../../../services/addFetch';
 import { Item } from '../../../types/item';
-import { useModal } from '../../../customHooks/useModal';
 
 
 
-const AddForm = ( {itemType} : Props) => {
+const AddForm = ( {itemType, closeModal} : Props) => {
 
 const { token } = useContext(AuthContext) 
-const {error, setError} = useContext(ErrorContext);
-const {closeModal} = useModal()
+const {message, setMessage} = useContext(MessageContext);
 
 const defaultValues = itemType === 'artworks' ? {
       title: '',
@@ -38,31 +36,31 @@ const { handleSubmit, register, formState } = useForm<Item>({
 
      
       const onSubmit = (values: Item) => { 
-        formState.isValid && addFetch(itemType, token, values, setError, closeModal);
+        formState.isValid && addFetch(itemType, token, values, setMessage, closeModal);
       }
   
      
   return (
 
     <FormStyled onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
-      <h1>Add a new {itemType.slice(0, -1)}</h1>
+      <h1>Add a new {itemType === 'authors' ? 'artist' : 'artwork'}</h1>
       <Container direction='column'>
 
         {itemType === 'artworks' && ( 
         <>
-         <input type="text" id="title" placeholder="title" 
+         <input type="text" id="title" placeholder="Title" 
           {...register('title', {
             required: true
           }
           )}
           />
-   <input type="text" id="author" placeholder="author" 
+   <input type="text" id="author" placeholder="Author" 
           {...register('author', {
             required: true
           }
           )}
           />
- <input type="number" id="year" placeholder="year" 
+ <input type="number" id="year" placeholder="Year" 
           {...register('year', {
             required: true,
             pattern: {
@@ -81,28 +79,30 @@ const { handleSubmit, register, formState } = useForm<Item>({
                 <option value="painting">painting</option>
                 <option value="sculpture">sculpture</option>
             </select>
-            <input type="text" id="movement" placeholder="movement" 
+            <input type="text" id="movement" placeholder="Movement" 
           {...register('movement', {
             required: true
           }
           )}
           />
-<input type="file" id="image" accept=".jpg, .png, .gif, .webp"
+  <label htmlFor="image" id="input-label">Upload Image</label>
+<input type="file" id="image" accept=".jpeg, .png, .gif, .webp"
           {...register('image', {
             required: false
           }
           )}
-          />        </>
+          />
+        </>
         )}
       {itemType === 'authors' && (
         <>
-        <input type="text" id="name" placeholder="name"
+        <input type="text" id="name" placeholder="Name"
           {...register('name', {
             required: true
           }
             )}
             />
-        <input type="text" id="movement" placeholder="movement" 
+        <input type="text" id="movement" placeholder="Movement" 
           {...register('movement', {
             required: true
           }
@@ -119,10 +119,10 @@ const { handleSubmit, register, formState } = useForm<Item>({
             </select>
 
 
-{/* obras */}
+{/* obras podría llevar a añadir obra*/}
 
         {(formState.errors.name || formState.errors.movement || formState.errors.area) && <p>Please, check your data and try again.</p>}
-        <p>{error}</p>
+        <p>{message}</p>
         </>)}
   
         </Container>
@@ -138,6 +138,7 @@ const { handleSubmit, register, formState } = useForm<Item>({
 
 export type Props = {
   itemType: string
+  closeModal: () => void
 }
 
 
