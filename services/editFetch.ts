@@ -1,6 +1,6 @@
 import { Item } from '../types/item';
 
-export const editFetch = async (currentPath: string, item: Item, token: string, values: Item, setMessage: (arg0: string) => void, closeModal: () => void) => {
+export const editFetch = async (currentPath: string, item: Item, token: string, values: Item, setMessage: (arg0: string) => void) => {
   
   await fetch(`https://complete-server-rtc.onrender.com/api${currentPath}/${item._id}`, {
       method: 'PUT',
@@ -12,16 +12,17 @@ export const editFetch = async (currentPath: string, item: Item, token: string, 
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log('data en edit', data)
-        if (data.message) {
-          setMessage('Your changes were not saved.');
+        console.log(data)
+        if (typeof(data) === 'string') {
+          setMessage(data);
+        } else if (typeof(data) === 'object' && data.message) {
+          setMessage(data.message);
         } else {
           setMessage(`${item.title || item.name} was successfully updated.`);       
-          closeModal()
         }
       })
       .catch((error) => {
         console.log('error:', error.message);
-        setMessage('Your changes were not saved.');
+        setMessage(error.message);
       });
   };

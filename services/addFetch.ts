@@ -1,6 +1,6 @@
 import { Item } from '../types/item';
 
-export const addFetch = async (itemType: string, token: string, values: Item, setMessage: (arg0: string) => void, closeModal: () => void) => {
+export const addFetch = async (itemType: string, token: string, values: Item, setMessage: (arg0: string) => void) => {
   // const formData = new FormData();
 
 //   if (itemType === 'artworks') {
@@ -28,7 +28,6 @@ export const addFetch = async (itemType: string, token: string, values: Item, se
           setMessage(data);
         } else {
           setMessage(`Your ${itemType.slice(0,-1)} has been added.`);
-          closeModal()
         }
       })
       .catch((error) => {

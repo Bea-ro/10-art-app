@@ -8,6 +8,7 @@ import Container from '../Container/Container';
 import { AuthContext, MessageContext } from '../../../pages/_app';
 import { addFetch } from '../../../services/addFetch';
 import { Item } from '../../../types/item';
+import Message from '../Message/Message';
 
 
 
@@ -20,7 +21,7 @@ const defaultValues = itemType === 'artworks' ? {
       title: '',
       author: '',
       year: undefined,
-      area: [],
+      area: '',
       movement: '',
       image: 'https://'
     }
@@ -30,13 +31,13 @@ const defaultValues = itemType === 'artworks' ? {
       area: []
     }
   
-const { handleSubmit, register, formState } = useForm<Item>({
+const { handleSubmit, register, formState, setValue } = useForm<Item>({
   defaultValues,
 });
 
      
       const onSubmit = (values: Item) => { 
-        formState.isValid && addFetch(itemType, token, values, setMessage, closeModal);
+        formState.isValid && addFetch(itemType, token, values, setMessage);
       }
   
      
@@ -85,7 +86,7 @@ const { handleSubmit, register, formState } = useForm<Item>({
           }
           )}
           />
-  <label htmlFor="image" id="input-label">Upload Image</label>
+  <label htmlFor="image" id="image-input-label">Upload Image</label>
 <input type="file" id="image" accept=".jpeg, .png, .gif, .webp"
           {...register('image', {
             required: false
@@ -119,10 +120,8 @@ const { handleSubmit, register, formState } = useForm<Item>({
             </select>
 
 
-{/* obras podría llevar a añadir obra*/}
-
-        {(formState.errors.name || formState.errors.movement || formState.errors.area) && <p>Please, check your data and try again.</p>}
-        <p>{message}</p>
+{/* obras podría llevar a añadir obra*/}      
+       
         </>)}
   
         </Container>
@@ -132,7 +131,8 @@ const { handleSubmit, register, formState } = useForm<Item>({
         />
     <Button buttonText="Cancel" type="button" onClick={closeModal}/>
     </Container>
-   </FormStyled>
+    <Message shadow="transparent"></Message>
+    </FormStyled>
      )
 }
 

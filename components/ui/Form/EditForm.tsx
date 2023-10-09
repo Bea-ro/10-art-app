@@ -5,10 +5,10 @@ import { useForm} from 'react-hook-form'
 import { AuthContext, MessageContext } from '../../../pages/_app';
 import { editFetch } from '../../../services/editFetch';
 import { Item } from '../../../types/item';
-import { useModal } from '../../../customHooks/useModal';
 
 import Button from '../Button/Button';
 import Container from '../Container/Container';
+import Message from '../Message/Message';
 
 
 const EditForm = ({item, currentPath, closeModal}: Props) => {
@@ -17,17 +17,17 @@ const { token } = useContext(AuthContext)
 const {message, setMessage} = useContext(MessageContext);
 
 const defaultValues = currentPath === '/artworks' ? {
-  title: '',
-  author: '',
-  year: undefined,
-  area: [],
-  movement: '',
-  image: ''
+  title: item.title,
+  author: item.author,
+  year: item.year,
+  area: item.area,
+  movement: item.movement,
+  image: item.image
 }
 : {
-  name: '',
-  movement: '',
-  area: []
+  name: item.name,
+  movement: item.movement,
+  area: item.area
 }
 
 const { handleSubmit, register, formState } = useForm<Item>({
@@ -36,11 +36,10 @@ defaultValues,
 
 
       const onSubmit = (values: Item) => { 
-       formState.isValid && editFetch(currentPath, item, token, values, setMessage, closeModal)
+       formState.isValid && editFetch(currentPath, item, token, values, setMessage)
       }
 
-      
-
+      const allAreas = ['arquitecture', 'painting', 'sculpture']
   return (
 
     <FormStyled onSubmit={handleSubmit(onSubmit)}>
@@ -49,28 +48,36 @@ defaultValues,
 
      {item.name && ( 
         <>
-        <input type="text" id="name" placeholder="Name"
+        <input type="text" id="name" placeholder={item.name}
           {...register('name', {
             required: false
           }
             )}
             />
-        <input type="text" id="movement" placeholder="Movement" 
+        <input type="text" id="movement" placeholder={item.movement} 
           {...register('movement', {
             required: false
           }
             )}
             />
 
-            <select id="area" {...register('area', {
+              <label id="areas">
+      {allAreas.map((area) => (
+        <div key={area} id="area-names">
+      <input {...register('area', {
             required: false
-          })}>
-            <option value="">Área</option>
-                <option value="arquitecture">arquitecture</option>
-                <option value="painting">painting</option>
-                <option value="sculpture">sculpture</option>
-            </select>
-
+          })}
+            type="checkbox"
+            id={area}
+            name="areas"
+            value={area}
+            // onChange={evento lo que sea}
+            />
+            <label htmlFor={area}>{area}</label>
+            </div>
+              )
+          )}
+</label>
             {/* <label htmlFor={(item.mainArtworks)?.map((artwork) => artwork._id)} id="artworks">
         Main artworks
       </label>
@@ -85,28 +92,24 @@ defaultValues,
             // onChange={evento lo que sea}
             />
           ))} */}
-      
-
-        {(formState.errors.name || formState.errors.movement || formState.errors.area) && <p>Please, check your data and try again.</p>}
-        <p>{message}</p>
-        
+    
         </>)}
 
         {item.title && ( 
         <>
-         <input type="text" id="title" placeholder="Title" 
+         <input type="text" id="title" placeholder={item.title} 
           {...register('title', {
             required: false
           }
           )}
           />
-   <input type="text" id="author" placeholder="Author" 
+   <input type="text" id="author" placeholder={item.author} 
           {...register('author', {
             required: false
           }
           )}
           />
- <input type="number" id="year" placeholder="Year" 
+ <input type="number" id="year" placeholder={item.year} 
           {...register('year', {
             required: false,
             pattern: {
@@ -120,18 +123,18 @@ defaultValues,
             required: false
           })}
           >
-  <option value="">Area</option>
+  <option value={item.area}>{item.area}</option>
                 <option value="arquitecture">arquitecture</option>
                 <option value="painting">painting</option>
                 <option value="sculpture">sculpture</option>
             </select>
-<input type="text" id="movement" placeholder="Movement" 
+<input type="text" id="movement" placeholder={item.movement} 
           {...register('movement', {
             required: false
           }
           )}
           />
-          <label htmlFor="image" id="input-label">Upload Image</label>
+          <label htmlFor="image" id="image-input-label">Upload Image</label>
 <input type="file" id="image" accept=".jpeg, .png, .gif, .webp"
           {...register('image', {
             required: false
@@ -148,6 +151,7 @@ defaultValues,
         />
     <Button type="button" buttonText="Cancel" onClick={closeModal}/>
     </Container>
+    <Message shadow="transparent"></Message> 
    </FormStyled>
      )
 }

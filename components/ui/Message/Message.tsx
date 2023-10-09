@@ -18,6 +18,10 @@ if (action === "login" && (formState.errors.email || formState.errors.password))
 } else if (action === "register" && formState.errors.email) {
   "User already exists."}
   }
+
+  
+  // {(formState.errors.name || formState.errors.movement || formState.errors.area) && <p>Please, check your data and try again.</p>}
+
   
   return (
 <MessageStyled padding={padding} shadow={shadow}>{message}</MessageStyled>
