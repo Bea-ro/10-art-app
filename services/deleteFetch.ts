@@ -1,8 +1,8 @@
 import { Item } from '../types/item'
 
-export const deleteFetch = async (currentPath: string, item: Item, token: string, setMessage: (arg0: string) => void, nextItem: () => void) => {
+export const deleteFetch = async (itemType: string, item: Item, token: string, setMessage: (arg0: string) => void, nextItem: () => void) => {
 
-  await fetch(`https://complete-server-rtc.onrender.com/api${currentPath}/${item._id}`, {
+  await fetch(`https://complete-server-rtc.onrender.com/api/${itemType}/${item._id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

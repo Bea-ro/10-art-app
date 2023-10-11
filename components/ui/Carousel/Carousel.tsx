@@ -1,6 +1,5 @@
 import { CarouselStyled } from './CarouselStyled';
 import React, { useState, useContext } from 'react';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/legacy/image';
 
@@ -17,10 +16,7 @@ import EditForm from '../Form/EditForm';
 import Message from '../Message/Message';
 
 
-const Carousel = ({carouselItems}: Props) => {
-
-  const router = useRouter();
-  const currentPath = router.pathname
+const Carousel = ({carouselItems, itemType}: Props) => {
 
   const {message, setMessage} = useContext(MessageContext)
   const {token} = useContext(AuthContext)
@@ -41,7 +37,7 @@ const Carousel = ({carouselItems}: Props) => {
     const handleEditModal = (item: Item) => {
       openModal();
       setModalContent(
-     <EditForm item={item} currentPath={currentPath} closeModal={closeModal}/>
+     <EditForm item={item} itemType={itemType} closeModal={closeModal}/>
     );
     }
         
@@ -51,7 +47,7 @@ const Carousel = ({carouselItems}: Props) => {
         <>
             <p>Are you sure you want to delete {item.title || item.name}?</p>
             <Container>
-            <Button buttonText="Yes" type="button" onClick={() => deleteFetch(currentPath, item, token, setMessage, nextItem)} ></Button>
+            <Button buttonText="Yes" type="button" onClick={() => deleteFetch(itemType, item, token, setMessage, nextItem)} ></Button>
             <Button buttonText="No" type="button" onClick={closeModal}></Button> 
             </Container>
             <Message shadow="transparent"></Message> 
@@ -72,8 +68,8 @@ return (
               <p>{item.title ? `${item.author},  ${item.year}` : null} </p>
               <p>{item.movement}  {
               item.name && (item.area).length > 0 &&
-               (item.area).map((area, index) => (
-      <span key={index}>{area}{index < item.area.length - 1 && ', '}</span>
+               (item.area).map((area) => (
+      <span key={area}>{area}{index < item.area.length - 1 && ', '}</span>
     ))}</p>
               <Container>
               <Button type="button" buttonText="<" onClick={() => prevItem()}></Button>
@@ -106,6 +102,7 @@ return (
 
 export type Props = {
     carouselItems: Item[]
+    itemType: string
 }
   
 

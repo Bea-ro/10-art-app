@@ -2,12 +2,12 @@ import React, { useContext }  from 'react'
 import { FormStyled } from './FormStyled';
 import { useForm} from 'react-hook-form'
 
-import Button from '../Button/Button';
-import Container from '../Container/Container';
-
 import { AuthContext, MessageContext } from '../../../pages/_app';
 import { addFetch } from '../../../services/addFetch';
 import { Item } from '../../../types/item';
+
+import Button from '../Button/Button';
+import Container from '../Container/Container';
 import Message from '../Message/Message';
 
 
@@ -23,7 +23,7 @@ const defaultValues = itemType === 'artworks' ? {
       year: undefined,
       area: '',
       movement: '',
-      image: 'https://'
+      // image: 'https://'
     }
   : {
       name: '',
@@ -38,12 +38,13 @@ const { handleSubmit, register, formState, setValue } = useForm<Item>({
      
       const onSubmit = (values: Item) => { 
         formState.isValid && addFetch(itemType, token, values, setMessage);
-      }
+        }
   
-     
+      const allAreas = ['Arquitecture', 'Painting', 'Sculpture']
+         
   return (
 
-    <FormStyled onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
+    <FormStyled onSubmit={handleSubmit(onSubmit)}>
       <h1>Add a new {itemType === 'authors' ? 'artist' : 'artwork'}</h1>
       <Container direction='column'>
 
@@ -71,14 +72,18 @@ const { handleSubmit, register, formState, setValue } = useForm<Item>({
           }
           )}
           />
-  <select id="area" {...register('area', {
+          
+  <select id="area"
+  {...register('area', {
             required: true
-          })}
+          })}  
           >
-  <option value="">Area</option>
-                <option value="arquitecture">arquitecture</option>
-                <option value="painting">painting</option>
-                <option value="sculpture">sculpture</option>
+            <option value="" disabled hidden>Area</option> 
+     {allAreas.map((area) => (
+          <option key={area} value={area.toLowerCase()} id={area}>{area}</option>
+          )
+          )}             
+              
             </select>
             <input type="text" id="movement" placeholder="Movement" 
           {...register('movement', {
@@ -87,7 +92,7 @@ const { handleSubmit, register, formState, setValue } = useForm<Item>({
           )}
           />
   <label htmlFor="image" id="image-input-label">Upload Image</label>
-<input type="file" id="image" accept=".jpeg, .png, .gif, .webp"
+<input type="file" id="image" accept=".jpeg, .jpg, .png, .gif, .webp"
           {...register('image', {
             required: false
           }
@@ -110,14 +115,24 @@ const { handleSubmit, register, formState, setValue } = useForm<Item>({
             )}
             />
 
-<select id="area" {...register('area', {
-            required: true
-          })}>
-            <option value="">Área</option>
-                <option value="arquitecture">arquitecture</option>
-                <option value="painting">painting</option>
-                <option value="sculpture">sculpture</option>
-            </select>
+
+<label id="areas">
+      {allAreas.map((area) => (
+        <div key={area} id="area-names">
+      <input {...register('area', {
+            required: false
+          })}
+            type="checkbox"
+            id={area}
+            name="areas"
+            value={area}
+            // onChange={evento lo que sea}
+            />
+            <label htmlFor={area} id={area}>{area}</label>
+            </div>
+              )
+          )}
+</label>
 
 
 {/* obras podría llevar a añadir obra*/}      

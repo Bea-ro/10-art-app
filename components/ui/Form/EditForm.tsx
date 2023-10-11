@@ -3,7 +3,7 @@ import { FormStyled } from './FormStyled';
 import { useForm} from 'react-hook-form'
 
 import { AuthContext, MessageContext } from '../../../pages/_app';
-import { editFetch } from '../../../services/editFetch';
+import { editFetch, uploadImageFetch } from '../../../services/editFetch';
 import { Item } from '../../../types/item';
 
 import Button from '../Button/Button';
@@ -11,12 +11,12 @@ import Container from '../Container/Container';
 import Message from '../Message/Message';
 
 
-const EditForm = ({item, currentPath, closeModal}: Props) => {
+const EditForm = ({item, itemType, closeModal}: Props) => {
 
 const { token } = useContext(AuthContext) 
 const {message, setMessage} = useContext(MessageContext);
 
-const defaultValues = currentPath === '/artworks' ? {
+const defaultValues = itemType === 'artworks' ? {
   title: item.title,
   author: item.author,
   year: item.year,
@@ -36,10 +36,16 @@ defaultValues,
 
 
       const onSubmit = (values: Item) => { 
-       formState.isValid && editFetch(currentPath, item, token, values, setMessage)
+      
+      if (formState.isValid) {
+        editFetch(itemType, item, token, values, setMessage)
+        itemType === 'artworks' && uploadImageFetch(itemType, item, token, values)
+      }
       }
 
-      const allAreas = ['arquitecture', 'painting', 'sculpture']
+
+      const allAreas = ['Arquitecture', 'Painting', 'Sculpture']
+    
   return (
 
     <FormStyled onSubmit={handleSubmit(onSubmit)}>
@@ -73,7 +79,7 @@ defaultValues,
             value={area}
             // onChange={evento lo que sea}
             />
-            <label htmlFor={area}>{area}</label>
+            <label htmlFor={area} id={area}>{area}</label>
             </div>
               )
           )}
@@ -119,15 +125,18 @@ defaultValues,
           }
           )}
           />
-  <select id="area" {...register('area', {
+          
+  <select id="area" 
+  value={(item.area).replace(item.area[0],item.area[0].toUpperCase())}
+  {...register('area', {
             required: false
           })}
           >
-  <option value={item.area}>{item.area}</option>
-                <option value="arquitecture">arquitecture</option>
-                <option value="painting">painting</option>
-                <option value="sculpture">sculpture</option>
-            </select>
+            {allAreas.map((area) => (
+          <option key={area} value={area} id={area}>{area}</option>
+          )
+          )}             
+          </select>
 <input type="text" id="movement" placeholder={item.movement} 
           {...register('movement', {
             required: false
@@ -135,7 +144,7 @@ defaultValues,
           )}
           />
           <label htmlFor="image" id="image-input-label">Upload Image</label>
-<input type="file" id="image" accept=".jpeg, .png, .gif, .webp"
+<input type="file" id="image" accept=".jpg, .jpeg, .png, .gif, .webp"
           {...register('image', {
             required: false
           }
@@ -158,7 +167,7 @@ defaultValues,
 
 export type Props = {
     item: Item
-    currentPath: string
+    itemType: string
     closeModal: () => void
 }
 

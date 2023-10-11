@@ -18,9 +18,9 @@ select {
 width: 100%
 }
 
-#image {
+/* #image {
 display: none
-}
+} */
 
 #image-input-label {
 background-color: var(--color-grey);
@@ -39,8 +39,5 @@ box-shadow: 2px 2px 4px grey;
     text-align: left;
     gap: 0.5em;
     align-items: baseline;
-    label::first-letter{
-    text-transform: uppercase;
-}
 }
 `  

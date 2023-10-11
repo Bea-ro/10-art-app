@@ -35,7 +35,7 @@ const ArtworkPage = ({ artwork }: Props) => {
       <>
           <p>Are you sure you want to delete {artwork.title}?</p>
           <Container>
-          <Button buttonText="Yes" type="button" onClick={() => deleteFetch('/artworks', artwork, token, setMessage, closeModal)} ></Button>
+          <Button buttonText="Yes" type="button" onClick={() => deleteFetch('artworks', artwork, token, setMessage, closeModal)} ></Button>
           <Button buttonText="No" type="button" onClick={closeModal}></Button> 
           </Container>
           <Message shadow="transparent"></Message> 

@@ -20,7 +20,7 @@ const AuthorsPage = ( { authors }: Props ) => {
       <PageTitle title="Artists"/>
       {
       isAuth?
-      <Carousel carouselItems={authors}></Carousel> : <Text text="Please, log in to discover artists."/>
+      <Carousel carouselItems={authors} itemType={'authors'}></Carousel> : <Text text="Please, log in to discover artists."/>
         }
       </Layout>
   

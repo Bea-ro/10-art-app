@@ -1,7 +1,7 @@
 import { AuthFormData } from '../types/formData';
 
 export const loginPostFetch = async (values: AuthFormData, setMessage: (arg0: string) => void, handleNavigate: (arg0: string) => void, setIsAuth: (arg0: boolean) => void, setToken: (arg0:string) => void) => {
-  console.log('se ejecuta el loginPostFetch')  
+
   await fetch('https://complete-server-rtc.onrender.com/api/users/login', {
       method: 'POST',
       headers: {
