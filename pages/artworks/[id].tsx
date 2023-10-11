@@ -54,7 +54,7 @@ const ArtworkPage = ({ artwork }: Props) => {
       <>
       <Container direction="column">
       <p>{`${artwork.author},  ${artwork.year}`} </p>   
-      <p>{artwork.movement}  {artwork.area}</p>
+      <p>{artwork.movement} {(artwork.area).replace(artwork.area[0],artwork.area[0].toUpperCase())}</p>   
       <Image src={artwork.image || ''} alt={artwork.title} 
       height={400} width={400*(16/9)}
       ></Image> 
