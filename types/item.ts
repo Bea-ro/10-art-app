@@ -8,6 +8,6 @@ export type Item = {
     year?: number,
     area:  string | string[],
     movement: string,
-   image?: string | undefined,
+   image?: string,
     mainArtworks?: Artwork | Artwork[],
 }

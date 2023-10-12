@@ -5,5 +5,5 @@ export type Artwork = {
     year: number,
     area: string,
     movement: string,
-   image: string | undefined
+   image: string
 }

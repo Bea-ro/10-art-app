@@ -18,12 +18,14 @@ gap: 36px
 li {
   background-color: var(--color-beige);
   border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
   padding: 10px;
-  max-width: 25%
+  max-width: 25%;
+  transition: transform .3s
 }
 
 li:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 a >  span > img {

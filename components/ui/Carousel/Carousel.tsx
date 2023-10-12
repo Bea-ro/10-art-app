@@ -12,8 +12,6 @@ import Container from "../Container/Container"
 import Button from '../Button/Button';
 import Modal from '../Modal/Modal';
 import Message from '../Message/Message';
-import ItemCard from '../../../components/ItemCard/ItemCard';
-
 
 
 const Carousel = ({carouselItems, itemType}: Props) => {
@@ -47,35 +45,36 @@ const Carousel = ({carouselItems, itemType}: Props) => {
             )
       openModal(); 
     }
-    
+
+    const randomArtwork = (artworks : Item[]) => artworks[Math.floor(Math.random () * artworks.length)]
+
 return (
 <CarouselStyled>
 <Container>
 <Button type="button" buttonText="<" onClick={() => prevItem()}></Button>
 <ul>
           {carouselItems.map((item, index) => (
-               
             <li key={item._id} 
             style={{
               display: index >= currentIndex && index < currentIndex + 3 ? 'flex' : 'none',
                  flexDirection: 'column'
             }}
             >           
-        
               <h2>{item.title || item.name}</h2>
               <p>{item.title ? item.author : null} </p>
-              {/* <p>{item.movement}  {
-              item.name && Array.isArray(item.area) &&
-               (item.area).map((area,i) => (
-      <span key={area}>{upperCaseArea(area)}{i < (item.area).length - 1 && ', '}</span>
-    ))}</p> */}
-            
       <Link href={`/${itemType}/${item._id}`} key={item._id}>
               {item.title && <Image src={item.image || ''} alt={item.title || item.name || ''} 
               height={400} width={400 * (16 / 9)} 
               ></Image>}
+               {item.mainArtworks && Array.isArray(item.mainArtworks) && item.mainArtworks[0] &&
+              <Image
+              src={randomArtwork(item.mainArtworks).image} 
+                alt={`Ramdom Artwork by ${item.name}`}
+                height={100} 
+                width={100* (16 / 9)}
+                ></Image>
+             }
                </Link>
-               {/* {item.mainArtworks && <ItemCard item={Array.isArray(item.mainArtworks) ? item.mainArtworks[0] : item.mainArtworks}></ItemCard>} */}
                {display && 
                <Button buttonText="Delete" type="button" onClick={()=>handleDeleteModal(item)}/>
               }

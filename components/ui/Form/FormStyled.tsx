@@ -18,10 +18,6 @@ select {
 width: 100%
 }
 
-/* #image {
-display: none
-} */
-
 #image-input-label {
 background-color: var(--color-grey);
 border-radius: var(--border-radius);

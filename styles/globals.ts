@@ -8,6 +8,7 @@ export const Global = createGlobalStyle`
   --color-beige: #EEE0C9;
   --color-grey: #F1F0E8;
   --border-radius: 5px;
+  --box-shadow: 2px 2px 4px var(--color-grey);
 }
 
 * {
@@ -37,14 +38,14 @@ li {
 button:disabled {
 color: var(--color-grey);
 background-color: var(--color-beige);
-box-shadow: 2px 2px 4px var(--color-blue);
+box-shadow: var(--box-shadow);
 }
 
 .button {
 color: var(--color-grey);
 background-color: var(--color-light-blue);
 text-shadow: 2px 2px 4px var(--color-blue);
-box-shadow: 2px 2px 4px var(--color-grey);
+box-shadow: var(--box-shadow);
 border-radius: var(--border-radius);
 padding: 8px 10px;
 margin: 0 10px;

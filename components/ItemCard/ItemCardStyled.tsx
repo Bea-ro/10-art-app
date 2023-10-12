@@ -8,7 +8,12 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center; 
-box-shadow: 2px 2px 4px var(--color-grey);
+box-shadow: var(--box-shadow);
+transition: transform .3s;
+
+&:hover {
+  transform: scale(1.1);
+}
 
 h3 {
     font-size: 18px;
