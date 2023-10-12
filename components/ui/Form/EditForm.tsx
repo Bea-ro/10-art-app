@@ -5,6 +5,7 @@ import { useForm} from 'react-hook-form'
 import { AuthContext, MessageContext } from '../../../pages/_app';
 import { editFetch, uploadImageFetch } from '../../../services/editFetch';
 import { Item } from '../../../types/item';
+import { upperCaseArea } from '../../../utils/upperCaseArea';
 
 import Button from '../Button/Button';
 import Container from '../Container/Container';
@@ -127,7 +128,7 @@ defaultValues,
           />
           
   <select id="area" 
-  value={(item.area).replace(item.area[0],item.area[0].toUpperCase())}
+  value={upperCaseArea(item.area)}
   {...register('area', {
             required: false
           })}

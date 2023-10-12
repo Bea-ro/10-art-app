@@ -14,21 +14,22 @@ import AddForm from "../Form/AddForm"
 
 const ItemsInHome = ( { items, itemType } : Props ) => {
 
-const {isModalOpen, display, modalContent, setModalContent, openModal} = useModal()
+const {isModalOpen, display, modalContent, setModalContent, openModal, closeModal} = useModal()
 
 
 const handleAddModal = (itemType: string) => {
-    setModalContent(<AddForm itemType={itemType}/>);
+    setModalContent(<AddForm itemType={itemType} closeModal={closeModal}/>);
     openModal()
   }
 
 
     return (
 <ItemsInHomeStyled>
-<Subtitle subtitle={itemType}/>
+<Subtitle subtitle={itemType === 'authors' ? 'artists' : itemType}/>
 <Container>
-{display && <Button buttonText={`Add a new ${itemType.slice(0, -1)}`} type="button" onClick={()=>handleAddModal(itemType)}/>}
-{display && <Link className="button" href={`/${itemType}`}>See {itemType} Detail</Link>}
+{display && <Button buttonText={`Add a new ${itemType === 'authors' ? 'artist' : itemType.slice(0, -1)}`} 
+type="button" onClick={()=>handleAddModal(itemType)}/>}
+{display && <Link className="button" href={`/${itemType}`}>See {itemType === 'authors' ? 'artists' : itemType} detail</Link>}
 {isModalOpen && <Modal>{modalContent}</Modal>}
 </Container>
 <ItemsGrid items={items}></ItemsGrid>

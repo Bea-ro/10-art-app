@@ -50,6 +50,10 @@ padding: 8px 10px;
 margin: 0 10px;
 font-size: 22px;
 width: fit-content;
-align-self: center
+align-self: center;
+}
+
+main > div > span > img {
+  object-fit: contain;
 }
 `

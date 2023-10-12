@@ -1,5 +1,4 @@
 import { Item } from '../types/item';
-import { uploadImageFetch } from './editFetch';
 
 export const addFetch = async (itemType: string, token: string, values: Item, setMessage: (arg0: string) => void) => {
 
@@ -14,14 +13,13 @@ export const addFetch = async (itemType: string, token: string, values: Item, se
       .then((response) => response.json())
       .then((data) => {
         console.log(data)
-        console.log('id es', data._id)
-        if (data === 'Authentication failed. Please, login again.') {
+        if (typeof(data) === 'string') {
           setMessage(data);
+        } else if (typeof(data) === 'object' && data.message) {
+          setMessage(data.message);
         } else {
           setMessage(`${itemType.slice(0,-1)} saved.`);
-          //meterle aquí el upload img con data._id
-       uploadImage(itemType, data._id, token, values)
-
+      itemType === 'artworks' && uploadImage(itemType, data._id, token, values)
         }
       })
       .catch((error) => {
@@ -32,7 +30,6 @@ export const addFetch = async (itemType: string, token: string, values: Item, se
   
   const uploadImage = async (itemType: string, id: string, token: string, values: Item) => {
     const formData = new FormData();
-    console.log(values.image[0])
     formData.append('image', values.image[0]);
 
     await fetch(`https://complete-server-rtc.onrender.com/api/${itemType}/${id}`, {

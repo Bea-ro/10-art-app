@@ -5,6 +5,7 @@ import { AuthContext, MessageContext } from "../_app";
 import { Artwork } from "../../types/artwork";
 import { useModal } from '../../customHooks/useModal';
 import { deleteFetch } from '../../services/deleteFetch';
+import { upperCaseArea } from '../../utils/upperCaseArea';
 
 import Link from "next/link";
 import Image from 'next/legacy/image'
@@ -15,8 +16,9 @@ import Text from '../../components/ui/Text/Text';
 import Button from '../../components/ui/Button/Button';
 import Container from '../../components/ui/Container/Container';
 import Modal from '../../components/ui/Modal/Modal';
-import AddForm from "../../components/ui/Form/AddForm";
-import Message from "../../components/ui/Message/Message";
+import Message from '../../components/ui/Message/Message';
+import EditForm from '../../components/ui/Form/EditForm';
+
 
 
 const ArtworkPage = ({ artwork }: Props) => {
@@ -25,9 +27,11 @@ const ArtworkPage = ({ artwork }: Props) => {
   const { message, setMessage } = useContext(MessageContext)
   const {openModal, closeModal, isModalOpen, setModalContent, display, modalContent} = useModal()
 
-  const handleAddModal = () => {
-    setModalContent(<AddForm itemType={'artworks'} closeModal={closeModal}/>);
-    openModal()
+  const handleEditModal = (artwork: Artwork) => {
+    openModal();
+    setModalContent(
+   <EditForm item={artwork} itemType='artworks' closeModal={closeModal}/>
+  );
   }
 
   const handleDeleteModal = (artwork: Artwork) => {
@@ -54,14 +58,14 @@ const ArtworkPage = ({ artwork }: Props) => {
       <>
       <Container direction="column">
       <p>{`${artwork.author},  ${artwork.year}`} </p>   
-      <p>{artwork.movement} {(artwork.area).replace(artwork.area[0],artwork.area[0].toUpperCase())}</p>   
+      <p>{artwork.movement} {upperCaseArea(artwork.area)}</p>   
       <Image src={artwork.image || ''} alt={artwork.title} 
       height={400} width={400*(16/9)}
-      ></Image> 
+      id="image-in-detail"></Image> 
       </Container>
       
       {display && <Container>
-      <Button buttonText="Add a new artwork" type="button" onClick={handleAddModal}/>
+      <Button buttonText="Edit" type="button" onClick={()=>handleEditModal(item)}/>
       <Button buttonText="Delete" type="button" onClick={()=>handleDeleteModal(artwork)}/>
       </Container>}
 

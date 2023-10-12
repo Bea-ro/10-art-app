@@ -8,6 +8,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center; 
+box-shadow: 2px 2px 4px var(--color-grey);
 
 h3 {
     font-size: 18px;

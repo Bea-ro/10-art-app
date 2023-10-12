@@ -10,10 +10,10 @@ import { useModal } from '../../../customHooks/useModal'
 
 import Container from "../Container/Container"
 import Button from '../Button/Button';
-import ItemsGrid from '../ItemsGrid/ItemsGrid';
 import Modal from '../Modal/Modal';
-import EditForm from '../Form/EditForm';
 import Message from '../Message/Message';
+import ItemCard from '../../../components/ItemCard/ItemCard';
+
 
 
 const Carousel = ({carouselItems, itemType}: Props) => {
@@ -22,25 +22,17 @@ const Carousel = ({carouselItems, itemType}: Props) => {
   const {token} = useContext(AuthContext)
   const {openModal, closeModal, isModalOpen, setIsModalOpen, modalContent, setModalContent, display, setDisplay} = useModal()
 
-    
     const [currentIndex, setCurrentIndex] = useState<number>(0);
+
     const prevItem = () => {  
-    currentIndex > 0 ? setCurrentIndex(currentIndex - 1): setCurrentIndex(carouselItems.length -1)
+    currentIndex > 0 ? setCurrentIndex(currentIndex - 3) : setCurrentIndex(carouselItems.length -3)
     closeModal()
   };
 
     const nextItem = () => {
-      currentIndex < carouselItems.length - 1 ? setCurrentIndex(currentIndex + 1) : setCurrentIndex(0)
+      currentIndex < carouselItems.length - 3 ? setCurrentIndex(currentIndex + 3) : setCurrentIndex(0)
       closeModal()
     };
-
-    const handleEditModal = (item: Item) => {
-      openModal();
-      setModalContent(
-     <EditForm item={item} itemType={itemType} closeModal={closeModal}/>
-    );
-    }
-        
 
     const handleDeleteModal = (item: Item) => {
       setModalContent(
@@ -58,44 +50,41 @@ const Carousel = ({carouselItems, itemType}: Props) => {
     
 return (
 <CarouselStyled>
+<Container>
+<Button type="button" buttonText="<" onClick={() => prevItem()}></Button>
+<ul>
           {carouselItems.map((item, index) => (
                
-            <li key={item._id} style={{display: index === currentIndex ? 'flex' : 'none',
-            flexDirection: 'column'
-            }}>           
-              {/* <Link href={item.title? `/artworks/${item._id}` : `/authors/${item._id}`} key={item._id}>  */}
+            <li key={item._id} 
+            style={{
+              display: index >= currentIndex && index < currentIndex + 3 ? 'flex' : 'none',
+                 flexDirection: 'column'
+            }}
+            >           
+        
               <h2>{item.title || item.name}</h2>
-              <p>{item.title ? `${item.author},  ${item.year}` : null} </p>
-              <p>{item.movement}  {
-              item.name && (item.area).length > 0 &&
-               (item.area).map((area) => (
-      <span key={area}>{area}{index < item.area.length - 1 && ', '}</span>
-    ))}</p>
-              <Container>
-              <Button type="button" buttonText="<" onClick={() => prevItem()}></Button>
-              {item.title? <Image src={item.image || ''} alt={item.title || item.name || ''} 
+              <p>{item.title ? item.author : null} </p>
+              {/* <p>{item.movement}  {
+              item.name && Array.isArray(item.area) &&
+               (item.area).map((area,i) => (
+      <span key={area}>{upperCaseArea(area)}{i < (item.area).length - 1 && ', '}</span>
+    ))}</p> */}
+            
+      <Link href={`/${itemType}/${item._id}`} key={item._id}>
+              {item.title && <Image src={item.image || ''} alt={item.title || item.name || ''} 
               height={400} width={400 * (16 / 9)} 
-              ></Image> : null}
-          
-{
-  item.mainArtworks && <ItemsGrid items={item.mainArtworks}
-  flow="column"
-  ></ItemsGrid>
-  }
-               <Button type="button" buttonText=">" onClick={() => nextItem()}></Button>
-               </Container>
-   
-               {display && <Container>
-               <Button buttonText="Edit" type="button" onClick={()=>handleEditModal(item)}/>
+              ></Image>}
+               </Link>
+               {/* {item.mainArtworks && <ItemCard item={Array.isArray(item.mainArtworks) ? item.mainArtworks[0] : item.mainArtworks}></ItemCard>} */}
+               {display && 
                <Button buttonText="Delete" type="button" onClick={()=>handleDeleteModal(item)}/>
-              </Container>}
-   
-              {isModalOpen && <Modal>{modalContent}</Modal>}
-   
-             
-              {/* </Link> */}
+              }
               </li>             
           ))}
+  </ul>
+                <Button type="button" buttonText=">" onClick={() => nextItem()}></Button>
+                </Container>
+                {isModalOpen && <Modal>{modalContent}</Modal>}
       </CarouselStyled>
   )
 }

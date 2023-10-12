@@ -16,6 +16,7 @@ import ItemsGrid from '../../components/ui/ItemsGrid/ItemsGrid';
 import Message from '../../components/ui/Message/Message';
 import AddForm from '../../components/ui/Form/AddForm';
 import Modal from '../../components/ui/Modal/Modal';
+import { upperCaseArea } from "@/utils/upperCaseArea";
 
 
 
@@ -51,12 +52,12 @@ const AuthorPage = ({ author }: Props) => {
       <PageTitle title={author.name}/>
       {isAuth? 
       <>
-      <ItemsGrid items={author.mainArtworks}></ItemsGrid>
              <p>{author.movement}  {
               (author.area).length > 0 &&
                (author.area).map((area, index) => (
-      <span key={index}>{area}{index < author.area.length - 1 && ', '}</span>
+      <span key={area}>{upperCaseArea(area)}{index < author.area.length - 1 && ', '}</span>
     ))}</p>
+      <ItemsGrid items={author.mainArtworks}></ItemsGrid>
         {display && <Container>
           <Button buttonText="Add a new artist" type="button" onClick={handleAddModal}/>
       <Button buttonText="Delete" type="button" onClick={()=>handleDeleteModal(author)}/>

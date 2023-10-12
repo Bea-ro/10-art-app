@@ -4,7 +4,7 @@ import Image from 'next/legacy/image';
 import { Item } from '../../types/item';
 
 const ItemCard = ( {item }: Props ) => {
-
+console.log(item.title)
   return (
 <ItemCardStyled>
      <Link href={item.title? `/artworks/${item._id}`: `/authors/${item._id}`} key={item._id}> 
