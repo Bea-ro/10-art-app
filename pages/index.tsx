@@ -1,13 +1,13 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, createContext } from 'react';
 
 // import { useRouter } from 'next/router';
 // import { GetStaticProps } from 'next';
-// import { Artwork } from '../types/artwork'
-// import { Author } from '../types/author'
+import { Artwork } from '../types/artwork'
+import { Author } from '../types/author'
 // import { getArtworks } from '../libs/artworks/artworks';
 // import { getAuthors } from '../libs/authors/authors';
 import { AuthContext, MessageContext } from './_app';
-// import { ItemsFetch } from '../services/itemsFetch';
+import { ItemsFetch } from '../services/itemsFetch';
 
 import Layout from '../components/ui/Layout/Layout'
 import PageTitle from '../components/ui/PageTitle/PageTitle';
@@ -16,9 +16,14 @@ import Container from '../components/ui/Container/Container';
 import Text from '../components/ui/Text/Text';
 import ItemsInHome from '../components/ui/ItemsInHome/ItemsInHome';
 import Link from 'next/link';
-import { ItemsFetch } from '@/services/itemsFetch';
 
 
+export const ItemsContext = createContext<ItemsContextType>({
+  artworks: [],
+  authors: [],
+  setArtworks: () => {},
+  setAuthors: () => {}
+})
 
 const Home = (
   // { artworks, authors }: Props
@@ -36,6 +41,14 @@ const Home = (
   // },[])
 
 const { artworks, authors } = ItemsFetch(useState, useEffect)
+
+// const [artworksToRender, setArtworksToRender] = useState([])
+// const [authorsToRender, setAuthorsToRender] = useState([])
+
+// useEffect(() => {
+// setArtworksToRender(artworks)
+// setAuthorsToRender(authors)
+// },[artworks, authors])
 
   return (
       <Layout title="Art App" 
@@ -86,5 +99,12 @@ const { artworks, authors } = ItemsFetch(useState, useEffect)
 //     token: string
 //     setToken: (arg0: string) => void
 //    }
+
+export type ItemsContextType = {
+  artworks: Artwork[]
+  setArtworks: (arg0: []) => void
+  authors: Author[]
+  setAuthors: (arg0: []) => void
+ }
 
 export default Home

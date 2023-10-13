@@ -19,7 +19,6 @@ const handleAddModal = (itemType: string) => {
     openModal()
   }
 
-
     return (
 <div>
 <Subtitle subtitle={itemType === 'authors' ? 'artists' : itemType}/>

@@ -3,6 +3,7 @@ import { FormStyled } from './FormStyled';
 import { useForm} from 'react-hook-form'
 
 import { AuthContext, MessageContext } from '../../../pages/_app';
+import { ItemsContext } from '../../../pages';
 import { addFetch } from '../../../services/addFetch';
 import { Item } from '../../../types/item';
 
@@ -16,6 +17,7 @@ const AddForm = ( {itemType, closeModal} : Props) => {
 
 const { token } = useContext(AuthContext) 
 const {message, setMessage} = useContext(MessageContext);
+const {artworks, setArtworks, authors, setAuthors} = useContext(ItemsContext)
 
 const defaultValues = itemType === 'artworks' ? {
       title: '',
@@ -35,7 +37,7 @@ const { handleSubmit, register, formState } = useForm<Item>({defaultValues});
 
      
       const onSubmit = (values: Item) => { 
-        formState.isValid && addFetch(itemType, token, values, setMessage);
+        formState.isValid && addFetch(itemType, token, values, setMessage, artworks, setArtworks, authors, setAuthors);
         }
   
       const allAreas = ['Arquitecture', 'Painting', 'Sculpture']

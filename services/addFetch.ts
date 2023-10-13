@@ -1,6 +1,10 @@
 import { Item } from '../types/item';
+import { Artwork } from '../types/artwork'
+import { Author } from '../types/author'
 
-export const addFetch = async (itemType: string, token: string, values: Item, setMessage: (arg0: string) => void) => {
+export const addFetch = async (itemType: string, token: string, values: Item, setMessage: (arg0: string) => void,
+artworks: Artwork[], setArtworks:(arg0: []) => void, authors: Author[], setAuthors:(arg0: []) => void 
+) => {
 
   await fetch(`https://complete-server-rtc.onrender.com/api/${itemType}`, {
       method: 'POST',
@@ -19,7 +23,8 @@ export const addFetch = async (itemType: string, token: string, values: Item, se
           setMessage(data.message);
         } else {
           setMessage(itemType === 'authors' ? 'artist saved.' : `${itemType.slice(0,-1)} saved.`);
-      itemType === 'artworks' && uploadImage(itemType, data._id, token, values)
+      itemType === 'artworks' && uploadImage(itemType, data._id, token, values);
+      itemType === 'artworks' ? setArtworks([...artworks, data]) : setAuthors([...authors, data])
         }
       })
       .catch((error) => {
