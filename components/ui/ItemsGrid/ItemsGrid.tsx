@@ -5,6 +5,7 @@ import { Item } from '../../../types/item';
 import ItemCard from '../../ItemCard/ItemCard';
 
 const ItemsGrid = ( { items, flow } : Props ) => {
+
   return (
     <ItemsGridStyled flow={flow}>
           {items.map((item) => (

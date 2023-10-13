@@ -8,6 +8,7 @@ import { deleteFetch } from '../../services/deleteFetch';
 import { upperCaseArea } from '../../utils/upperCaseArea';
 
 import Image from 'next/legacy/image'
+import Link from 'next/link';
 
 import Layout from '../../components/ui/Layout/Layout';
 import PageTitle from '../../components/ui/PageTitle/PageTitle';
@@ -17,7 +18,6 @@ import Container from '../../components/ui/Container/Container';
 import Modal from '../../components/ui/Modal/Modal';
 import Message from '../../components/ui/Message/Message';
 import EditForm from '../../components/ui/Form/EditForm';
-
 
 
 const ArtworkPage = ({ artwork }: Props) => {
@@ -56,7 +56,7 @@ const ArtworkPage = ({ artwork }: Props) => {
       {isAuth? 
       <>
       <Container direction="column">
-      <p>{`${artwork.author},  ${artwork.year}`} </p>   
+      <p>{`${artwork.author},  ${artwork.year}`} </p>
       <p>{artwork.movement} {upperCaseArea(artwork.area)}</p>   
       <Image src={artwork.image || ''} alt={artwork.title} 
       height={400} width={400*(16/9)}

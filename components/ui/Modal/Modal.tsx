@@ -1,4 +1,3 @@
-import { useModal } from '@/customHooks/useModal';
 import { ModalStyled } from './ModalStyled'
 
 const Modal = ( { children}: Props ) => {
