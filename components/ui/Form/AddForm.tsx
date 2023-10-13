@@ -31,9 +31,7 @@ const defaultValues = itemType === 'artworks' ? {
       area: []
     }
   
-const { handleSubmit, register, formState, setValue } = useForm<Item>({
-  defaultValues,
-});
+const { handleSubmit, register, formState } = useForm<Item>({defaultValues});
 
      
       const onSubmit = (values: Item) => { 

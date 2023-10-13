@@ -3,19 +3,19 @@ import { useState } from 'react';
 export const useModal = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalContent, setModalContent] = useState<React.ReactNode>(null);
-  const [display, setDisplay] = useState<boolean>(true)
+  const [modalDisplay, setModalDisplay] = useState<boolean>(true)
 
   const openModal = () => {
       setIsModalOpen(true);
-      setDisplay(false);
+      setModalDisplay(false);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setDisplay(true)
+    setModalDisplay(true)
   };
 
-  return { isModalOpen, setIsModalOpen, openModal, closeModal, modalContent, setModalContent, display, setDisplay};
+  return { isModalOpen, setIsModalOpen, openModal, closeModal, modalContent, setModalContent, modalDisplay, setModalDisplay};
 };
 
 export type useModal = {
@@ -25,6 +25,6 @@ export type useModal = {
   closeModal: ()=> void
   modalContent: React.ReactNode
   setModalContent: (arg0: React.ReactNode) => void
-  display: boolean
+  modalDisplay: boolean
   setModalDisplay: (arg0: boolean) => void
  }

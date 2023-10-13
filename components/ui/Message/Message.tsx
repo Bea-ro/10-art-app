@@ -1,8 +1,8 @@
 import { MessageStyled } from './MessageStyled';
 import { useContext } from 'react'
-import { useForm } from 'react-hook-form'
-import { AuthFormData } from '../../../types/formData'
 import { MessageContext } from '../../../pages/_app';
+import { AuthFormData } from '../../../types/formData'
+
 
 const Message = ({formState, action, padding, shadow}: Props) => {
   

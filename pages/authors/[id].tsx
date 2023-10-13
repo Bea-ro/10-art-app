@@ -24,7 +24,7 @@ const AuthorPage = ({ author }: Props) => {
 
   const { isAuth, token } = useContext(AuthContext);
   const { message, setMessage } = useContext(MessageContext);
-  const {openModal, closeModal, isModalOpen, setModalContent, display, modalContent} = useModal()
+  const {openModal, closeModal, isModalOpen, setModalContent, modalDisplay, modalContent} = useModal()
 
   const handleAddModal = () => {
     setModalContent(<AddForm itemType={'authors'} closeModal={closeModal}/>);
@@ -58,7 +58,7 @@ const AuthorPage = ({ author }: Props) => {
       <span key={area}>{upperCaseArea(area)}{index < author.area.length - 1 && ', '}</span>
     ))}</p>
       <ItemsGrid items={author.mainArtworks}></ItemsGrid>
-        {display && <Container>
+        {modalDisplay && <Container>
           <Button buttonText="Add a new artist" type="button" onClick={handleAddModal}/>
       <Button buttonText="Delete" type="button" onClick={()=>handleDeleteModal(author)}/>
       </Container>}

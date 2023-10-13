@@ -1,15 +1,16 @@
 import { styled } from "styled-components"
 
-export const ItemCardStyled = styled.li`
+export const ItemCardStyled = styled.li<{display?:string, width?:string, imageFit?:string}>`
+display: ${(props) => props.display || 'flex'};
+max-width: ${(props) => props.width || '100%'};
 background-color: var(--color-beige);
 border-radius: var(--border-radius);
+box-shadow: var(--box-shadow);
 padding: 10px;
-display: flex;
+transition: transform .3s;
 flex-direction: column;
 align-items: center;
 justify-content: center; 
-box-shadow: var(--box-shadow);
-transition: transform .3s;
 
 &:hover {
   transform: scale(1.1);
@@ -20,8 +21,8 @@ h3 {
     color: black
     }
 
-img {
-    object-fit: cover;
+a >  span > img {
+  object-fit: ${(props) => props.imageFit || 'cover'};
     object-position: center 30%;
     border-radius: 2%
 }

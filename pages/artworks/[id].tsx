@@ -7,7 +7,6 @@ import { useModal } from '../../customHooks/useModal';
 import { deleteFetch } from '../../services/deleteFetch';
 import { upperCaseArea } from '../../utils/upperCaseArea';
 
-import Link from "next/link";
 import Image from 'next/legacy/image'
 
 import Layout from '../../components/ui/Layout/Layout';
@@ -25,7 +24,7 @@ const ArtworkPage = ({ artwork }: Props) => {
 
   const { isAuth, token } = useContext(AuthContext)
   const { message, setMessage } = useContext(MessageContext)
-  const {openModal, closeModal, isModalOpen, setModalContent, display, modalContent} = useModal()
+  const {openModal, closeModal, isModalOpen, setModalContent, modalDisplay, modalContent} = useModal()
 
   const handleEditModal = (artwork: Artwork) => {
     openModal();
@@ -64,8 +63,8 @@ const ArtworkPage = ({ artwork }: Props) => {
       id="image-in-detail"></Image> 
       </Container>
       
-      {display && <Container>
-      <Button buttonText="Edit" type="button" onClick={()=>handleEditModal(item)}/>
+      {modalDisplay && <Container>
+      <Button buttonText="Edit" type="button" onClick={()=>handleEditModal(artwork)}/>
       <Button buttonText="Delete" type="button" onClick={()=>handleDeleteModal(artwork)}/>
       </Container>}
 

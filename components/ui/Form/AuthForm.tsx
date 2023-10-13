@@ -19,11 +19,12 @@ const { setIsAuth, setToken } = useContext(AuthContext)
 const {setMessage} = useContext(MessageContext);
 const router = useRouter();
 
-        const { handleSubmit, register, formState } = useForm<AuthFormData>({defaultValues: 
-        {email: '',
-        password: ''
-      }
-      })
+const defaultValues = {
+  email: '',
+  password: ''
+}
+
+        const { handleSubmit, register, formState } = useForm<AuthFormData>({defaultValues})
      
       
       const handleNavigate = (url: string) => {
