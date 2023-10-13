@@ -21,11 +21,11 @@ export default function App({ Component, pageProps }: AppProps) {
   const [token, setToken] = useState<string>('')
 
   useEffect(() => {
-    const isClient = typeof window !== 'undefined';
-    if (isClient) {
+    // const isClient = typeof window !== 'undefined';
+    // if (isClient) {
       const userStored = localStorage.getItem('userStored');
       userStored ? setIsAuth(true) : setIsAuth(false);
-}
+// }
   },[])
 
   return (

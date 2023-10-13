@@ -18,7 +18,7 @@ export const addFetch = async (itemType: string, token: string, values: Item, se
         } else if (typeof(data) === 'object' && data.message) {
           setMessage(data.message);
         } else {
-          setMessage(`${itemType.slice(0,-1)} saved.`);
+          setMessage(itemType === 'authors' ? 'artist saved.' : `${itemType.slice(0,-1)} saved.`);
       itemType === 'artworks' && uploadImage(itemType, data._id, token, values)
         }
       })

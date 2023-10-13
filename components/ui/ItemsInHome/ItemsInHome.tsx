@@ -13,7 +13,6 @@ import AddForm from '../Form/AddForm'
 const ItemsInHome = ( { items, itemType } : Props ) => {
 
 const {isModalOpen, modalDisplay, modalContent, setModalContent, openModal, closeModal} = useModal()
-console.log(items)
 
 const handleAddModal = (itemType: string) => {
     setModalContent(<AddForm itemType={itemType} closeModal={closeModal}/>);

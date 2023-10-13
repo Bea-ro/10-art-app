@@ -1,13 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
 
-import { useRouter } from 'next/router';
-import { GetStaticProps } from 'next';
-import { Artwork } from '../types/artwork'
-import { Author } from '../types/author'
-import { getArtworks } from '../libs/artworks/artworks';
-import { getAuthors } from '../libs/authors/authors';
+// import { useRouter } from 'next/router';
+// import { GetStaticProps } from 'next';
+// import { Artwork } from '../types/artwork'
+// import { Author } from '../types/author'
+// import { getArtworks } from '../libs/artworks/artworks';
+// import { getAuthors } from '../libs/authors/authors';
 import { AuthContext, MessageContext } from './_app';
-import { ItemsFetch } from '../services/itemsFetch';
+// import { ItemsFetch } from '../services/itemsFetch';
 
 import Layout from '../components/ui/Layout/Layout'
 import PageTitle from '../components/ui/PageTitle/PageTitle';
@@ -16,6 +16,7 @@ import Container from '../components/ui/Container/Container';
 import Text from '../components/ui/Text/Text';
 import ItemsInHome from '../components/ui/ItemsInHome/ItemsInHome';
 import Link from 'next/link';
+import { ItemsFetch } from '@/services/itemsFetch';
 
 
 
@@ -26,8 +27,16 @@ const Home = (
   const { isAuth } = useContext(AuthContext) 
   const {setMessage} = useContext(MessageContext)
   
-  const {artworks, authors} = ItemsFetch(useState, useEffect)
-  
+
+  // const [isAuth, setIsAuth] = useState<boolean>(false);
+  // const [token, setToken] = useState<string>('')
+  // useEffect(() => {
+  //     const userStored = localStorage.getItem('userStored');
+  //     userStored ? setIsAuth(true) : setIsAuth(false);
+  // },[])
+
+const { artworks, authors } = ItemsFetch(useState, useEffect)
+
   return (
       <Layout title="Art App" 
       description="Find information about artists from all movements and artworks of pinture, sculpture and arquitecture."
@@ -70,5 +79,12 @@ const Home = (
 //   artworks: Artwork[]
 //   authors: Author[]
 //  }
+
+// export type AuthContextType = {
+//     isAuth: boolean | undefined
+//     setIsAuth: (arg0: boolean) => void
+//     token: string
+//     setToken: (arg0: string) => void
+//    }
 
 export default Home
