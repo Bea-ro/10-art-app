@@ -6,6 +6,7 @@ import { Author } from "../../types/author";
 
 import { useModal } from '../../customHooks/useModal';
 import { deleteFetch } from '../../services/deleteFetch';
+import { upperCaseArea } from '../../utils/upperCaseArea';
 
 import Layout from '../../components/ui/Layout/Layout';
 import PageTitle from '../../components/ui/PageTitle/PageTitle';
@@ -14,9 +15,8 @@ import Button from '../../components/ui/Button/Button';
 import Container from '../../components/ui/Container/Container';
 import ItemsGrid from '../../components/ui/ItemsGrid/ItemsGrid';
 import Message from '../../components/ui/Message/Message';
-import AddForm from '../../components/ui/Form/AddForm';
 import Modal from '../../components/ui/Modal/Modal';
-import { upperCaseArea } from "@/utils/upperCaseArea";
+import EditForm from "@/components/ui/Form/EditForm";
 
 
 
@@ -26,9 +26,11 @@ const AuthorPage = ({ author }: Props) => {
   const { message, setMessage } = useContext(MessageContext);
   const {openModal, closeModal, isModalOpen, setModalContent, modalDisplay, modalContent} = useModal()
 
-  const handleAddModal = () => {
-    setModalContent(<AddForm itemType={'authors'} closeModal={closeModal}/>);
-    openModal()
+  const handleEditModal = (author: Author) => {
+    openModal();
+    setModalContent(
+   <EditForm item={author} itemType='authors' closeModal={closeModal}/>
+  );
   }
 
   const handleDeleteModal = (author: Author) => {
@@ -59,8 +61,8 @@ const AuthorPage = ({ author }: Props) => {
     ))}</p>
       <ItemsGrid items={author.mainArtworks}></ItemsGrid>
         {modalDisplay && <Container>
-          <Button buttonText="Add a new artist" type="button" onClick={handleAddModal}/>
-      <Button buttonText="Delete" type="button" onClick={()=>handleDeleteModal(author)}/>
+          <Button buttonText="Edit" type="button" onClick={() => handleEditModal(author)}/>
+      <Button buttonText="Delete" type="button" onClick={() => handleDeleteModal(author)}/>
       </Container>}
       {isModalOpen && <Modal>{modalContent}</Modal>}
         </>

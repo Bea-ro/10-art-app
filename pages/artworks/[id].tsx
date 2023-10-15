@@ -80,10 +80,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
         `https://my-json-server.typicode.com/bea-ro/shop-api/artworks/`
       ).then((res) => res.json());
       return {
-        // paths: response.map((artwork) => ({
-        //   params: { id: artwork._id }
-        // })),
-        // fallback:false
         paths:[],
         fallback: 'blocking'
       };
