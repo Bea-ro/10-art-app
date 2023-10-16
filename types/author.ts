@@ -4,6 +4,6 @@
     _id: string,
     name: string,
     movement: string,
-    area: string[],
+    area: string | string[],
     mainArtworks: Artwork[],
 }

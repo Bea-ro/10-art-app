@@ -30,7 +30,7 @@ const defaultValues = itemType === 'artworks' ? {
   : {
       name: '',
       movement: '',
-      area: []
+      area: '' || []
     }
   
 const { handleSubmit, register, formState } = useForm<Item>({defaultValues});
@@ -116,17 +116,17 @@ const { handleSubmit, register, formState } = useForm<Item>({defaultValues});
             />
 
 
-<label id="areas">
-      {allAreas.map((area) => (
+<label id="area">
+          {allAreas.map((area) => (
         <div key={area} id="area-names">
       <input {...register('area', {
-            required: false
-          })}
+            required: true
+        })}
             type="checkbox"
             id={area}
-            name="areas"
-            value={area}
-            // onChange={evento lo que sea}
+            name="area"
+            value={area.toLowerCase()}
+            placeholder={area}
             />
             <label htmlFor={area} id={area}>{area}</label>
             </div>
