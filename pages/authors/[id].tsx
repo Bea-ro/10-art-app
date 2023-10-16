@@ -24,7 +24,7 @@ const AuthorPage = ({ author }: Props) => {
 
   const { isAuth, token } = useContext(AuthContext);
   const { message, setMessage } = useContext(MessageContext);
-  const {openModal, closeModal, isModalOpen, setModalContent, modalDisplay, modalContent} = useModal()
+  const {openModal, closeModal, isModalOpen, setModalContent, modalDisplay, modalContent} = useModal(setMessage)
 
   const handleEditModal = (author: Author) => {
     openModal();

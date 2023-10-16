@@ -28,6 +28,7 @@ const Home = () => {
   const {setMessage} = useContext(MessageContext)
   const { artworks, setArtworks, authors, setAuthors } = ItemsFetch(useState, useEffect)
 
+  console.log('isAuth', isAuth)
 
   return (
       <Layout title="Art App" 
@@ -65,9 +66,9 @@ const Home = () => {
 }
 
 export type ItemsContextType = {
-  artworks: Artwork[]
+  artworks: Artwork[] | Item[]
   setArtworks: (arg0: Artwork[]) => void
-  authors: Author[]
+  authors: Author[] | Item[]
   setAuthors: (arg0: Author[]) => void
  }
 

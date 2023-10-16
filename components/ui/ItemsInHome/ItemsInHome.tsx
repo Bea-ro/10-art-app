@@ -1,4 +1,6 @@
+import { useContext } from 'react'
 import { useModal } from '../../../customHooks/useModal'
+import { MessageContext } from '../../../pages/_app';
 import { Item } from '../../../types/item'
 
 import Link from 'next/link';
@@ -12,7 +14,8 @@ import AddForm from '../Form/AddForm'
 
 const ItemsInHome = ( { items, itemType } : Props ) => {
 
-const {isModalOpen, modalDisplay, modalContent, setModalContent, openModal, closeModal} = useModal()
+const {setMessage} = useContext(MessageContext)  
+const {isModalOpen, modalDisplay, modalContent, setModalContent, openModal, closeModal} = useModal(setMessage)
 
 const handleAddModal = (itemType: string) => {
     setModalContent(<AddForm itemType={itemType} closeModal={closeModal}/>);

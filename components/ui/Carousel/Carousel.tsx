@@ -1,8 +1,9 @@
 import { CarouselStyled } from './CarouselStyled';
-import React, { useState } from 'react';
-
-import { Item } from '../../../types/item';
+import React, { useState, useContext } from 'react';
+import { MessageContext } from '../../../pages/_app';
 import { useModal } from '../../../customHooks/useModal'
+import { Item } from '../../../types/item';
+
 
 import CarouselItemCard from '../../../components/ItemCard/CarouselItemCard';
 import Container from '../Container/Container'
@@ -10,9 +11,11 @@ import Button from '../Button/Button';
 import Modal from '../Modal/Modal';
 
 
-const Carousel = ({carouselItems, itemType}: Props) => {
 
-  const {closeModal, isModalOpen, modalContent, openModal, setModalContent, modalDisplay} = useModal()
+const Carousel = ({carouselItems, itemType}: Props) => {
+  
+  const {setMessage} = useContext(MessageContext)
+  const {closeModal, isModalOpen, modalContent, openModal, setModalContent, modalDisplay} = useModal(setMessage)
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
     const prevItem = () => {  

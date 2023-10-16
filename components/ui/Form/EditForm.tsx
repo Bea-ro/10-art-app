@@ -1,4 +1,4 @@
-import React, { useContext }  from 'react'
+import React, { useState, useContext }  from 'react'
 import { FormStyled } from './FormStyled';
 import { useForm} from 'react-hook-form'
 
@@ -17,6 +17,7 @@ const EditForm = ({item, itemType, closeModal}: Props) => {
 const { token } = useContext(AuthContext) 
 const {message, setMessage} = useContext(MessageContext);
 
+
 const defaultValues = itemType === 'artworks' ? {
   title: item.title,
   author: item.author,
@@ -31,9 +32,11 @@ const defaultValues = itemType === 'artworks' ? {
   area: item.area
 }
 
-const { handleSubmit, register, formState } = useForm<Item>({
+const { handleSubmit, register, formState, watch } = useForm<Item>({
 defaultValues,
 });
+
+const fileName = watch('image')?.[0]?.name || '';
 
 
       const onSubmit = (values: Item) => { 
@@ -68,7 +71,7 @@ defaultValues,
             )}
             />
 
-              <label id="areas">
+              <label id="area">
       {allAreas.map((area) => (
         <div key={area} id="area-names">
       <input {...register('area', {
@@ -76,9 +79,8 @@ defaultValues,
           })}
             type="checkbox"
             id={area}
-            name="areas"
-            value={area}
-            // onChange={evento lo que sea}
+            name="area"
+            value={area.toLowerCase()}
             />
             <label htmlFor={area} id={area}>{area}</label>
             </div>
@@ -144,7 +146,9 @@ defaultValues,
           }
           )}
           />
+         
           <label htmlFor="image" id="image-input-label">Upload Image</label>
+          <span>{fileName}</span>
 <input type="file" id="image" accept=".jpg, .jpeg, .png, .gif, .webp"
           {...register('image', {
             required: false

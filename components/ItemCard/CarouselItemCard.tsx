@@ -1,7 +1,6 @@
 import { ItemCardStyled } from './ItemCardStyled';
 import { useContext } from 'react';
 import { AuthContext, MessageContext } from '../../pages/_app';
-import { useModal } from '../../customHooks/useModal';
 import { deleteFetch } from '../../services/deleteFetch';
 
 import { Item } from '../../types/item';
@@ -16,7 +15,6 @@ const CarouselItemCard = ( {item, itemType, display, width, imageFit, openModal,
 
   const {setMessage} = useContext(MessageContext)
   const {token} = useContext(AuthContext)
-  // const {openModal, closeModal, setModalContent, modalDisplay} = useModal()
 
     const randomArtwork = (artworks : Item[]) => artworks[Math.floor(Math.random () * artworks.length)]
 
