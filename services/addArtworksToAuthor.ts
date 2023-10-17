@@ -1,4 +1,4 @@
-export const addArtworksToAuthor = async (token: string, artworkId: string, authorId: string, setMessage: (arg0: string) => void) => {
+export const addArtworksToAuthor = async (token: string, artworkId: string | string[], authorId: string, setMessage: (arg0: string) => void) => {
   console.log('el id de la obra', artworkId)
   console.log('id del autor', authorId)
   await fetch(`https://complete-server-rtc.onrender.com/api/authors/${authorId}/artwork`, {

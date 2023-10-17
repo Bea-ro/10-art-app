@@ -33,7 +33,10 @@ artworks: Artwork[], setArtworks:(arg0: Artwork[]) => void, authors: Author[], s
       } else {
         setAuthors([...authors, data])
        setMessage('artist saved.');
-      }
+       const existingArtworks = artworks.filter((artwork) => artwork.author === values.name) 
+       const existingArtworksIds = existingArtworks.map((existingArtwork) => existingArtwork._id)
+       addArtworksToAuthor(token, existingArtworksIds, data._id, setMessage) 
+       }
         }
       })
       .catch((error) => {
