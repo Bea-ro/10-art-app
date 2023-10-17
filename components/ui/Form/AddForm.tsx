@@ -1,15 +1,17 @@
-import React, { useContext }  from 'react'
+import React, { useState, useContext }  from 'react'
 import { FormStyled } from './FormStyled';
 import { useForm} from 'react-hook-form'
 
 import { AuthContext, MessageContext } from '../../../pages/_app';
 import { ItemsContext } from '../../../pages';
 import { addFetch } from '../../../services/addFetch';
+import { addArtworksToAuthor } from '../../../services/addArtworksToAuthor';
 import { Item } from '../../../types/item';
 
 import Button from '../Button/Button';
 import Container from '../Container/Container';
 import Message from '../Message/Message';
+
 
 
 
@@ -33,14 +35,18 @@ const defaultValues = itemType === 'artworks' ? {
       area: '' || []
     }
   
-const { handleSubmit, register, formState } = useForm<Item>({defaultValues});
+const { handleSubmit, register, formState, watch } = useForm<Item>({defaultValues});
 
-     
+const fileName = watch('image')?.[0]?.name || '';
+ 
+const [addedArtworkId, setAddedArtworkId] = useState<string>('')
+
       const onSubmit = (values: Item) => { 
-        formState.isValid && addFetch(itemType, token, values, setMessage, artworks, setArtworks, authors, setAuthors);
+        formState.isValid && addFetch(itemType, token, values, setMessage, artworks, setArtworks, authors, setAuthors);       
         }
-  
+      
       const allAreas = ['Arquitecture', 'Painting', 'Sculpture']
+       
          
   return (
 
@@ -92,6 +98,7 @@ const { handleSubmit, register, formState } = useForm<Item>({defaultValues});
           )}
           />
   <label htmlFor="image" id="image-input-label">Upload Image</label>
+  <span>{fileName}</span>
 <input type="file" id="image" accept=".jpeg, .jpg, .png, .gif, .webp"
           {...register('image', {
             required: false

@@ -40,13 +40,11 @@ const fileName = watch('image')?.[0]?.name || '';
 
 
       const onSubmit = (values: Item) => { 
-      
       if (formState.isValid) {
         editFetch(itemType, item, token, values, setMessage)
         itemType === 'artworks' && uploadImageFetch(itemType, item, token, values)
       }
       }
-
 
       const allAreas = ['Arquitecture', 'Painting', 'Sculpture']
     

@@ -66,9 +66,9 @@ const Home = () => {
 }
 
 export type ItemsContextType = {
-  artworks: Artwork[] | Item[]
+  artworks: Artwork[]
   setArtworks: (arg0: Artwork[]) => void
-  authors: Author[] | Item[]
+  authors: Author[]
   setAuthors: (arg0: Author[]) => void
  }
 
