@@ -23,7 +23,7 @@ const handleAddModal = (itemType: string) => {
   }
 
     return (
-<div style={{position: 'relative'}}>
+<div style={{position: 'relative', padding: '10px'}}>
 <Subtitle subtitle={itemType === 'authors' ? 'artists' : itemType}/>
 <Container>
 {modalDisplay && <Button buttonText={`Add a new ${itemType === 'authors' ? 'artist' : itemType.slice(0, -1)}`} 
@@ -31,7 +31,7 @@ type="button" onClick={()=>handleAddModal(itemType)}/>}
 {modalDisplay && <Link className="button" href={`/${itemType}`}>See {itemType === 'authors' ? 'artists' : itemType} detail</Link>}
 {isModalOpen && <Modal top="3%">{modalContent}</Modal>}
 </Container>
-<ItemsGrid isModalOpen={isModalOpen} items={items}></ItemsGrid>
+<ItemsGrid isModalOpen={isModalOpen} items={items} itemType={itemType}></ItemsGrid>
 </div>
 )
 }

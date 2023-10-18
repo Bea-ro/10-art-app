@@ -1,14 +1,15 @@
 import React from 'react'
 import { PageTitleStyled } from './PageTitleStyled'
 
-const PageTitle = ( {title}: Props ) => {
+const PageTitle = ( {title, fontSize}: Props ) => {
   return (
-    <PageTitleStyled>{title}</PageTitleStyled>
+    <PageTitleStyled fontSize={fontSize}>{title}</PageTitleStyled>
     )
 }
 
 type Props = {
     title: string
+    fontSize?: string
 } 
 
 

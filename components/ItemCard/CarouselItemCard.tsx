@@ -44,18 +44,13 @@ const CarouselItemCard = ( {item, itemType, display, width, imageFit, openModal,
 <ItemCardStyled display={display} width={width} imageFit={imageFit}>
 <h2>{item.title || item.name}</h2>
               <p>{item.title ? item.author : item.movement} </p>
-      <Link href={`/${itemType}/${item._id}`} key={item._id}>
-              {item.title && <Image src={item.image || ''} alt={item.title || item.name || ''} 
+      <Link href={`/${itemType}/${item._id}`} key={item._id}>             
+              <Image 
+              src={item.title ? item.image || '' :  item.mainArtworks && Array.isArray(item.mainArtworks) && item.mainArtworks[0] &&
+              randomArtwork(item.mainArtworks).image} 
+              alt={item.title ? item.title || item.name || '' : `Ramdom Artwork by ${item.name}`} 
               height={400} width={400 * (16 / 9)} 
-              ></Image>}
-               {item.mainArtworks && Array.isArray(item.mainArtworks) && item.mainArtworks[0] &&
-              <Image
-              src={randomArtwork(item.mainArtworks).image} 
-                alt={`Ramdom Artwork by ${item.name}`}
-                height={100} 
-                width={100* (16 / 9)}
-                ></Image>
-             }
+              ></Image>
                </Link>
                {modalDisplay && <Button buttonText="Delete" type="button" onClick={()=>handleDeleteModal(item)}/>
               }

@@ -2,7 +2,6 @@ import React, { useState, useEffect, createContext, useContext } from 'react';
 
 import { AuthContext, MessageContext } from './_app';
 import { ItemsFetch } from '../services/itemsFetch';
-import { Item } from '../types/item';
 import { Artwork } from '../types/artwork'
 import { Author } from '../types/author'
 
@@ -34,11 +33,10 @@ const Home = () => {
       <Layout title="Art App" 
       description="Find information about artists from all movements and artworks of pinture, sculpture and arquitecture."
       >
-      <PageTitle title="Your Art App"/>
+     <PageTitle fontSize={isAuth? '54px' : '80px'} title="Your Art App"/>
       
 {isAuth? 
 (
- <>
  <ItemsContext.Provider
         value={{
           artworks: artworks,
@@ -47,10 +45,9 @@ const Home = () => {
           setAuthors: setAuthors
         }}
       >
- <ItemsInHome items={artworks} itemType='artworks'></ItemsInHome>
+<ItemsInHome items={artworks} itemType='artworks'></ItemsInHome>
 <ItemsInHome items={authors} itemType='authors'></ItemsInHome>
 </ItemsContext.Provider>
-</> 
 )
 :
 (<>

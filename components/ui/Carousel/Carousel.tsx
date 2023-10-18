@@ -4,12 +4,10 @@ import { MessageContext } from '../../../pages/_app';
 import { useModal } from '../../../customHooks/useModal'
 import { Item } from '../../../types/item';
 
-
 import CarouselItemCard from '../../../components/ItemCard/CarouselItemCard';
 import Container from '../Container/Container'
 import Button from '../Button/Button';
 import Modal from '../Modal/Modal';
-
 
 
 const Carousel = ({carouselItems, itemType}: Props) => {
@@ -27,6 +25,8 @@ const Carousel = ({carouselItems, itemType}: Props) => {
       currentIndex < carouselItems.length - 3 ? setCurrentIndex(currentIndex + 3) : setCurrentIndex(0)
       closeModal()
     };
+
+   
 
 return (
 <CarouselStyled>

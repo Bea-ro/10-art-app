@@ -11,6 +11,22 @@ export const Global = createGlobalStyle`
   --box-shadow: 2px 2px 4px var(--color-grey);
 }
 
+*::-webkit-scrollbar {
+  width: 18px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--color-grey);
+  border-radius: 20px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-beige);
+  /* border: 3px solid var(--color-); */
+  border-radius: 5px;
+ 
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

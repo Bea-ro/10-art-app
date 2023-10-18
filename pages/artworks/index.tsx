@@ -10,7 +10,6 @@ import Carousel from '../../components/ui/Carousel/Carousel';
 import Text from '../../components/ui/Text/Text';
 
 
-
 const ArtworksPage = ( { artworks }: Props ) => {
 
   const { isAuth } = useContext(AuthContext)
@@ -21,7 +20,8 @@ const ArtworksPage = ( { artworks }: Props ) => {
       description="Find information about artists from all movements and artworks of pinture, sculpture and arquitecture.">
       
       <PageTitle title="Artworks"/>
-      {isAuth? <Carousel carouselItems={artworks} itemType={'artworks'}></Carousel> 
+      {isAuth? 
+      <Carousel carouselItems={artworks} itemType={'artworks'}></Carousel> 
       : <Text text="Please, log in to discover artworks."/>}         
       </Layout>
   )
