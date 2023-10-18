@@ -5,7 +5,6 @@ import { useForm} from 'react-hook-form'
 import { AuthContext, MessageContext } from '../../../pages/_app';
 import { ItemsContext } from '../../../pages';
 import { addFetch } from '../../../services/addFetch';
-import { addArtworksToAuthor } from '../../../services/addArtworksToAuthor';
 import { Item } from '../../../types/item';
 
 import Button from '../Button/Button';
@@ -15,11 +14,12 @@ import Message from '../Message/Message';
 
 
 
-const AddForm = ( {itemType, closeModal} : Props) => {
+const AddForm = ( {itemType, closeModal, setModalContent} : Props) => {
 
 const { token } = useContext(AuthContext) 
-const {message, setMessage} = useContext(MessageContext);
-const {artworks, setArtworks, authors, setAuthors} = useContext(ItemsContext)
+const {setMessage } = useContext(MessageContext);
+const { artworks, setArtworks, authors, setAuthors } = useContext(ItemsContext)
+//const {  } = useModal(setMessage)
 
 const defaultValues = itemType === 'artworks' ? {
       title: '',
@@ -39,15 +39,19 @@ const { handleSubmit, register, formState, watch } = useForm<Item>({defaultValue
 
 const fileName = watch('image')?.[0]?.name || '';
  
-const [addedArtworkId, setAddedArtworkId] = useState<string>('')
 
       const onSubmit = (values: Item) => { 
         formState.isValid && addFetch(itemType, token, values, setMessage, artworks, setArtworks, authors, setAuthors);       
-        }
+        formState.isValid && setModalContent(
+          <>
+        <Button type="button" buttonText="x" onClick={closeModal}/>
+        <Message shadow="transparent"></Message>
+         </>
+        )
+      }
       
       const allAreas = ['Arquitecture', 'Painting', 'Sculpture']
        
-         
   return (
 
     <FormStyled onSubmit={handleSubmit(onSubmit)}>
@@ -153,7 +157,6 @@ const [addedArtworkId, setAddedArtworkId] = useState<string>('')
         />
     <Button buttonText="Cancel" type="button" onClick={closeModal}/>
     </Container>
-    <Message shadow="transparent"></Message>
     </FormStyled>
      )
 }
@@ -161,6 +164,7 @@ const [addedArtworkId, setAddedArtworkId] = useState<string>('')
 export type Props = {
   itemType: string
   closeModal: () => void
+   setModalContent: (arg0: any) => void
 }
 
 

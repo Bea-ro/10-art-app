@@ -38,10 +38,18 @@ const AuthorPage = ({ author }: Props) => {
       <>
           <p>Are you sure you want to delete {author.name}?</p>
           <Container>
-          <Button buttonText="Yes" type="button" onClick={() => deleteFetch('/authors', author, token, setMessage, closeModal)} ></Button>
+          <Button buttonText="Yes" type="button" onClick={
+            () => {
+              deleteFetch('/authors', author, token, setMessage)
+              setModalContent(
+              <>
+            <Button type="button" buttonText="x" onClick={closeModal}/>
+            <Message shadow="transparent"></Message>
+             </>
+             )}
+            } ></Button>
           <Button buttonText="No" type="button" onClick={closeModal}></Button> 
           </Container>
-          <Message shadow="transparent"></Message> 
         </>
           )
     openModal(); 

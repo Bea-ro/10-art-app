@@ -23,10 +23,18 @@ const CarouselItemCard = ( {item, itemType, display, width, imageFit, openModal,
           <>
               <p>Are you sure you want to delete {item.title || item.name}?</p>
               <Container>
-              <Button buttonText="Yes" type="button" onClick={() => deleteFetch(itemType, item, token, setMessage)} ></Button>
+              <Button buttonText="Yes" type="button" onClick={
+                () => {
+                  deleteFetch(itemType, item, token, setMessage)
+                  setModalContent(
+                  <>
+                <Button type="button" buttonText="x" onClick={closeModal}/>
+                <Message shadow="transparent"></Message>
+                 </>
+                 )}
+                } ></Button>
               <Button buttonText="No" type="button" onClick={closeModal}></Button> 
               </Container>
-              <Message shadow="transparent"></Message> 
             </>
               )
         openModal(); 

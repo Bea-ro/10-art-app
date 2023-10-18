@@ -1,14 +1,15 @@
 import { ModalStyled } from './ModalStyled'
 
-const Modal = ( { children}: Props ) => {
+const Modal = ( { children, top}: Props ) => {
   
   return (
-        <ModalStyled>{children}</ModalStyled>        
+        <ModalStyled top={top}>{children}</ModalStyled>        
   )
 }
 
 export type Props = {
     children: React.ReactNode
+    top?: string
   };
 
 export default Modal

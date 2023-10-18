@@ -32,16 +32,24 @@ const ArtworkPage = ({ artwork }: Props) => {
    <EditForm item={artwork} itemType='artworks' closeModal={closeModal}/>
   );
   }
-
+console.log(Button)
   const handleDeleteModal = (artwork: Artwork) => {
     setModalContent(
       <>
           <p>Are you sure you want to delete {artwork.title}?</p>
           <Container>
-          <Button buttonText="Yes" type="button" onClick={() => deleteFetch('artworks', artwork, token, setMessage, closeModal)} ></Button>
+          <Button buttonText="Yes" type="button" onClick={
+              () => {
+              deleteFetch('artworks', artwork, token, setMessage)
+              setModalContent(
+              <>
+            <Button type="button" buttonText="x" onClick={closeModal}/>
+            <Message shadow="transparent"></Message>
+             </>
+             )}
+            } ></Button>
           <Button buttonText="No" type="button" onClick={closeModal}></Button> 
           </Container>
-          <Message shadow="transparent"></Message> 
         </>
           )
     openModal(); 
@@ -55,7 +63,7 @@ const ArtworkPage = ({ artwork }: Props) => {
       <PageTitle title={artwork.title}/>
       {isAuth? 
       <>
-      <Container direction="column">
+      <Container direction="column" isModalOpen={isModalOpen}>
       <p>{`${artwork.author},  ${artwork.year}`} </p>
       <p>{artwork.movement} {upperCaseArea(artwork.area)}</p>   
       <Image src={artwork.image || ''} alt={artwork.title} 

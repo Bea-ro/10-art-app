@@ -12,7 +12,7 @@ import PageTitle from '../components/ui/PageTitle/PageTitle';
 import Subtitle from '../components/ui/Subtitle/Subtitle';
 import Container from '../components/ui/Container/Container';
 import Text from '../components/ui/Text/Text';
-import ItemsInHome from '../components/ui/ItemsInHome/ItemsInHome';
+import ItemsInHome from '../components/ItemsInHome/ItemsInHome';
 
 
 export const ItemsContext = createContext<ItemsContextType>({

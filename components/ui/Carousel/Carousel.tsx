@@ -30,7 +30,7 @@ const Carousel = ({carouselItems, itemType}: Props) => {
 
 return (
 <CarouselStyled>
-<Container>
+<Container isModalOpen={isModalOpen}>
 <Button type="button" buttonText="<" onClick={() => prevItem()}></Button>
 <ul>
           {carouselItems.map((item, index) => (
@@ -47,7 +47,7 @@ return (
   </ul>
   <Button type="button" buttonText=">" onClick={() => nextItem()}></Button>
   </Container>
-  {isModalOpen && <Modal>{modalContent}</Modal>}
+  {isModalOpen && <Modal top="47%">{modalContent}</Modal>}
   </CarouselStyled>
   )
 }
