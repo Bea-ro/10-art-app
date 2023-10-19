@@ -15,18 +15,17 @@ const Carousel = ({carouselItems, itemType}: Props) => {
   const {setMessage} = useContext(MessageContext)
   const {closeModal, isModalOpen, modalContent, openModal, setModalContent, modalDisplay} = useModal(setMessage)
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-
-    const prevItem = () => {  
+  
+  const prevItem = () => {  
     currentIndex > 0 ? setCurrentIndex(currentIndex - 3) : setCurrentIndex(carouselItems.length -3)
     closeModal()
   };
 
     const nextItem = () => {
-      currentIndex < carouselItems.length - 3 ? setCurrentIndex(currentIndex + 3) : setCurrentIndex(0)
+     currentIndex < carouselItems.length - 3 ? setCurrentIndex(currentIndex + 3) : setCurrentIndex(0)
       closeModal()
-    };
-
-   
+    }  
+    
 
 return (
 <CarouselStyled>

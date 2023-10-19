@@ -67,7 +67,7 @@ const AuthorPage = ({ author }: Props) => {
                (author.area).map((area, index) => (
       <span key={area}>{upperCaseArea(area)}{index < author.area.length - 1 && ', '}</span>
     ))}</p>
-      <ItemsGrid items={author.mainArtworks}></ItemsGrid>
+      <ItemsGrid itemType='' items={author.mainArtworks}></ItemsGrid>
         {modalDisplay && <Container>
           <Button buttonText="Edit" type="button" onClick={() => handleEditModal(author)}/>
       <Button buttonText="Delete" type="button" onClick={() => handleDeleteModal(author)}/>

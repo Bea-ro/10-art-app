@@ -14,7 +14,8 @@ const UserPage = () => {
       <Layout title={action === "register" ? "Register" : "Login"} 
       description="Find information about artists from all movements and artworks of pinture, sculpture and arquitecture.">
       <PageTitle title={action === "register" ? "Register" : "Login"}/>
-      <Text text={action === "register" ? "Create your free account and start enjoying" : "Please, provide your email and password for start enjoying!"}/>
+      <Text text={action === "register" ? "Create your free account and start enjoying!" : 
+      "Please, provide your email and password for start enjoying!"}/>
       <AuthForm action={action}/>
       </Layout>
   

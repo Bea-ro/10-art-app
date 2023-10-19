@@ -1,4 +1,3 @@
-import React from 'react'
 import { SubtitleStyled } from './SubtitleStyled'
 
 const Subtitle = ( {subtitle}: Props ) => {

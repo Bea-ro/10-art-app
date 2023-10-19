@@ -1,5 +1,5 @@
-import React from 'react'
 import { PageTitleStyled } from './PageTitleStyled'
+
 
 const PageTitle = ( {title, fontSize}: Props ) => {
   return (

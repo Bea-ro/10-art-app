@@ -1,4 +1,3 @@
-import React from 'react'
 import { TextStyled } from './TextStyled'
 
 const Text = ( {text, fontSize, color, background}: Props ) => {

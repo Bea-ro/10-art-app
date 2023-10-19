@@ -1,15 +1,14 @@
-import React, { useContext }  from 'react'
 import { FormStyled } from './FormStyled';
-import { useForm} from 'react-hook-form'
+import React, { useContext }  from 'react'
+import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router';
-
-import Button from '../Button/Button';
-import Container from '../Container/Container';
-
-import { AuthFormData } from '../../../types/formData'
 import { registerPostFetch } from '../../../services/registerPostFetch';
 import { loginPostFetch } from '../../../services/loginPostFetch';
 import { AuthContext, MessageContext } from '../../../pages/_app';
+import { AuthFormData } from '../../../types/formData'
+
+import Button from '../Button/Button';
+import Container from '../Container/Container';
 import Message from '../Message/Message';
 
 
@@ -26,7 +25,6 @@ const defaultValues = {
 
         const { handleSubmit, register, formState } = useForm<AuthFormData>({defaultValues})
      
-      
       const handleNavigate = (url: string) => {
         router.push(url);
       };
@@ -40,7 +38,7 @@ const defaultValues = {
   return (
 
     <FormStyled onSubmit={handleSubmit(onSubmit)}>
-      <Container direction='column'>
+      <Container direction='column'>  
         <input type="email" id="email" placeholder="email"
           {...register('email', {
             required: true,
@@ -55,10 +53,8 @@ const defaultValues = {
           }
             )}
             />
-     
-        {/* {(formState.errors.email || formState.errors.password) && <p>Please, check your email and password and try again.</p>}
-        <p>{error}</p> */}
-      <Message formState={formState} action={action}></Message>
+        {action ==='register' && <p>Password must be at least 6 characters long and contain both uppercase and lowercase letters.</p>}
+        <Message></Message>
         </Container>
         <Button type="submit" buttonText="Submit" 
         disabled={!formState.isValid || formState.isSubmitting}

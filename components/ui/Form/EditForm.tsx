@@ -1,11 +1,10 @@
-import React, { useState, useContext }  from 'react'
 import { FormStyled } from './FormStyled';
+import React, { useState, useContext }  from 'react'
 import { useForm} from 'react-hook-form'
-
 import { AuthContext, MessageContext } from '../../../pages/_app';
 import { editFetch, uploadImageFetch } from '../../../services/editFetch';
-import { Item } from '../../../types/item';
 import { upperCaseArea } from '../../../utils/upperCaseArea';
+import { Item } from '../../../types/item';
 
 import Button from '../Button/Button';
 import Container from '../Container/Container';

@@ -43,4 +43,8 @@ box-shadow: 2px 2px 4px grey;
 span {
     color: grey;
 }
+
+p {
+color: #535353 
+}
 `  

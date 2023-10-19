@@ -1,4 +1,5 @@
 import { FooterStyled } from './FooterStyled';
+
 import Text from '../ui/Text/Text';
 
 const Footer = () => {

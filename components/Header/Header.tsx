@@ -1,7 +1,6 @@
+import { HeaderStyled } from './HeaderStyled';
 import { useContext } from 'react';
 import { useRouter } from 'next/router';
-import { HeaderStyled } from './HeaderStyled';
-
 import { AuthContext, MessageContext } from '../../pages/_app';
 
 import Link from 'next/link';
@@ -24,14 +23,16 @@ const Header = () => {
 return (
     <HeaderStyled>
      <Navbar></Navbar> 
-<Link className="button" href={action === undefined && !isAuth? "/user?action=login" : "/"} onClick={handleButtonClick}>{action === "register" || action === "login"? "Home" : (isAuth? "Logout" : "Login")}</Link>
+<Link className="button" href={action === undefined && !isAuth? "/user?action=login" : "/"} 
+onClick={handleButtonClick}>{action === "register" || action === "login"? "Home" : 
+(isAuth? "Logout" : "Login")}</Link>
 
 </HeaderStyled>
   )
 }
 
 type Props = {
-  action: string | undefined | string[]
+  action: string | undefined
 } 
 
 export default Header

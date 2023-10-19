@@ -1,7 +1,6 @@
-import React, { useState, useContext }  from 'react'
 import { FormStyled } from './FormStyled';
+import React, { useContext }  from 'react'
 import { useForm} from 'react-hook-form'
-
 import { AuthContext, MessageContext } from '../../../pages/_app';
 import { ItemsContext } from '../../../pages';
 import { addFetch } from '../../../services/addFetch';
@@ -10,8 +9,6 @@ import { Item } from '../../../types/item';
 import Button from '../Button/Button';
 import Container from '../Container/Container';
 import Message from '../Message/Message';
-
-
 
 
 const AddForm = ( {itemType, closeModal, setModalContent} : Props) => {

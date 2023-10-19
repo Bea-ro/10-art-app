@@ -1,7 +1,9 @@
 import { ItemCardStyled } from './ItemCardStyled';
+import { Item } from '../../types/item';
+
 import Link from 'next/link';
 import Image from 'next/legacy/image';
-import { Item } from '../../types/item';
+
 
 const ItemCard = ( {item }: Props ) => {
 

@@ -23,7 +23,7 @@ import EditForm from '../../components/ui/Form/EditForm';
 const ArtworkPage = ({ artwork }: Props) => {
 
   const { isAuth, token } = useContext(AuthContext)
-  const { message, setMessage } = useContext(MessageContext)
+  const { setMessage } = useContext(MessageContext)
   const {openModal, closeModal, isModalOpen, setModalContent, modalDisplay, modalContent} = useModal(setMessage)
 
   const handleEditModal = (artwork: Artwork) => {
@@ -32,7 +32,7 @@ const ArtworkPage = ({ artwork }: Props) => {
    <EditForm item={artwork} itemType='artworks' closeModal={closeModal}/>
   );
   }
-console.log(Button)
+
   const handleDeleteModal = (artwork: Artwork) => {
     setModalContent(
       <>
@@ -40,10 +40,13 @@ console.log(Button)
           <Container>
           <Button buttonText="Yes" type="button" onClick={
               () => {
-              deleteFetch('artworks', artwork, token, setMessage)
+              deleteFetch('artworks', artwork, token, setMessage) 
               setModalContent(
               <>
-            <Button type="button" buttonText="x" onClick={closeModal}/>
+              <Link href='/'>
+            <Button type="button" buttonText="x" onClick={closeModal}
+            />
+            </Link>
             <Message shadow="transparent"></Message>
              </>
              )}

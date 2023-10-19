@@ -1,8 +1,7 @@
 import { ItemCardStyled } from './ItemCardStyled';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext, MessageContext } from '../../pages/_app';
 import { deleteFetch } from '../../services/deleteFetch';
-
 import { Item } from '../../types/item';
 
 import Link from 'next/link';
@@ -15,8 +14,10 @@ const CarouselItemCard = ( {item, itemType, display, width, imageFit, openModal,
 
   const {setMessage} = useContext(MessageContext)
   const {token} = useContext(AuthContext)
-
-    const randomArtwork = (artworks : Item[]) => artworks[Math.floor(Math.random () * artworks.length)]
+ 
+  const [deletedItem, setDeletedItem] = useState(false)
+ 
+  const randomArtwork = (artworks : Item[]) => artworks[Math.floor(Math.random () * artworks.length)]
 
     const handleDeleteModal = (item: Item) => {
         setModalContent(
@@ -28,7 +29,12 @@ const CarouselItemCard = ( {item, itemType, display, width, imageFit, openModal,
                   deleteFetch(itemType, item, token, setMessage)
                   setModalContent(
                   <>
-                <Button type="button" buttonText="x" onClick={closeModal}/>
+                <Button type="button" buttonText="x" onClick={() => {
+                  setDeletedItem(true)
+                  closeModal()
+                }
+                  }/>
+                
                 <Message shadow="transparent"></Message>
                  </>
                  )}
@@ -41,10 +47,10 @@ const CarouselItemCard = ( {item, itemType, display, width, imageFit, openModal,
       }
 
   return (
-<ItemCardStyled display={display} width={width} imageFit={imageFit}>
+<ItemCardStyled display={deletedItem ? 'none': display} width={width} imageFit={imageFit}>
 <h2>{item.title || item.name}</h2>
               <p>{item.title ? item.author : item.movement} </p>
-      <Link href={`/${itemType}/${item._id}`} key={item._id}>             
+      <Link href={`/${itemType}/${item._id}`}>             
               <Image 
               src={item.title ? item.image || '' :  item.mainArtworks && Array.isArray(item.mainArtworks) && item.mainArtworks[0] &&
               randomArtwork(item.mainArtworks).image} 
