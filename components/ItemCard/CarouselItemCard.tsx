@@ -39,7 +39,7 @@ const CarouselItemCard = ({
         <Image
           src={
             (typeof item.image === "string" && item.image) ||
-            (item.mainArtworks &&
+            (typeof item.mainArtworks === "string" && item.mainArtworks &&
               Array.isArray(item.mainArtworks) &&
               item.mainArtworks[0] &&
               randomArtwork(item.mainArtworks).image) ||

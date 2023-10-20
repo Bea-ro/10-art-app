@@ -12,10 +12,7 @@ const Carousel = ({ carouselItems, itemType }: Props) => {
   const {
     closeModal,
     isModalOpen,
-    modalContent,
-    openModal,
-    setModalContent,
-    modalDisplay,
+    modalContent
   } = useContext(ModalContext);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 

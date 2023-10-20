@@ -1,13 +1,13 @@
-import { GetStaticProps } from "next";
-import { createContext, useContext } from "react";
-import { AuthContext } from "../_app";
-import { getArtworks } from "../../libs/artworks/artworks";
-import { Artwork } from "../../types/artwork";
+import { GetStaticProps } from 'next';
+import { useContext } from 'react';
+import { AuthContext } from '../_app';
+import { getArtworks } from '../../libs/artworks/artworks';
+import { Artwork } from '../../types/artwork';
 
-import Layout from "../../components/ui/Layout/Layout";
-import PageTitle from "../../components/ui/PageTitle/PageTitle";
-import Carousel from "../../components/ui/Carousel/Carousel";
-import Text from "../../components/ui/Text/Text";
+import Layout from '../../components/ui/Layout/Layout';
+import PageTitle from '../../components/ui/PageTitle/PageTitle';
+import Carousel from '../../components/ui/Carousel/Carousel';
+import Text from '../../components/ui/Text/Text';
 
 const ArtworksPage = ({ artworks }: Props) => {
   const { isAuth } = useContext(AuthContext);

@@ -1,20 +1,20 @@
-import { GetStaticProps } from "next";
-import { GetStaticPaths } from "next";
-import { useRouter } from "next/router";
-import { useContext } from "react";
-import { AuthContext, MessageContext, ModalContext } from "../_app";
-import { handleDeleteModal } from "../../utils/handleDeleteModal";
-import { handleEditModal } from "../../utils/handleEditModal";
-import { upperCaseArea } from "../../utils/upperCaseArea";
-import { Artwork } from "../../types/artwork";
+import { GetStaticProps } from 'next';
+import { GetStaticPaths } from 'next';
+import { useRouter } from 'next/router';
+import { useContext } from 'react';
+import { AuthContext, MessageContext, ModalContext } from '../_app';
+import { handleDeleteModal } from '../../utils/handleDeleteModal';
+import { handleEditModal } from '../../utils/handleEditModal';
+import { upperCaseArea } from '../../utils/upperCaseArea';
+import { Artwork } from '../../types/artwork';
 
-import Image from "next/legacy/image";
-import Layout from "../../components/ui/Layout/Layout";
-import PageTitle from "../../components/ui/PageTitle/PageTitle";
-import Text from "../../components/ui/Text/Text";
-import Button from "../../components/ui/Button/Button";
-import Container from "../../components/ui/Container/Container";
-import Modal from "../../components/ui/Modal/Modal";
+import Image from 'next/legacy/image';
+import Layout from '../../components/ui/Layout/Layout';
+import PageTitle from '../../components/ui/PageTitle/PageTitle';
+import Text from '../../components/ui/Text/Text';
+import Button from '../../components/ui/Button/Button';
+import Container from '../../components/ui/Container/Container';
+import Modal from '../../components/ui/Modal/Modal';
 
 const ArtworkPage = ({ artwork }: Props) => {
   const { isAuth, token } = useContext(AuthContext);
@@ -48,7 +48,7 @@ const ArtworkPage = ({ artwork }: Props) => {
               {artwork.movement} {upperCaseArea(artwork.area)}
             </p>
             <Image
-              src={artwork.image || ""}
+              src={typeof artwork.image === "string" && artwork.image || ""}
               alt={artwork.title}
               height={400}
               width={400 * (16 / 9)}

@@ -1,21 +1,21 @@
-import { GetStaticProps } from "next";
-import { GetStaticPaths } from "next";
-import { useRouter } from "next/router";
-import { useContext } from "react";
-import { AuthContext, MessageContext, ModalContext } from "../_app";
-import { Author } from "../../types/author";
+import { GetStaticProps } from 'next';
+import { GetStaticPaths } from 'next';
+import { useRouter } from 'next/router';
+import { useContext } from 'react';
+import { AuthContext, MessageContext, ModalContext } from '../_app';
+import { Author } from '../../types/author';
 
-import { upperCaseArea } from "../../utils/upperCaseArea";
-import { handleDeleteModal } from "../../utils/handleDeleteModal";
-import { handleEditModal } from "../../utils/handleEditModal";
+import { upperCaseArea } from '../../utils/upperCaseArea';
+import { handleDeleteModal } from '../../utils/handleDeleteModal';
+import { handleEditModal } from '../../utils/handleEditModal';
 
-import Layout from "../../components/ui/Layout/Layout";
-import PageTitle from "../../components/ui/PageTitle/PageTitle";
-import Text from "../../components/ui/Text/Text";
-import Button from "../../components/ui/Button/Button";
-import Container from "../../components/ui/Container/Container";
-import ItemsGrid from "../../components/ui/ItemsGrid/ItemsGrid";
-import Modal from "../../components/ui/Modal/Modal";
+import Layout from '../../components/ui/Layout/Layout';
+import PageTitle from '../../components/ui/PageTitle/PageTitle';
+import Text from '../../components/ui/Text/Text';
+import Button from '../../components/ui/Button/Button';
+import Container from '../../components/ui/Container/Container';
+import ItemsGrid from '../../components/ui/ItemsGrid/ItemsGrid';
+import Modal from '../../components/ui/Modal/Modal';
 
 const AuthorPage = ({ author }: Props) => {
   const { isAuth, token } = useContext(AuthContext);
