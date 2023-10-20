@@ -1,30 +1,36 @@
-import { AuthFormData } from '../types/formData';
-import { loginPostFetch } from './loginPostFetch';
+import { loginPostFetch } from "./loginPostFetch";
+import { AuthFormData } from "../types/formData";
 
-export const registerPostFetch = async (values: AuthFormData, setMessage: (arg0: string) => void, handleNavigate: (arg0: string) => void, setIsAuth: (arg0: boolean) => void, setToken: (arg0: string) => void) => {
-  await fetch('https://complete-server-rtc.onrender.com/api/users/register', {
-    method: 'POST',
+export const registerPostFetch = async (
+  values: AuthFormData,
+  setMessage: (arg0: string) => void,
+  handleNavigate: (arg0: string) => void,
+  setIsAuth: (arg0: boolean) => void,
+  setToken: (arg0: string) => void
+) => {
+  await fetch("https://complete-server-rtc.onrender.com/api/users/register", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(values)
+    body: JSON.stringify(values),
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log('data en register', data)
+      console.log("data en register", data);
       if (data.message) {
         setMessage(data.message);
       } else {
-        setMessage('');
+        setMessage("");
         const userStored = {
           email: data.email,
-          password: data.password
+          password: data.password,
         };
-        localStorage.setItem('userStored', JSON.stringify(userStored));
+        localStorage.setItem("userStored", JSON.stringify(userStored));
         loginPostFetch(values, setMessage, handleNavigate, setIsAuth, setToken);
       }
     })
     .catch((error) => {
-      console.log('Error:', error);
+      console.log("Error:", error);
     });
 };

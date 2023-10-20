@@ -1,14 +1,13 @@
-import { FooterStyled } from './FooterStyled';
+import { FooterStyled } from "./FooterStyled";
 
-import Text from '../ui/Text/Text';
+import Text from "../ui/Text/Text";
 
 const Footer = () => {
-
-return (
+  return (
     <FooterStyled>
       <Text text="Created by Beatriz Rodríguez"></Text>
-      </FooterStyled>
-  )
-}
+    </FooterStyled>
+  );
+};
 
-export default Footer
+export default Footer;

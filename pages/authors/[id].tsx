@@ -1,120 +1,122 @@
-import { GetStaticProps } from "next"; 
-import { GetStaticPaths } from "next"; 
-import { useContext } from 'react';
-import { AuthContext, MessageContext } from '../_app';
+import { GetStaticProps } from "next";
+import { GetStaticPaths } from "next";
+import { useRouter } from "next/router";
+import { useContext } from "react";
+import { AuthContext, MessageContext, ModalContext } from "../_app";
 import { Author } from "../../types/author";
 
-import { useModal } from '../../customHooks/useModal';
-import { deleteFetch } from '../../services/deleteFetch';
-import { upperCaseArea } from '../../utils/upperCaseArea';
+import { upperCaseArea } from "../../utils/upperCaseArea";
+import { handleDeleteModal } from "../../utils/handleDeleteModal";
+import { handleEditModal } from "../../utils/handleEditModal";
 
-import Layout from '../../components/ui/Layout/Layout';
-import PageTitle from '../../components/ui/PageTitle/PageTitle';
-import Text from '../../components/ui/Text/Text';
-import Button from '../../components/ui/Button/Button';
-import Container from '../../components/ui/Container/Container';
-import ItemsGrid from '../../components/ui/ItemsGrid/ItemsGrid';
-import Message from '../../components/ui/Message/Message';
-import Modal from '../../components/ui/Modal/Modal';
-import EditForm from "@/components/ui/Form/EditForm";
-
-
+import Layout from "../../components/ui/Layout/Layout";
+import PageTitle from "../../components/ui/PageTitle/PageTitle";
+import Text from "../../components/ui/Text/Text";
+import Button from "../../components/ui/Button/Button";
+import Container from "../../components/ui/Container/Container";
+import ItemsGrid from "../../components/ui/ItemsGrid/ItemsGrid";
+import Modal from "../../components/ui/Modal/Modal";
 
 const AuthorPage = ({ author }: Props) => {
-
   const { isAuth, token } = useContext(AuthContext);
-  const { message, setMessage } = useContext(MessageContext);
-  const {openModal, closeModal, isModalOpen, setModalContent, modalDisplay, modalContent} = useModal(setMessage)
+  const { setMessage } = useContext(MessageContext);
+  const {
+    openModal,
+    closeModal,
+    isModalOpen,
+    setModalContent,
+    modalDisplay,
+    modalContent,
+  } = useContext(ModalContext);
+  const router = useRouter();
 
-  const handleEditModal = (author: Author) => {
-    openModal();
-    setModalContent(
-   <EditForm item={author} itemType='authors' closeModal={closeModal}/>
-  );
-  }
-
-  const handleDeleteModal = (author: Author) => {
-    setModalContent(
-      <>
-          <p>Are you sure you want to delete {author.name}?</p>
-          <Container>
-          <Button buttonText="Yes" type="button" onClick={
-            () => {
-              deleteFetch('/authors', author, token, setMessage)
-              setModalContent(
-              <>
-            <Button type="button" buttonText="x" onClick={closeModal}/>
-            <Message shadow="transparent"></Message>
-             </>
-             )}
-            } ></Button>
-          <Button buttonText="No" type="button" onClick={closeModal}></Button> 
-          </Container>
-        </>
-          )
-    openModal(); 
-  }
+  const closeWithNavigate = () => {
+    closeModal();
+    router.push("/");
+  };
 
   return (
-    <Layout title={`Artist ${author.name}`}
-      description={`Find information about artist ${author.name}`}>
-      
-      <PageTitle title={author.name}/>
-      {isAuth? 
-      <>
-             <p>{author.movement}  {
-              (author.area).length > 0 &&
-               (author.area).map((area, index) => (
-      <span key={area}>{upperCaseArea(area)}{index < author.area.length - 1 && ', '}</span>
-    ))}</p>
-      <ItemsGrid itemType='' items={author.mainArtworks}></ItemsGrid>
-        {modalDisplay && <Container>
-          <Button buttonText="Edit" type="button" onClick={() => handleEditModal(author)}/>
-      <Button buttonText="Delete" type="button" onClick={() => handleDeleteModal(author)}/>
-      </Container>}
-      {isModalOpen && <Modal>{modalContent}</Modal>}
+    <Layout
+      title={`Artist ${author.name}`}
+      description={`Find information about artist ${author.name}`}
+    >
+      <PageTitle title={author.name} />
+      {isAuth ? (
+        <>
+          <p>
+            {author.movement}{" "}
+            {author.area.length > 0 &&
+              author.area.map((area, index) => (
+                <span key={area}>
+                  {upperCaseArea(area)}
+                  {index < author.area.length - 1 && ", "}
+                </span>
+              ))}
+          </p>
+          <ItemsGrid itemType="" items={author.mainArtworks}></ItemsGrid>
+          {modalDisplay && (
+            <Container>
+              <Button
+                buttonText="Edit"
+                type="button"
+                onClick={() =>
+                  handleEditModal(author, "authors", openModal, setModalContent)
+                }
+              />
+              <Button
+                buttonText="Delete"
+                type="button"
+                onClick={() =>
+                  handleDeleteModal(
+                    author,
+                    "authors",
+                    token,
+                    openModal,
+                    closeModal,
+                    setMessage,
+                    setModalContent,
+                    closeWithNavigate
+                  )
+                }
+              />
+            </Container>
+          )}
+          {isModalOpen && <Modal>{modalContent}</Modal>}
         </>
-       : <Text text={`Please, log in to discover ${author.name}.`}/>}
-      </Layout>
-     
+      ) : (
+        <Text text={`Please, log in to discover ${author.name}.`} />
+      )}
+    </Layout>
   );
-};              
+};
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const response: Author[] = await fetch(
     `https://my-json-server.typicode.com/bea-ro/shop-api/authors/`
   ).then((res) => res.json());
   return {
-    // paths: response.map((author) => ({
-    //   params: { id: author._id }
-    // })),
-    // fallback: false
-    paths:[],
-    fallback: 'blocking'
+    paths: [],
+    fallback: "blocking",
   };
-}
+};
 
 export const getStaticProps: GetStaticProps = async (context) => {
-    const id = context.params?.id as string;
+  const id = context.params?.id as string;
 
-      const response: Author = await fetch(
-        `https://complete-server-rtc.onrender.com/api/authors/${id}`
-      ).then((res) => res.json());
-     
-      return {
-        props: {
-          author: response,
-        },
-        revalidate: 10
-      };
-    };
+  const response: Author = await fetch(
+    `https://complete-server-rtc.onrender.com/api/authors/${id}`
+  ).then((res) => res.json());
 
-
+  return {
+    props: {
+      author: response,
+    },
+    revalidate: 10,
+  };
+};
 
 export type Props = {
   author: Author;
 };
 
 export default AuthorPage;
-
-

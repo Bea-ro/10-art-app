@@ -1,13 +1,13 @@
-import { Artwork } from './artwork'
+import { Artwork } from "./artwork";
 
 export type Item = {
-    _id: string,
-    title?: string,
-    name?: string,
-    author?: string,
-    year?: number,
-    area:  string | string[],
-    movement: string,
-   image?: string,
-    mainArtworks?: Artwork | Artwork[],
-}
+  _id: string;
+  title?: string;
+  name?: string;
+  author?: string;
+  year?: number;
+  area: string | string[];
+  movement: string;
+  image?: FileList;
+  mainArtworks?: Artwork[];
+};

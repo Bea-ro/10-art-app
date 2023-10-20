@@ -1,21 +1,28 @@
-import { Item } from '../types/item'
+import { Item } from "../types/item";
 
-export const deleteFetch = async (itemType: string, item: Item, token: string, setMessage: (arg0: string) => void) => {
-
-  await fetch(`https://complete-server-rtc.onrender.com/api/${itemType}/${item._id}`, {
-      method: 'DELETE',
+export const deleteFetch = async (
+  itemType: string,
+  item: Item,
+  token: string,
+  setMessage: (arg0: string) => void
+) => {
+  await fetch(
+    `https://complete-server-rtc.onrender.com/api/${itemType}/${item._id}`,
+    {
+      method: "DELETE",
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
+    }
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("data en delete", data);
+      setMessage(data);
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('data en delete', data)       
-          setMessage(data);
-      })
-      .catch((error) => {
-        console.log('error:', error.message);
-        setMessage('This item could not been deleted.');
-      });
-  };
+    .catch((error) => {
+      console.log("error:", error.message);
+      setMessage("This item could not been deleted.");
+    });
+};

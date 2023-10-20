@@ -1,13 +1,11 @@
-import { SubtitleStyled } from './SubtitleStyled'
+import { SubtitleStyled } from "./SubtitleStyled";
 
-const Subtitle = ( {subtitle}: Props ) => {
-  return (
-    <SubtitleStyled>{subtitle}</SubtitleStyled>
-    )
-}
+const Subtitle = ({ subtitle }: Props) => {
+  return <SubtitleStyled>{subtitle}</SubtitleStyled>;
+};
 
 type Props = {
-    subtitle: string
-} 
+  subtitle: string;
+};
 
-export default Subtitle
+export default Subtitle;

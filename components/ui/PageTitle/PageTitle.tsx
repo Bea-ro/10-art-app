@@ -1,16 +1,12 @@
-import { PageTitleStyled } from './PageTitleStyled'
+import { PageTitleStyled } from "./PageTitleStyled";
 
-
-const PageTitle = ( {title, fontSize}: Props ) => {
-  return (
-    <PageTitleStyled fontSize={fontSize}>{title}</PageTitleStyled>
-    )
-}
+const PageTitle = ({ title, fontSize }: Props) => {
+  return <PageTitleStyled fontSize={fontSize}>{title}</PageTitleStyled>;
+};
 
 type Props = {
-    title: string
-    fontSize?: string
-} 
+  title: string;
+  fontSize?: string;
+};
 
-
-export default PageTitle
+export default PageTitle;

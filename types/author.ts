@@ -1,9 +1,9 @@
- import { Artwork } from './artwork'
+import { Artwork } from "./artwork";
 
- export type Author = {
-    _id: string,
-    name: string,
-    movement: string,
-    area: string | string[],
-    mainArtworks: Artwork[],
-}
+export type Author = {
+  _id: string;
+  name: string;
+  movement: string;
+  area: string | string[];
+  mainArtworks: Artwork[];
+};

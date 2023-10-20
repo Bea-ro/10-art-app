@@ -1,16 +1,18 @@
-import { TextStyled } from './TextStyled'
+import { TextStyled } from "./TextStyled";
 
-const Text = ( {text, fontSize, color, background}: Props ) => {
+const Text = ({ text, fontSize, color, background }: Props) => {
   return (
-    <TextStyled fontSize={fontSize} color={color} background={background}>{text}</TextStyled>
-    )
-}
+    <TextStyled fontSize={fontSize} color={color} background={background}>
+      {text}
+    </TextStyled>
+  );
+};
 
 export type Props = {
-  fontSize?: string
-  text: string | string[]
-  color?: string
-  background?: string
-} 
+  fontSize?: string;
+  text: string | string[];
+  color?: string;
+  background?: string;
+};
 
-export default Text
+export default Text;
