@@ -7,4 +7,10 @@ export const NavbarStyled = styled.nav`
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     font-size: 38px;
   }
+
+  @media screen and (max-width: 490px) {
+    a {
+    font-size: 22px;
+  }
+  }
 `;

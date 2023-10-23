@@ -14,6 +14,7 @@ const Button = ({ type, onClick, disabled, display, buttonText }: Props) => {
   );
 };
 
+
 export type Props = {
   type: "button" | "submit" | "reset" | undefined;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;

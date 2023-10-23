@@ -11,4 +11,17 @@ export const CarouselStyled = styled.div`
     gap: 36px;
     width: 75vw;
   }
+
+  @media screen and (max-width: 490px) {
+    align-items: flex-start; 
+    overflow-x: scroll;
+  scroll-behavior: smooth;
+    ul {
+    justify-content: flex-start;
+  }
+
+  button {
+    display: none
+  }
+}
 `;

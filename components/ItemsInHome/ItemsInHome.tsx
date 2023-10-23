@@ -1,3 +1,4 @@
+import { ItemsInHomeStyled } from './ItemsInHomeStyled';
 import { useContext } from 'react';
 import { MessageContext } from '../../pages/_app';
 import { useModal } from '../../customHooks/useModal';
@@ -11,6 +12,7 @@ import Subtitle from '../ui/Subtitle/Subtitle';
 import Modal from '../ui/Modal/Modal';
 import Carousel from '../ui/Carousel/Carousel';
 
+
 const ItemsInHome = ({ items, itemType }: Props) => {
   const { setMessage } = useContext(MessageContext);
   const {
@@ -23,12 +25,12 @@ const ItemsInHome = ({ items, itemType }: Props) => {
   } = useModal(setMessage);
 
   return (
-    <div style={{ position: "relative", padding: "10px" }}>
-      <Subtitle subtitle={itemType === "authors" ? "artists" : itemType} />
+    <ItemsInHomeStyled>
+      <Subtitle subtitle={itemType === "authors" ? "artists" : itemType} align="left"/>
       <Container>
         {modalDisplay && (
           <Button
-            buttonText={`Add a new ${
+            buttonText={`New ${
               itemType === "authors" ? "artist" : itemType.slice(0, -1)
             }`}
             type="button"
@@ -39,14 +41,14 @@ const ItemsInHome = ({ items, itemType }: Props) => {
         )}
         {modalDisplay && (
           <Link className="button" href={`/${itemType}`}>
-            See all {itemType === "authors" ? "artists" : itemType}
+            All {itemType === "authors" ? "artists" : itemType}
           </Link>
         )}
         {isModalOpen &&<Modal>{modalContent}</Modal>}
       </Container>
 <Carousel carouselItems={items} itemType={itemType} isModalOpen={isModalOpen}></Carousel>
 
-    </div>
+    </ItemsInHomeStyled>
   );
 };
 

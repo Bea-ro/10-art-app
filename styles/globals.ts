@@ -11,22 +11,6 @@ export const Global = createGlobalStyle`
   --box-shadow: 2px 2px 4px var(--color-grey);
 }
 
-*::-webkit-scrollbar {
-  width: 18px;
-}
-
-*::-webkit-scrollbar-track {
-  background: var(--color-grey);
-  border-radius: 20px;
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: var(--color-beige);
-  /* border: 3px solid var(--color-); */
-  border-radius: 5px;
- 
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -70,7 +54,40 @@ width: fit-content;
 align-self: center;
 }
 
-main > div > span > img {
+.background-image-container {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          z-index: -1
+  }
+  
+  .background-image {
+  opacity: 0.6;
+  z-index: -1;
+  object-fit: cover;
+  }
+
+  main > div > span > img {
   object-fit: contain;
 }
+
+.author-link {
+  font-weight: bold;
+   color: black; 
+   text-decoration: none
+}
+
+  @media screen and (max-width: 490px) {
+  .button {
+  font-size: 18px;
+  padding: 5px;
+}
+
+.artwork-info {
+  padding: 0 14px
+}
+  }
 `;

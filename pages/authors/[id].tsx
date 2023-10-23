@@ -35,10 +35,10 @@ const AuthorPage = ({ author }: Props) => {
       title={`Artist ${author.name}`}
       description={`Find information about artist ${author.name}`}
     >
-      <PageTitle title={author.name} />
+      <PageTitle title={author.name}/>
       {isAuth ? (
         <>
-          <p>
+          <p className="artwork-info">
             {author.movement}{" "}
             {author.area.length > 0 &&
               author.area.map((area, index) => (

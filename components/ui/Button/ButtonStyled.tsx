@@ -18,4 +18,12 @@ export const ButtonStyled = styled.button<{
   font-size: 22px;
   width: fit-content;
   cursor: pointer;
+
+  @media screen and (max-width: 490px) {
+  display: ${(props) => props.display || "block"};
+  padding: ${(props) => (props.buttonText === "x" ? "1px 6px" : "5px")};;
+  font-size: 18px;
+  }
 `;
+
+

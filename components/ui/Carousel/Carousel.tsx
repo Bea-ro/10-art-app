@@ -47,6 +47,7 @@ const Carousel = ({ carouselItems, itemType, isModalOpen }: Props) => {
                   ? "flex"
                   : "none"
               }
+              mobile={index >= currentIndex && index < currentIndex + 10 ? "flex" : "none"}
              width="25%"
               imageFit="contain"
             ></CarouselItemCard>

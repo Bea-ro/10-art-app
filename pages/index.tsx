@@ -34,7 +34,6 @@ const Home = () => {
       description="Find information about artists from all movements and artworks of pinture, sculpture and arquitecture."
     >
       <PageTitle fontSize={isAuth ? "54px" : "80px"} title="Your Art App" />
-
       {isAuth ? (
         <ItemsContext.Provider
           value={{

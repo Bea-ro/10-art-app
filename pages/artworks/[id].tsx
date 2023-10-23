@@ -42,20 +42,20 @@ return (
       title={`Artwork ${artwork.title}`}
       description={`Find information about artwork ${artwork.title}`}
     >
-      <PageTitle title={artwork.title} />
+      <PageTitle title={artwork.title} fontSize="40px"/>
       {isAuth ? (
         <>
-          <Container direction="column" isModalOpen={isModalOpen}>
-            <Link href={`/authors/${authorId}`}>
-            <p style={{fontWeight: 'bold'}}>{artwork.author}</p>
+          <Container direction="column" isModalOpen={isModalOpen} gap="14px">
+            <div>
+            <Link className="author-link" href={`/authors/${authorId}`}>{artwork.author}
             </Link>
             <p>{`${artwork.movement} ${upperCaseArea(artwork.area)},  ${artwork.year}`}</p>
+            </div>
             <Image
               src={typeof artwork.image === "string" && artwork.image || ""}
               alt={artwork.title}
-              height={400}
-              width={400 * (16 / 9)}
-              id="image-in-detail"
+              height={600}
+              width={600 * (16 / 9)}
             ></Image>
           </Container>
 

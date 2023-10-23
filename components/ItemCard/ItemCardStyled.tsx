@@ -5,6 +5,7 @@ export const ItemCardStyled = styled.li<{
   width?: string;
   imageFit?: string;
   isModalOpen?: boolean;
+  mobile?: string
 }>`
   display: ${(props) => props.display || "flex"};
   max-width: ${(props) => props.width || "100%"};
@@ -28,8 +29,26 @@ export const ItemCardStyled = styled.li<{
   }
 
   a > span > img {
-    object-fit: ${(props) => props.imageFit || "cover"};
+    object-fit: ${(props) => props.imageFit || "contain"};
     object-position: center 30%;
     border-radius: 2%;
+  }
+
+  @media screen and (max-width: 490px) {
+    display: ${(props) => props.mobile || "flex"};
+    min-width: 102px;
+
+  h2, h3 {
+    font-size: 16px;
+  }
+  
+  a > span > img {
+  object-fit: cover;
+  }
+
+  &:hover {
+    transform: none;
+  }
+
   }
 `;
