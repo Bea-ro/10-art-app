@@ -46,7 +46,6 @@ export const uploadImageFetch = async (
   image: FileList
 ) => {
   const formData = new FormData();
-  console.log(image[0]);
   formData.append("image", image[0]);
 
   await fetch(

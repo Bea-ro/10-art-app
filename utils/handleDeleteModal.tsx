@@ -1,11 +1,10 @@
+import { NextRouter } from "next/router";
 import { deleteFetch } from "../services/deleteFetch";
 import { Item } from "../types/item";
 
 import Container from "../components/ui/Container/Container";
 import Button from "../components/ui/Button/Button";
 import Message from "../components/ui/Message/Message";
-import { useRouter } from "next/router";
-
 
 
 export const handleDeleteModal = (
@@ -16,7 +15,7 @@ export const handleDeleteModal = (
   closeModal: () => void,
   setMessage: (arg0: string) => void,
   setModalContent: (arg0: React.ReactNode) => void,
-  router
+  router: NextRouter
 ) => {
   
   const closeWithNavigate = () => {

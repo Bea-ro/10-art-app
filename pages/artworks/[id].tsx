@@ -3,20 +3,25 @@ import { GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { AuthContext, MessageContext, ModalContext } from '../_app';
+import { getAuthors } from '../../libs/authors/authors';
 import { handleDeleteModal } from '../../utils/handleDeleteModal';
 import { handleEditModal } from '../../utils/handleEditModal';
 import { upperCaseArea } from '../../utils/upperCaseArea';
+import { getAuthorId } from '../../utils/getAuthorId';
 import { Artwork } from '../../types/artwork';
+import { Author } from '../../types/author';
 
 import Layout from '../../components/ui/Layout/Layout';
 import Image from 'next/legacy/image';
+import Link from 'next/link';
 import PageTitle from '../../components/ui/PageTitle/PageTitle';
 import Text from '../../components/ui/Text/Text';
 import Button from '../../components/ui/Button/Button';
 import Container from '../../components/ui/Container/Container';
 import Modal from '../../components/ui/Modal/Modal';
 
-const ArtworkPage = ({ artwork }: Props) => {
+
+const ArtworkPage = ({ artwork, authors }: Props) => {
   const { isAuth, token } = useContext(AuthContext);
   const { setMessage } = useContext(MessageContext);
   const {
@@ -30,7 +35,9 @@ const ArtworkPage = ({ artwork }: Props) => {
  
   const router = useRouter();
 
-  return (
+const authorId = getAuthorId(authors, artwork) 
+
+return (
     <Layout
       title={`Artwork ${artwork.title}`}
       description={`Find information about artwork ${artwork.title}`}
@@ -39,10 +46,10 @@ const ArtworkPage = ({ artwork }: Props) => {
       {isAuth ? (
         <>
           <Container direction="column" isModalOpen={isModalOpen}>
-            <p>{`${artwork.author},  ${artwork.year}`} </p>
-            <p>
-              {artwork.movement} {upperCaseArea(artwork.area)}
-            </p>
+            <Link href={`/authors/${authorId}`}>
+            <p style={{fontWeight: 'bold'}}>{artwork.author}</p>
+            </Link>
+            <p>{`${artwork.movement} ${upperCaseArea(artwork.area)},  ${artwork.year}`}</p>
             <Image
               src={typeof artwork.image === "string" && artwork.image || ""}
               alt={artwork.title}
@@ -110,17 +117,24 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const response: Artwork = await fetch(
     `https://complete-server-rtc.onrender.com/api/artworks/${id}`
   ).then((res) => res.json());
+  const authors: Author[] = await getAuthors();
 
   return {
     props: {
       artwork: response,
+      authors: authors,
     },
     revalidate: 10,
   };
 };
 
+
+  
+
+
 export type Props = {
   artwork: Artwork;
+  authors: Author[]
 };
 
 export default ArtworkPage;
