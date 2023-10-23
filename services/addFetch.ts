@@ -30,8 +30,7 @@ export const addFetch = async (
         setMessage(data.message);
       } else {
         if (itemType === "artworks") {
-          values.image && uploadImage(itemType, data._id, token, values.image);
-          setArtworks([...artworks, data]);
+          values.image && uploadImage(itemType, data._id, token, values.image, artworks, setArtworks);
           setMessage(`${itemType.slice(0, -1)} saved.`);
           const existingAuthor = authors.find(
             (author) => author.name === values.author
@@ -66,7 +65,9 @@ const uploadImage = async (
   itemType: string,
   id: string,
   token: string,
-  image: FileList
+  image: FileList,
+  artworks: Artwork[],
+  setArtworks: (arg0: Artwork[]) => void,
 ) => {
   const formData = new FormData();
   formData.append("image", image[0]);
@@ -84,6 +85,7 @@ const uploadImage = async (
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
+      setArtworks([...artworks, data]);
     })
     .catch((error) => {
       console.log("error:", error);

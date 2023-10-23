@@ -6,26 +6,24 @@ import { Item } from "../../../types/item";
 import CarouselItemCard from "../../../components/ItemCard/CarouselItemCard";
 import Container from "../Container/Container";
 import Button from "../Button/Button";
-import Modal from "../Modal/Modal";
 
-const Carousel = ({ carouselItems, itemType }: Props) => {
+
+const Carousel = ({ carouselItems, itemType, isModalOpen }: Props) => {
   const {
-    closeModal,
-    isModalOpen,
-    modalContent
+    closeModal
   } = useContext(ModalContext);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   const prevItem = () => {
     currentIndex > 0
-      ? setCurrentIndex(currentIndex - 3)
-      : setCurrentIndex(carouselItems.length - 3);
+      ? setCurrentIndex(currentIndex - 4)
+      : setCurrentIndex(carouselItems.length - 4);
     closeModal();
   };
 
   const nextItem = () => {
-    currentIndex < carouselItems.length - 3
-      ? setCurrentIndex(currentIndex + 3)
+    currentIndex < carouselItems.length - 4
+      ? setCurrentIndex(currentIndex + 4)
       : setCurrentIndex(0);
     closeModal();
   };
@@ -45,11 +43,11 @@ const Carousel = ({ carouselItems, itemType }: Props) => {
               item={item}
               itemType={itemType}
               display={
-                index >= currentIndex && index < currentIndex + 3
+                index >= currentIndex && index < currentIndex + 4
                   ? "flex"
                   : "none"
               }
-              width="25%"
+             width="25%"
               imageFit="contain"
             ></CarouselItemCard>
           ))}
@@ -60,14 +58,14 @@ const Carousel = ({ carouselItems, itemType }: Props) => {
           onClick={() => nextItem()}
         ></Button>
       </Container>
-      {isModalOpen && <Modal top="47%">{modalContent}</Modal>}
-    </CarouselStyled>
+   </CarouselStyled>
   );
 };
 
 export type Props = {
   carouselItems: Item[];
   itemType: string;
+  isModalOpen: boolean;
 };
 
 export default Carousel;

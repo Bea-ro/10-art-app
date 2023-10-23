@@ -8,8 +8,8 @@ import { handleEditModal } from '../../utils/handleEditModal';
 import { upperCaseArea } from '../../utils/upperCaseArea';
 import { Artwork } from '../../types/artwork';
 
-import Image from 'next/legacy/image';
 import Layout from '../../components/ui/Layout/Layout';
+import Image from 'next/legacy/image';
 import PageTitle from '../../components/ui/PageTitle/PageTitle';
 import Text from '../../components/ui/Text/Text';
 import Button from '../../components/ui/Button/Button';
@@ -27,12 +27,8 @@ const ArtworkPage = ({ artwork }: Props) => {
     modalDisplay,
     modalContent,
   } = useContext(ModalContext);
+ 
   const router = useRouter();
-
-  const closeWithNavigate = () => {
-    closeModal();
-    router.push("/");
-  };
 
   return (
     <Layout
@@ -82,7 +78,7 @@ const ArtworkPage = ({ artwork }: Props) => {
                     closeModal,
                     setMessage,
                     setModalContent,
-                    closeWithNavigate
+                    router
                   )
                 }
               />

@@ -6,7 +6,10 @@ export const ButtonStyled = styled.button<{
 }>`
   display: ${(props) => props.display || "block"};
   align-self: ${(props) => (props.buttonText === "x" ? "flex-end" : "center")};
-  padding: ${(props) => (props.buttonText === "x" ? "1px 6px" : "8px 10px")};
+  padding: ${(props) => (props.buttonText === "x" ? "1px 6px" : 
+  (props.buttonText === "<" || props.buttonText === ">" ? "4px 12px" : 
+  "8px 10px")
+  )};
   color: var(--color-grey);
   background-color: var(--color-light-blue);
   text-shadow: 2px 2px 4px var(--color-blue);

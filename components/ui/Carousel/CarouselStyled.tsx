@@ -5,13 +5,10 @@ export const CarouselStyled = styled.div`
   flex-direction: column;
   align-items: center;
 
-  h2 {
-    font-weight: bold;
-  }
-
   ul {
     display: flex;
     justify-content: space-around;
     gap: 36px;
+    width: 75vw;
   }
 `;

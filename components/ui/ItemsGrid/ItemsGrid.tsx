@@ -5,20 +5,21 @@ import { Item } from '../../../types/item';
 
 import ItemCard from '../../ItemCard/ItemCard';
 
-const ItemsGrid = ({ items, itemType, flow }: Props) => {
-  const { isModalOpen } = useContext(ModalContext);
+const ItemsGrid = ({ items, itemType }: Props) => {
+  
+  const { isModalOpen, modalContent } = useContext(ModalContext);
+console.log(isModalOpen)
 
   return (
-    <ItemsGridStyled flow={flow} isModalOpen={isModalOpen} itemType={itemType}>
+    <ItemsGridStyled >
       {items.map((item) => (
-        <ItemCard key={item._id} item={item}></ItemCard>
+        <ItemCard key={item._id} item={item} itemType={itemType} isModalOpen={isModalOpen}></ItemCard>
       ))}
     </ItemsGridStyled>
   );
 };
 export type Props = {
   items: Item[];
-  flow?: string;
   itemType?: string;
 };
 

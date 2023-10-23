@@ -1,15 +1,15 @@
-import { useContext } from "react";
-import { MessageContext } from "../../pages/_app";
-import { useModal } from "../../customHooks/useModal";
-import { handleAddModal } from "../../utils/handleAddModal";
-import { Item } from "../../types/item";
+import { useContext } from 'react';
+import { MessageContext } from '../../pages/_app';
+import { useModal } from '../../customHooks/useModal';
+import { handleAddModal } from '../../utils/handleAddModal';
+import { Item } from '../../types/item';
 
-import Link from "next/link";
-import Button from "../ui/Button/Button";
-import Container from "../ui/Container/Container";
-import Subtitle from "../ui/Subtitle/Subtitle";
-import Modal from "../ui/Modal/Modal";
-import ItemsGrid from "../ui/ItemsGrid/ItemsGrid";
+import Link from 'next/link';
+import Button from '../ui/Button/Button';
+import Container from '../ui/Container/Container';
+import Subtitle from '../ui/Subtitle/Subtitle';
+import Modal from '../ui/Modal/Modal';
+import Carousel from '../ui/Carousel/Carousel';
 
 const ItemsInHome = ({ items, itemType }: Props) => {
   const { setMessage } = useContext(MessageContext);
@@ -39,12 +39,13 @@ const ItemsInHome = ({ items, itemType }: Props) => {
         )}
         {modalDisplay && (
           <Link className="button" href={`/${itemType}`}>
-            See {itemType === "authors" ? "artists" : itemType} detail
+            See all {itemType === "authors" ? "artists" : itemType}
           </Link>
         )}
-        {isModalOpen && <Modal top="3%">{modalContent}</Modal>}
+        {isModalOpen &&<Modal>{modalContent}</Modal>}
       </Container>
-      <ItemsGrid items={items} itemType={itemType}></ItemsGrid>
+<Carousel carouselItems={items} itemType={itemType} isModalOpen={isModalOpen}></Carousel>
+
     </div>
   );
 };

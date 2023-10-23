@@ -1,13 +1,12 @@
 import { GetStaticProps } from 'next';
 import { GetStaticPaths } from 'next';
-import { useRouter } from 'next/router';
+import { NextRouter, useRouter } from 'next/router';
 import { useContext } from 'react';
 import { AuthContext, MessageContext, ModalContext } from '../_app';
-import { Author } from '../../types/author';
-
 import { upperCaseArea } from '../../utils/upperCaseArea';
 import { handleDeleteModal } from '../../utils/handleDeleteModal';
 import { handleEditModal } from '../../utils/handleEditModal';
+import { Author } from '../../types/author';
 
 import Layout from '../../components/ui/Layout/Layout';
 import PageTitle from '../../components/ui/PageTitle/PageTitle';
@@ -28,12 +27,8 @@ const AuthorPage = ({ author }: Props) => {
     modalDisplay,
     modalContent,
   } = useContext(ModalContext);
+  
   const router = useRouter();
-
-  const closeWithNavigate = () => {
-    closeModal();
-    router.push("/");
-  };
 
   return (
     <Layout
@@ -75,7 +70,7 @@ const AuthorPage = ({ author }: Props) => {
                     closeModal,
                     setMessage,
                     setModalContent,
-                    closeWithNavigate
+                    router
                   )
                 }
               />

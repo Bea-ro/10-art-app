@@ -25,6 +25,7 @@ const AddForm = ({ itemType, closeModal, setModalContent }: Props) => {
           year: undefined,
           area: "",
           movement: "",
+          //image: ""
         }
       : {
           name: "",

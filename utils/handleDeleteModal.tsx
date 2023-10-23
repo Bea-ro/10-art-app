@@ -4,6 +4,9 @@ import { Item } from "../types/item";
 import Container from "../components/ui/Container/Container";
 import Button from "../components/ui/Button/Button";
 import Message from "../components/ui/Message/Message";
+import { useRouter } from "next/router";
+
+
 
 export const handleDeleteModal = (
   item: Item,
@@ -13,8 +16,14 @@ export const handleDeleteModal = (
   closeModal: () => void,
   setMessage: (arg0: string) => void,
   setModalContent: (arg0: React.ReactNode) => void,
-  closeEvent: () => void
+  router
 ) => {
+  
+  const closeWithNavigate = () => {
+    closeModal();
+    router.push(`/${itemType}`);
+  }
+
   setModalContent(
     <>
       <p>Are you sure you want to delete {item.title || item.name}?</p>
@@ -26,7 +35,8 @@ export const handleDeleteModal = (
             deleteFetch(itemType, item, token, setMessage);
             setModalContent(
               <>
-                <Button type="button" buttonText="x" onClick={closeEvent} />
+                <Button type="button" buttonText="x" onClick={closeWithNavigate}
+                />
                 <Message shadow="transparent"></Message>
               </>
             );
