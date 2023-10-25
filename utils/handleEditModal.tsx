@@ -1,6 +1,6 @@
-import { Item } from "../types/item";
+import { Item } from '../types/item';
 
-import EditForm from "../components/ui/Form/EditForm";
+import EditForm from '../components/ui/Form/EditForm';
 
 export const handleEditModal = (
   item: Item,

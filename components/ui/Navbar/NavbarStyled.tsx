@@ -10,7 +10,7 @@ export const NavbarStyled = styled.nav`
 
   @media screen and (max-width: 490px) {
     a {
-    font-size: 22px;
-  }
+      font-size: 22px;
+    }
   }
 `;

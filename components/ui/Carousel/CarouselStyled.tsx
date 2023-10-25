@@ -13,15 +13,15 @@ export const CarouselStyled = styled.div`
   }
 
   @media screen and (max-width: 567px) {
-    align-items: flex-start; 
+    align-items: flex-start;
     overflow-x: scroll;
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
     ul {
-    justify-content: flex-start;
-  }
+      justify-content: flex-start;
+    }
 
-  button {
-    display: none
+    button {
+      display: none;
+    }
   }
-}
 `;

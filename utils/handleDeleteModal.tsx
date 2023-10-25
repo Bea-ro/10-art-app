@@ -1,11 +1,10 @@
-import { NextRouter } from "next/router";
-import { deleteFetch } from "../services/deleteFetch";
-import { Item } from "../types/item";
+import { NextRouter } from 'next/router';
+import { deleteFetch } from '../services/deleteFetch';
+import { Item } from '../types/item';
 
-import Container from "../components/ui/Container/Container";
-import Button from "../components/ui/Button/Button";
-import Message from "../components/ui/Message/Message";
-
+import Container from '../components/ui/Container/Container';
+import Button from '../components/ui/Button/Button';
+import Message from '../components/ui/Message/Message';
 
 export const handleDeleteModal = (
   item: Item,
@@ -17,11 +16,10 @@ export const handleDeleteModal = (
   setModalContent: (arg0: React.ReactNode) => void,
   router: NextRouter
 ) => {
-  
   const closeWithNavigate = () => {
     closeModal();
     router.push(`/${itemType}`);
-  }
+  };
 
   setModalContent(
     <>
@@ -34,8 +32,8 @@ export const handleDeleteModal = (
             deleteFetch(itemType, item, token, setMessage);
             setModalContent(
               <>
-                <Button type="button" text="x" onClick={closeWithNavigate}/>
-                <Message shadow="transparent"></Message>
+                <Button type="button" text="x" onClick={closeWithNavigate} />
+                <Message></Message>
               </>
             );
           }}

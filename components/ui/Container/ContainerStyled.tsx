@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 export const ContainerStyled = styled.div<{
   direction?: string;
   justify?: string;
-  gap?: string,
+  gap?: string;
   color?: string;
   background?: string;
   padding?: string;

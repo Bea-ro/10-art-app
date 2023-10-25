@@ -11,7 +11,7 @@ export const ModalStyled = styled.div<{ top?: string }>`
   box-shadow: var(--box-shadow);
   position: absolute;
   z-index: 2;
-  top: ${(props) => props.top || '70%'};
+  top: ${(props) => props.top || "70%"};
   left: 50%;
   transform: translate(-50%, -50%);
   min-width: 250px;

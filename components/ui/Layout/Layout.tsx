@@ -20,7 +20,8 @@ const Layout = ({ title, description, children, auth }: Props) => {
         <meta property="og:image" content="URL IMG PREVIW WEB <300KB" />
       </Head>
       <div className="background-image-container">
-        <Image className="background-image"
+        <Image
+          className="background-image"
           src="https://res.cloudinary.com/dnlceaase/image/upload/v1694962965/art-api/portada_jyuzfq.jpg"
           alt="creation"
           layout="fill"
@@ -38,7 +39,7 @@ export type Props = {
   title: string;
   description: string;
   children: React.ReactNode;
-  auth?: string
+  auth?: boolean;
 };
 
 export default Layout;

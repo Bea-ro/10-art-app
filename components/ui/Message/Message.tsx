@@ -1,32 +1,19 @@
-import { MessageStyled } from './MessageStyled';
-import { useContext } from 'react'
-import { MessageContext } from '../../../pages/_app';
+import { MessageStyled } from "./MessageStyled";
+import { useContext } from "react";
+import { MessageContext } from "../../../pages/_app";
 
+const Message = ({ padding }: Props) => {
+  const { message } = useContext(MessageContext);
 
-const Message = ({ padding, shadow}: Props) => {
-  
-  
-  const {message} = useContext(MessageContext);
-  
   return (
-    <MessageStyled padding={padding} shadow={shadow}>
+    <MessageStyled padding={padding}>
       {message}
     </MessageStyled>
   );
-  };
+};
 
-  export type Props = {
-    padding?: string
-    shadow?: string
-  } 
+export type Props = {
+  padding?: string;
+};
 
-  // export type Props = {
-  //   formState: { 
-  //     errors: {
-  //       email: string
-  //       password: string
-  //     },
-  //   }
-  // }
-   
-  export default Message;
+export default Message;

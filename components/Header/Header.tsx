@@ -31,10 +31,9 @@ const Header = () => {
           ? "Home"
           : isAuth
           ? "Logout"
-          : "Login"}           
-            <Image src='/user-circle.svg' alt='user-icon' height={36} width={36}/>     
+          : "Login"}
+        <Image src="/user-circle.svg" alt="user-icon" height={36} width={36} />
       </Link>
-  
     </HeaderStyled>
   );
 };

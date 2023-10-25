@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next';
 import { GetStaticPaths } from 'next';
-import { NextRouter, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { AuthContext, MessageContext, ModalContext } from '../_app';
 import { upperCaseArea } from '../../utils/upperCaseArea';
@@ -41,7 +41,7 @@ const AuthorPage = ({ author }: Props) => {
           <p className="artwork-info">
             {author.movement}{" "}
             {author.area.length > 0 &&
-              author.area.map((area, index) => (
+              Array.isArray(author.area) && author.area.map((area, index) => (
                 <span key={area}>
                   {upperCaseArea(area)}
                   {index < author.area.length - 1 && ", "}

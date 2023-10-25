@@ -1,20 +1,19 @@
-import { useContext } from 'react';
-import { GetStaticProps } from 'next';
-import { AuthContext, ModalContext, ModalTopContext } from '../_app';
-import { getArtworks } from '../../libs/artworks/artworks';
-import { Artwork } from '../../types/artwork';
+import { useContext } from "react";
+import { GetStaticProps } from "next";
+import { AuthContext, ModalContext, ModalTopContext } from "../_app";
+import { getArtworks } from "../../libs/artworks/artworks";
+import { Artwork } from "../../types/artwork";
 
-import Layout from '../../components/ui/Layout/Layout';
-import PageTitle from '../../components/ui/PageTitle/PageTitle';
-import Text from '../../components/ui/Text/Text';
-import ItemsGrid from '../../components/ui/ItemsGrid/ItemsGrid';
-import Modal from '../../components/ui/Modal/Modal';
-
+import Layout from "../../components/ui/Layout/Layout";
+import PageTitle from "../../components/ui/PageTitle/PageTitle";
+import Text from "../../components/ui/Text/Text";
+import ItemsGrid from "../../components/ui/ItemsGrid/ItemsGrid";
+import Modal from "../../components/ui/Modal/Modal";
 
 const ArtworksPage = ({ artworks }: Props) => {
   const { isAuth } = useContext(AuthContext);
   const { isModalOpen, modalContent } = useContext(ModalContext);
-  const {modalTop} = useContext(ModalTopContext)
+  const { modalTop } = useContext(ModalTopContext);
 
   return (
     <Layout
@@ -23,9 +22,11 @@ const ArtworksPage = ({ artworks }: Props) => {
     >
       <PageTitle title="Artworks" />
       {isAuth ? (
-      <>
-        <ItemsGrid items={artworks} itemType="artworks"></ItemsGrid>
-        {isModalOpen && <Modal top={`${modalTop.toString()}px`}>{modalContent}</Modal>}
+        <>
+          <ItemsGrid items={artworks} itemType="artworks"></ItemsGrid>
+          {isModalOpen && (
+            <Modal top={`${modalTop.toString()}px`}>{modalContent}</Modal>
+          )}
         </>
       ) : (
         <Text text="Please, log in to discover artworks." />

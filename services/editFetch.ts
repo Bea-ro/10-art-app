@@ -1,6 +1,5 @@
 import { Item } from "../types/item";
 
-
 export const editFetch = async (
   itemType: string,
   item: Item,
@@ -11,17 +10,14 @@ export const editFetch = async (
   const valuesForPUT = { ...values };
   delete valuesForPUT.image;
 
-  await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/${itemType}/${item._id}`,
-    {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(valuesForPUT),
-    }
-  )
+  await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${itemType}/${item._id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(valuesForPUT),
+  })
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
@@ -48,16 +44,13 @@ export const uploadImageFetch = async (
   const formData = new FormData();
   formData.append("image", image[0]);
 
-  await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/${itemType}/${item._id}`,
-    {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: formData,
-    }
-  )
+  await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${itemType}/$item._id}`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  })
     .then((response) => response.json())
     .then((data) => {
       console.log("ejecuta el image");

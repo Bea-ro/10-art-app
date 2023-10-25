@@ -8,6 +8,7 @@ export const ItemCardStyled = styled.li<{
   mobile?: string
   tablet?: string
 }>`
+display: flex;
   display: ${(props) => props.display || "flex"};
   max-width: ${(props) => props.width || "100%"};
   opacity: ${(props) => (props.isModalOpen ? "50%" : "100%")};

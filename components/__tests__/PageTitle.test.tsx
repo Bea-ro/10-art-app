@@ -2,15 +2,12 @@
  * @jest-environment jsdom
  */
 
-import { render, screen } from '@testing-library/react';
-import PageTitle from '../ui/PageTitle/PageTitle';
+import { render, screen } from "@testing-library/react";
+import PageTitle from "../ui/PageTitle/PageTitle";
 
-
-describe('PageTitle', () => {
-  it('renders the component', () => {
-    render(
-        <PageTitle title="Your Art App" />
-    );
-    expect(screen.getByText('Your Art App')).toBeInTheDocument();
+describe("PageTitle", () => {
+  it("renders the component", () => {
+    render(<PageTitle title="Your Art App" />);
+    expect(screen.getByText("Your Art App")).toBeInTheDocument();
   });
 });

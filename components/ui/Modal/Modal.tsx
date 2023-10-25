@@ -6,7 +6,7 @@ const Modal = ({ children, top }: Props) => {
 
 export type Props = {
   children: React.ReactNode;
-    top?: string,
+  top?: string;
 };
 
 export default Modal;

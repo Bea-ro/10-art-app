@@ -1,17 +1,17 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
 
-import { AuthContext, MessageContext } from "./_app";
-import { ItemsFetch } from "../services/itemsFetch";
-import { Artwork } from "../types/artwork";
-import { Author } from "../types/author";
+import { AuthContext, MessageContext } from './_app';
+import { ItemsFetch } from '../services/itemsFetch';
+import { Artwork } from '../types/artwork';
+import { Author } from '../types/author';
 
-import Link from "next/link";
-import Layout from "../components/ui/Layout/Layout";
-import PageTitle from "../components/ui/PageTitle/PageTitle";
-import Subtitle from "../components/ui/Subtitle/Subtitle";
-import Container from "../components/ui/Container/Container";
-import Text from "../components/ui/Text/Text";
-import ItemsInHome from "../components/ItemsInHome/ItemsInHome";
+import Link from 'next/link';
+import Layout from '../components/ui/Layout/Layout';
+import PageTitle from '../components/ui/PageTitle/PageTitle';
+import Subtitle from '../components/ui/Subtitle/Subtitle';
+import Container from '../components/ui/Container/Container';
+import Text from '../components/ui/Text/Text';
+import ItemsInHome from '../components/ItemsInHome/ItemsInHome';
 
 export const ItemsContext = createContext<ItemsContextType>({
   artworks: [],

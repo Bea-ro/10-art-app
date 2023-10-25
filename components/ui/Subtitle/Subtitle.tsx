@@ -6,7 +6,7 @@ const Subtitle = ({ subtitle, align }: Props) => {
 
 type Props = {
   subtitle: string;
-  align?: string
+  align?: string;
 };
 
 export default Subtitle;

@@ -7,13 +7,13 @@ import ItemCard from '../../ItemCard/ItemCard';
 
 const ItemsGrid = ({ items, itemType }: Props) => {
   
-  const { isModalOpen, modalContent } = useContext(ModalContext);
+  const { isModalOpen } = useContext(ModalContext);
 console.log(isModalOpen)
 
   return (
     <ItemsGridStyled >
       {items.map((item) => (
-        <ItemCard key={item._id} item={item} itemType={itemType} isModalOpen={isModalOpen}></ItemCard>
+        <ItemCard key={item._id} item={item} itemType={itemType as string} isModalOpen={isModalOpen}></ItemCard>
       ))}
     </ItemsGridStyled>
   );

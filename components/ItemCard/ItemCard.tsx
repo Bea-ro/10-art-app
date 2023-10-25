@@ -12,7 +12,7 @@ import Image from 'next/legacy/image';
 import Button from '../ui/Button/Button';
 
 
-const ItemCard = ({ item, itemType, display, isModalOpen }: Props) => {
+const ItemCard = ({ item, itemType, isModalOpen }: Props) => {
 
   const router = useRouter();
   const currentPath = router.pathname;
@@ -32,7 +32,8 @@ const ItemCard = ({ item, itemType, display, isModalOpen }: Props) => {
   }
 
   return (
-    <ItemCardStyled display={display} isModalOpen={isModalOpen}>
+    <ItemCardStyled isModalOpen={isModalOpen}>
+      {/* display={display}  */}
       <h3>{item.title || item.name}</h3>
       <p>{item.author || item.movement}</p>
       <Link
@@ -86,7 +87,7 @@ handleModalTop(event)
 export type Props = {
   item: Item;
   itemType: string;
-  display: string;
+  // display: string;
   isModalOpen: boolean;
 };
 

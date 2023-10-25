@@ -1,18 +1,16 @@
-import { FormStyled } from './FormStyled';
-import { useRouter } from 'next/router';
-import React, { useContext } from 'react';
-import { useForm } from 'react-hook-form';
-import { AuthContext, MessageContext, ModalContext } from '../../../pages/_app';
-import { editFetch, uploadImageFetch } from '../../../services/editFetch';
-import { upperCaseArea } from '../../../utils/upperCaseArea';
-import { Item } from '../../../types/item';
+import { FormStyled } from "./FormStyled";
+import { useRouter } from "next/router";
+import React, { useContext } from "react";
+import { useForm } from "react-hook-form";
+import { AuthContext, MessageContext, ModalContext } from "../../../pages/_app";
+import { editFetch, uploadImageFetch } from "../../../services/editFetch";
+import { upperCaseArea } from "../../../utils/upperCaseArea";
+import { Item } from "../../../types/item";
 
-import Button from '../Button/Button';
-import Container from '../Container/Container';
-import Message from '../Message/Message';
-import Text from '../Text/Text';
-
-
+import Button from "../Button/Button";
+import Container from "../Container/Container";
+import Message from "../Message/Message";
+import Text from "../Text/Text";
 
 const EditForm = ({ item, itemType }: Props) => {
   const { token } = useContext(AuthContext);
@@ -56,9 +54,11 @@ const EditForm = ({ item, itemType }: Props) => {
         uploadImageFetch(itemType, item, token, values.image);
       setModalContent(
         <>
-          <Button type="button" text="x" 
-          onClick={() => closeWithNavigate(itemType, item._id)}
-           />
+          <Button
+            type="button"
+            text="x"
+            onClick={() => closeWithNavigate(itemType, item._id)}
+          />
           <Message shadow="transparent"></Message>
         </>
       );

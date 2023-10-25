@@ -8,10 +8,11 @@ const Button = ({ type, onClick, disabled, display, text }: Props) => {
       disabled={disabled}
       display={display}
       text={text}
-    >{text}</ButtonStyled>
+    >
+      {text}
+    </ButtonStyled>
   );
 };
-
 
 export type Props = {
   type: "button" | "submit" | "reset" | undefined;

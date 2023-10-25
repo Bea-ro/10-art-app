@@ -1,6 +1,12 @@
 import { Global } from "../styles/globals";
 import type { AppProps } from "next/app";
-import { useState, createContext, useEffect, SetStateAction, Dispatch } from "react";
+import {
+  useState,
+  createContext,
+  useEffect,
+  SetStateAction,
+  Dispatch,
+} from "react";
 import { useModal } from "../customHooks/useModal";
 
 export const AuthContext = createContext<AuthContextType>({
@@ -28,8 +34,8 @@ export const ModalContext = createContext<ModalContextType>({
 
 export const ModalTopContext = createContext<ModalTopContextType>({
   modalTop: 0,
-  setModalTop: () => {} 
-})
+  setModalTop: () => {},
+});
 
 export default function App({ Component, pageProps }: AppProps) {
   const [isAuth, setIsAuth] = useState<boolean>(false);
@@ -48,11 +54,8 @@ export default function App({ Component, pageProps }: AppProps) {
   } = useModal(setMessage);
 
   useEffect(() => {
-    // const isClient = typeof window !== 'undefined';
-    // if (isClient) {
     const userStored = localStorage.getItem("userStored");
     userStored ? setIsAuth(true) : setIsAuth(false);
-    // }
   }, []);
 
   return (
@@ -83,13 +86,14 @@ export default function App({ Component, pageProps }: AppProps) {
               setModalDisplay: setModalDisplay,
             }}
           >
-               <ModalTopContext.Provider
-         value={{
-          modalTop: modalTop,
-          setModalTop: setModalTop,
-        }}>
-            <Global />
-            <Component {...pageProps} />
+            <ModalTopContext.Provider
+              value={{
+                modalTop: modalTop,
+                setModalTop: setModalTop,
+              }}
+            >
+              <Global />
+              <Component {...pageProps} />
             </ModalTopContext.Provider>
           </ModalContext.Provider>
         </MessageContext.Provider>
@@ -99,7 +103,7 @@ export default function App({ Component, pageProps }: AppProps) {
 }
 
 export type AuthContextType = {
-  isAuth: boolean | undefined;
+  isAuth: boolean;
   setIsAuth: (arg0: boolean) => void;
   token: string;
   setToken: (arg0: string) => void;

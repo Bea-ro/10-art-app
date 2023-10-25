@@ -30,7 +30,15 @@ export const addFetch = async (
         setMessage(data.message);
       } else {
         if (itemType === "artworks") {
-          values.image && uploadImage(itemType, data._id, token, values.image, artworks, setArtworks);
+          values.image &&
+            uploadImage(
+              itemType,
+              data._id,
+              token,
+              values.image,
+              artworks,
+              setArtworks
+            );
           setMessage(`${itemType.slice(0, -1)} saved.`);
           const existingAuthor = authors.find(
             (author) => author.name === values.author
@@ -67,21 +75,18 @@ const uploadImage = async (
   token: string,
   image: FileList,
   artworks: Artwork[],
-  setArtworks: (arg0: Artwork[]) => void,
+  setArtworks: (arg0: Artwork[]) => void
 ) => {
   const formData = new FormData();
   formData.append("image", image[0]);
   console.log(image[0]);
-  await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/${itemType}/${id}`,
-    {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: formData,
-    }
-  )
+  await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${itemType}/${id}`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  })
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
