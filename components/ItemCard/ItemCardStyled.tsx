@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 export const ItemCardStyled = styled.li<{
   display?: string;
   width?: string;
-  imageFit?: string;
+  imagefit?: string;
   isModalOpen?: boolean;
   mobile?: string
   tablet?: string
@@ -31,7 +31,7 @@ display: flex;
   }
 
   a > span > img {
-    object-fit: ${(props) => props.imageFit || "contain"};
+    object-fit: ${(props) => props.imagefit || "contain"};
     object-position: center 30%;
     border-radius: 2%;
   }

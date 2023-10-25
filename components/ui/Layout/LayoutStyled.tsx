@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const LayoutStyled = styled.main<{ auth?: boolean }>`
+export const LayoutStyled = styled.main<{ auth?: string }>`
   min-height: 76vh;
   display: flex;
   flex-direction: column;

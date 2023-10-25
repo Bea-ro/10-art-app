@@ -23,7 +23,7 @@ const Header = () => {
     <HeaderStyled>
       <Navbar></Navbar>
       <Link
-        className="button"
+        className="button" id="login-text"
         href={action === undefined && !isAuth ? "/user?action=login" : "/"}
         onClick={handleButtonClick}
       >
@@ -32,7 +32,18 @@ const Header = () => {
           : isAuth
           ? "Logout"
           : "Login"}
-        <Image src="/user-circle.svg" alt="user-icon" height={36} width={36} />
+      </Link>
+      <Link
+        className="button" id="user-icon"
+        href={action === undefined && !isAuth ? "/user?action=login" : "/"}
+        onClick={handleButtonClick}
+      >
+        <Image src={action === "register" || action === "login"
+       ? "/home-icon.svg"
+       : isAuth
+       ? "/logout-icon.svg"
+       : "/login-icon.svg"}
+       alt="user-icon" height={24} width={24} />
       </Link>
     </HeaderStyled>
   );

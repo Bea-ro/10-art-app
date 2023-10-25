@@ -39,7 +39,7 @@ export type Props = {
   title: string;
   description: string;
   children: React.ReactNode;
-  auth?: boolean;
+  auth?: string;
 };
 
 export default Layout;

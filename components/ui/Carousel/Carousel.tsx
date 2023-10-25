@@ -51,7 +51,7 @@ const Carousel = ({ carouselItems, isModalOpen }: Props) => {
                   : "none"
               }
               width="25%"
-              imageFit="contain"
+              imagefit="contain"
             ></CarouselItemCard>
           ))}
         </ul>

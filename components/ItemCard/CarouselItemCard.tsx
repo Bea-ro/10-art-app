@@ -4,10 +4,10 @@ import { Item } from "../../types/item";
 import Link from "next/link";
 import Image from "next/legacy/image";
 
-const CarouselItemCard = ({ item, display, width, imageFit, mobile, tablet }: Props) => {
+const CarouselItemCard = ({ item, display, width, imagefit, mobile, tablet }: Props) => {
 
   return (
-    <ItemCardStyled display={display} width={width} imageFit={imageFit} mobile={mobile}
+    <ItemCardStyled display={display} width={width} imagefit={imagefit} mobile={mobile}
     tablet={tablet}>
       <Link
         href={item.title ? `/artworks/${item._id}` : `/authors/${item._id}`}
@@ -31,7 +31,7 @@ export type Props = {
   item: Item;
   display: string;
   width: string;
-  imageFit: string;
+  imagefit: string;
   mobile?: string
   tablet?: string
 };

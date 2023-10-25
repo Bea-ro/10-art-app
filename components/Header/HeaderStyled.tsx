@@ -5,11 +5,27 @@ export const HeaderStyled = styled.header`
   justify-content: space-between;
   padding: 20px 20px 0 20px;
 
-  img {
-    display: none !important;
+  #user-icon {
+    display: none 
+    /* !important; */
   }
 
   @media screen and (max-width: 567px) {
     padding: 14px 14px 0 14px;
+   
+    #login-text {
+    display: none 
+  }
+    #user-icon {
+    display: block;
+    border-radius: 50%;
+    padding: 2px;
+    height: 24px;
+    width: 24px;
+    border: 1px solid var(--color-grey)
+  }
+  img {
+    object-fit: cover
+    }
   }
 `;
