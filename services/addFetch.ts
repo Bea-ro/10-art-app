@@ -13,7 +13,7 @@ export const addFetch = async (
   authors: Author[],
   setAuthors: (arg0: Author[]) => void
 ) => {
-  await fetch(`https://complete-server-rtc.onrender.com/api/${itemType}`, {
+  await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${itemType}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -73,7 +73,7 @@ const uploadImage = async (
   formData.append("image", image[0]);
   console.log(image[0]);
   await fetch(
-    `https://complete-server-rtc.onrender.com/api/${itemType}/${id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/${itemType}/${id}`,
     {
       method: "PATCH",
       headers: {

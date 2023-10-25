@@ -7,7 +7,7 @@ export const deleteFetch = async (
   setMessage: (arg0: string) => void
 ) => {
   await fetch(
-    `https://complete-server-rtc.onrender.com/api/${itemType}/${item._id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/${itemType}/${item._id}`,
     {
       method: "DELETE",
       headers: {

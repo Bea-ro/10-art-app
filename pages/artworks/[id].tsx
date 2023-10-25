@@ -103,7 +103,7 @@ return (
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const response: Artwork[] = await fetch(
-    `https://complete-server-rtc.onrender.com/api/artworks/`
+    `${process.env.NEXT_PUBLIC_API_URL}/artworks/`
   ).then((res) => res.json());
   return {
     paths: [],
@@ -115,7 +115,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const id = context.params?.id as string;
 
   const response: Artwork = await fetch(
-    `https://complete-server-rtc.onrender.com/api/artworks/${id}`
+    `${process.env.NEXT_PUBLIC_API_URL}/artworks/${id}`
   ).then((res) => res.json());
   const authors: Author[] = await getAuthors();
 
@@ -127,9 +127,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     revalidate: 10,
   };
 };
-
-
-  
 
 
 export type Props = {

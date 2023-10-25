@@ -7,7 +7,7 @@ export const addArtworksToAuthor = async (
   console.log("el id de la obra", artworkId);
   console.log("id del autor", authorId);
   await fetch(
-    `https://complete-server-rtc.onrender.com/api/authors/${authorId}/artwork`,
+    `${process.env.NEXT_PUBLIC_API_URL}/authors/${authorId}/artwork`,
     {
       method: "PUT",
       headers: {

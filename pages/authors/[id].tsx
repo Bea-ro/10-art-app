@@ -87,7 +87,7 @@ const AuthorPage = ({ author }: Props) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const response: Author[] = await fetch(
-    `https://complete-server-rtc.onrender.com/api/authors/`
+    `${process.env.NEXT_PUBLIC_API_URL}/authors/`
   ).then((res) => res.json());
   return {
     paths: [],
@@ -99,7 +99,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const id = context.params?.id as string;
 
   const response: Author = await fetch(
-    `https://complete-server-rtc.onrender.com/api/authors/${id}`
+    `${process.env.NEXT_PUBLIC_API_URL}/authors/${id}`
   ).then((res) => res.json());
 
   return {

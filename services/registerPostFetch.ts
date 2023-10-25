@@ -8,7 +8,7 @@ export const registerPostFetch = async (
   setIsAuth: (arg0: boolean) => void,
   setToken: (arg0: string) => void
 ) => {
-  await fetch("https://complete-server-rtc.onrender.com/api/users/register", {
+  await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

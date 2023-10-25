@@ -12,7 +12,7 @@ export const editFetch = async (
   delete valuesForPUT.image;
 
   await fetch(
-    `https://complete-server-rtc.onrender.com/api/${itemType}/${item._id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/${itemType}/${item._id}`,
     {
       method: "PUT",
       headers: {
@@ -49,7 +49,7 @@ export const uploadImageFetch = async (
   formData.append("image", image[0]);
 
   await fetch(
-    `https://complete-server-rtc.onrender.com/api/${itemType}/${item._id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/${itemType}/${item._id}`,
     {
       method: "PATCH",
       headers: {

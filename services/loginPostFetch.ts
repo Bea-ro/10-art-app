@@ -7,7 +7,7 @@ export const loginPostFetch = async (
   setIsAuth: (arg0: boolean) => void,
   setToken: (arg0: string) => void
 ) => {
-  await fetch("https://complete-server-rtc.onrender.com/api/users/login", {
+  await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

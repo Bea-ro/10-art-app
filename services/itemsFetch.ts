@@ -12,14 +12,14 @@ export const ItemsFetch = (
   useEffect(() => {
     const getArtworks = async () => {
       const res = await fetch(
-        "https://complete-server-rtc.onrender.com/api/artworks"
+        `${process.env.NEXT_PUBLIC_API_URL}/artworks`
       );
       const artworksData = await res.json();
       return artworksData;
     };
     const getAuthors = async () => {
       const res = await fetch(
-        "https://complete-server-rtc.onrender.com/api/authors"
+        `${process.env.NEXT_PUBLIC_API_URL}/authors`
       );
       const authorsData = await res.json();
       return authorsData;
