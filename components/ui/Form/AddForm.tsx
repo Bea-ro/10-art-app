@@ -54,7 +54,7 @@ const AddForm = ({ itemType, closeModal, setModalContent }: Props) => {
       setModalContent(
         <>
           <Button type="button" text="x" onClick={closeModal} />
-          <Message shadow="transparent"></Message>
+          <Message></Message>
         </>
       );
   };

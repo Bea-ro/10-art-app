@@ -59,7 +59,7 @@ const EditForm = ({ item, itemType }: Props) => {
             text="x"
             onClick={() => closeWithNavigate(itemType, item._id)}
           />
-          <Message shadow="transparent"></Message>
+          <Message></Message>
         </>
       );
     }
@@ -195,7 +195,7 @@ const EditForm = ({ item, itemType }: Props) => {
         />
         <Button type="button" text="Cancel" onClick={closeModal} />
       </Container>
-      <Message shadow="transparent"></Message>
+      <Message></Message>
     </FormStyled>
   );
 };
