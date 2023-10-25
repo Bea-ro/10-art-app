@@ -52,14 +52,14 @@ const AuthorPage = ({ author }: Props) => {
           {modalDisplay && (
             <Container>
               <Button
-                buttonText="Edit"
+                text="Edit"
                 type="button"
                 onClick={() =>
                   handleEditModal(author, "authors", openModal, setModalContent)
                 }
               />
               <Button
-                buttonText="Delete"
+                text="Delete"
                 type="button"
                 onClick={() =>
                   handleDeleteModal(
@@ -87,7 +87,7 @@ const AuthorPage = ({ author }: Props) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const response: Author[] = await fetch(
-    `https://my-json-server.typicode.com/bea-ro/shop-api/authors/`
+    `https://complete-server-rtc.onrender.com/api/authors/`
   ).then((res) => res.json());
   return {
     paths: [],

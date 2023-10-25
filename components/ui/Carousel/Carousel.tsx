@@ -33,7 +33,7 @@ const Carousel = ({ carouselItems, itemType, isModalOpen }: Props) => {
       <Container isModalOpen={isModalOpen}>
         <Button
           type="button"
-          buttonText="<"
+          text="<"
           onClick={() => prevItem()}
         ></Button>
         <ul>
@@ -48,6 +48,7 @@ const Carousel = ({ carouselItems, itemType, isModalOpen }: Props) => {
                   : "none"
               }
               mobile={index >= currentIndex && index < currentIndex + 10 ? "flex" : "none"}
+              tablet={index >= currentIndex && index < currentIndex + 3 ? "flex" : "none"}
              width="25%"
               imageFit="contain"
             ></CarouselItemCard>
@@ -55,7 +56,7 @@ const Carousel = ({ carouselItems, itemType, isModalOpen }: Props) => {
         </ul>
         <Button
           type="button"
-          buttonText=">"
+          text=">"
           onClick={() => nextItem()}
         ></Button>
       </Container>

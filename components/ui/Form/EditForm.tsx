@@ -56,7 +56,7 @@ const EditForm = ({ item, itemType }: Props) => {
         uploadImageFetch(itemType, item, token, values.image);
       setModalContent(
         <>
-          <Button type="button" buttonText="x" 
+          <Button type="button" text="x" 
           onClick={() => closeWithNavigate(itemType, item._id)}
            />
           <Message shadow="transparent"></Message>
@@ -190,10 +190,10 @@ const EditForm = ({ item, itemType }: Props) => {
       <Container>
         <Button
           type="submit"
-          buttonText="Save"
+          text="Save"
           disabled={!formState.isValid || formState.isSubmitting}
         />
-        <Button type="button" buttonText="Cancel" onClick={closeModal} />
+        <Button type="button" text="Cancel" onClick={closeModal} />
       </Container>
       <Message shadow="transparent"></Message>
     </FormStyled>

@@ -28,20 +28,19 @@ export const handleDeleteModal = (
       <p>Are you sure you want to delete {item.title || item.name}?</p>
       <Container>
         <Button
-          buttonText="Yes"
+          text="Yes"
           type="button"
           onClick={() => {
             deleteFetch(itemType, item, token, setMessage);
             setModalContent(
               <>
-                <Button type="button" buttonText="x" onClick={closeWithNavigate}
-                />
+                <Button type="button" text="x" onClick={closeWithNavigate}/>
                 <Message shadow="transparent"></Message>
               </>
             );
           }}
         ></Button>
-        <Button buttonText="No" type="button" onClick={closeModal}></Button>
+        <Button text="No" type="button" onClick={closeModal}></Button>
       </Container>
     </>
   );

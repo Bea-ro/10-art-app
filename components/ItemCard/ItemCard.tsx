@@ -60,7 +60,7 @@ const ItemCard = ({ item, itemType, display, isModalOpen }: Props) => {
          
       {(currentPath === '/artworks' || currentPath === '/authors') && (
         <Button
-          buttonText="Delete"
+          text="Delete"
           type="button"
           onClick={() => {
             handleDeleteModal(

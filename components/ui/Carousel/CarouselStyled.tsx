@@ -12,7 +12,7 @@ export const CarouselStyled = styled.div`
     width: 75vw;
   }
 
-  @media screen and (max-width: 490px) {
+  @media screen and (max-width: 567px) {
     align-items: flex-start; 
     overflow-x: scroll;
   scroll-behavior: smooth;

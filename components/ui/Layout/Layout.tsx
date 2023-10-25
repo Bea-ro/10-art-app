@@ -5,7 +5,7 @@ import Image from "next/legacy/image";
 import Footer from "../../Footer/Footer";
 import Header from "../../Header/Header";
 
-const Layout = ({ title, description, children }: Props) => {
+const Layout = ({ title, description, children, auth }: Props) => {
   return (
     <>
       <Head>
@@ -28,7 +28,7 @@ const Layout = ({ title, description, children }: Props) => {
         ></Image>
       </div>
       <Header></Header>
-      <LayoutStyled>{children}</LayoutStyled>
+      <LayoutStyled auth={auth}>{children}</LayoutStyled>
       <Footer></Footer>
     </>
   );
@@ -38,6 +38,7 @@ export type Props = {
   title: string;
   description: string;
   children: React.ReactNode;
+  auth?: string
 };
 
 export default Layout;

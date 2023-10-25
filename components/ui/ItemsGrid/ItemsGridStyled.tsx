@@ -15,7 +15,7 @@ export const ItemsGridStyled = styled.ul<{
     font-weight: bold;
   }
 
-  @media screen and (max-width: 490px) {
+  @media screen and (max-width: 567px) {
   font-size: 30px;
   grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
   }

@@ -62,7 +62,7 @@ return (
           {modalDisplay && (
             <Container>
               <Button
-                buttonText="Edit"
+                text="Edit"
                 type="button"
                 onClick={() =>
                   handleEditModal(
@@ -74,7 +74,7 @@ return (
                 }
               />
               <Button
-                buttonText="Delete"
+                text="Delete"
                 type="button"
                 onClick={() =>
                   handleDeleteModal(
@@ -103,7 +103,7 @@ return (
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const response: Artwork[] = await fetch(
-    `https://my-json-server.typicode.com/bea-ro/shop-api/artworks/`
+    `https://complete-server-rtc.onrender.com/api/artworks/`
   ).then((res) => res.json());
   return {
     paths: [],

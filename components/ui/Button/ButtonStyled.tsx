@@ -2,12 +2,12 @@ import { styled } from "styled-components";
 
 export const ButtonStyled = styled.button<{
   display?: string;
-  buttonText: string;
+  text: string;
 }>`
   display: ${(props) => props.display || "block"};
-  align-self: ${(props) => (props.buttonText === "x" ? "flex-end" : "center")};
-  padding: ${(props) => (props.buttonText === "x" ? "1px 6px" : 
-  (props.buttonText === "<" || props.buttonText === ">" ? "4px 12px" : 
+  align-self: ${(props) => (props.text === "x" ? "flex-end" : "center")};
+  padding: ${(props) => (props.text === "x" ? "1px 6px" : 
+  (props.text === "<" || props.text === ">" ? "4px 12px" : 
   "8px 10px")
   )};
   color: var(--color-grey);
@@ -19,9 +19,9 @@ export const ButtonStyled = styled.button<{
   width: fit-content;
   cursor: pointer;
 
-  @media screen and (max-width: 490px) {
+  @media screen and (max-width: 567px) {
   display: ${(props) => props.display || "block"};
-  padding: ${(props) => (props.buttonText === "x" ? "1px 6px" : "5px")};;
+  padding: ${(props) => (props.text === "x" ? "1px 6px" : "5px")};;
   font-size: 18px;
   }
 `;

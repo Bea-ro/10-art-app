@@ -81,7 +81,7 @@ const AuthForm = ({ action }: Props) => {
       </Container>
       <Button
         type="submit"
-        buttonText="Submit"
+        text="Submit"
         disabled={!formState.isValid || formState.isSubmitting}
       />
     </FormStyled>

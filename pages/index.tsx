@@ -32,6 +32,7 @@ const Home = () => {
     <Layout
       title="Art App"
       description="Find information about artists from all movements and artworks of pinture, sculpture and arquitecture."
+      auth={isAuth}
     >
       <PageTitle fontSize={isAuth ? "54px" : "80px"} title="Your Art App" />
       {isAuth ? (

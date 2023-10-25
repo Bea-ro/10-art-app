@@ -54,7 +54,7 @@ const AddForm = ({ itemType, closeModal, setModalContent }: Props) => {
     formState.isValid &&
       setModalContent(
         <>
-          <Button type="button" buttonText="x" onClick={closeModal} />
+          <Button type="button" text="x" onClick={closeModal} />
           <Message shadow="transparent"></Message>
         </>
       );
@@ -183,10 +183,10 @@ const AddForm = ({ itemType, closeModal, setModalContent }: Props) => {
       <Container>
         <Button
           type="submit"
-          buttonText="Save"
+          text="Save"
           disabled={!formState.isValid || formState.isSubmitting}
         />
-        <Button buttonText="Cancel" type="button" onClick={closeModal} />
+        <Button text="Cancel" type="button" onClick={closeModal} />
       </Container>
     </FormStyled>
   );

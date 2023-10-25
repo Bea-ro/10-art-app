@@ -80,14 +80,17 @@ align-self: center;
    text-decoration: none
 }
 
-  @media screen and (max-width: 490px) {
+  @media screen and (max-width: 567px) {
   .button {
   font-size: 18px;
   padding: 5px;
+
+  
 }
 
 .artwork-info {
   padding: 0 14px
 }
-  }
-`;
+
+}
+  `;

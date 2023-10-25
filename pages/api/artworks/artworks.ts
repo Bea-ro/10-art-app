@@ -3,7 +3,7 @@ import { getArtworks } from "../../../libs/artworks/artworks";
 import { Artwork } from "../../../types/artwork";
 import { Error } from "../../../types/error";
 
-type Artworks = {
+export type Artworks = {
   artworks: Artwork[];
 };
 

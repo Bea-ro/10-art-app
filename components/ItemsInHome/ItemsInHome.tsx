@@ -30,7 +30,7 @@ const ItemsInHome = ({ items, itemType }: Props) => {
       <Container>
         {modalDisplay && (
           <Button
-            buttonText={`New ${
+            text={`New ${
               itemType === "authors" ? "artist" : itemType.slice(0, -1)
             }`}
             type="button"

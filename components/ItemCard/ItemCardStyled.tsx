@@ -6,6 +6,7 @@ export const ItemCardStyled = styled.li<{
   imageFit?: string;
   isModalOpen?: boolean;
   mobile?: string
+  tablet?: string
 }>`
   display: ${(props) => props.display || "flex"};
   max-width: ${(props) => props.width || "100%"};
@@ -34,7 +35,7 @@ export const ItemCardStyled = styled.li<{
     border-radius: 2%;
   }
 
-  @media screen and (max-width: 490px) {
+  @media screen and (max-width: 567px) {
     display: ${(props) => props.mobile || "flex"};
     min-width: 102px;
 
@@ -49,6 +50,9 @@ export const ItemCardStyled = styled.li<{
   &:hover {
     transform: none;
   }
+  }
 
+  @media screen and (min-width: 567px) and (max-width: 730px) {
+  display: ${(props) => props.tablet || "flex"};
   }
 `;

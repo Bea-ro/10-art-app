@@ -7,7 +7,7 @@ export const PageTitleStyled = styled.h1<{ fontSize?: string }>`
   text-align: center;
 
   @media screen and (max-width: 490px) {
-  font-size: ${(props) => props.fontSize || "46px"}; 
+    font-size: ${(props) => props.fontSize || "50px"}; 
   padding: 14px 16px 0 16px
   }
 `;

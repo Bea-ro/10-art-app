@@ -5,6 +5,7 @@ import { AuthContext, MessageContext } from "../../pages/_app";
 
 import Link from "next/link";
 import Navbar from "../ui/Navbar/Navbar";
+import Image from "next/legacy/image";
 
 const Header = () => {
   const router = useRouter();
@@ -30,8 +31,10 @@ const Header = () => {
           ? "Home"
           : isAuth
           ? "Logout"
-          : "Login"}
+          : "Login"}           
+            <Image src='/user-circle.svg' alt='user-icon' height={36} width={36}/>     
       </Link>
+  
     </HeaderStyled>
   );
 };
