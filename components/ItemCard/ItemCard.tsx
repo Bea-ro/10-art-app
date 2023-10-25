@@ -24,10 +24,10 @@ const ItemCard = ({ item, itemType, isModalOpen }: Props) => {
   const { setModalTop } = useContext(ModalTopContext);
 
 
-  const handleModalTop = (event) => {
+  const handleModalTop = (event: any) => {
     const rect = event.target.getBoundingClientRect();
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
-   const top = rect.top + scrollTop;
+    const top = rect.top + scrollTop;
     setModalTop(Math.round(top));
   }
 
@@ -45,7 +45,7 @@ const ItemCard = ({ item, itemType, isModalOpen }: Props) => {
             (typeof item.image === "string" && item.image) ||
             (
               item.mainArtworks && Array.isArray(item.mainArtworks) &&
-              item.mainArtworks[0] && randomArtwork(item.mainArtworks).image             
+              item.mainArtworks[0] && randomArtwork(item.mainArtworks).image            
             )
             || ""
           }

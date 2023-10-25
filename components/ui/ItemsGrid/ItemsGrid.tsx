@@ -8,7 +8,6 @@ import ItemCard from '../../ItemCard/ItemCard';
 const ItemsGrid = ({ items, itemType }: Props) => {
   
   const { isModalOpen } = useContext(ModalContext);
-console.log(isModalOpen)
 
   return (
     <ItemsGridStyled >
