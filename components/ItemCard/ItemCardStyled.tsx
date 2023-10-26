@@ -9,8 +9,7 @@ export const ItemCardStyled = styled.li<{
   tablet?: string
   filter?: string;
 }>`
-display: flex;
-  display: ${(props) => props.filter || "flex"};
+  display: ${(props) => props.display ? props.display : (props.filter? props.filter : "flex")};
   max-width: ${(props) => props.width || "100%"};
   opacity: ${(props) => (props.isModalOpen ? "50%" : "100%")};
   background-color: var(--color-beige);
