@@ -65,7 +65,7 @@ const ItemCard = ({ item, itemType, isModalOpen, filter }: Props) => {
               setModalContent,
               router
             );
-            handleModalTop(event);
+          handleModalTop(event);
           }}
         />
       )}

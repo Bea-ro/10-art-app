@@ -17,7 +17,7 @@ const [selectedMovement, setSelectedMovement] = useState<string>("")
    {movements.map((movement: string) => (
         <Button type="button" key={movement} text={movement} onClick={() => handleFilter(items, movement, setExcludedItems)}></Button>
       ))}
-      <select className="button" name="movement" value="" onChange={() => handleSelect(items, event, setExcludedItems, setSelectedMovement)}>
+      <select className="button" name="movement" value="" onChange={(event) => handleSelect(items, event, setExcludedItems, setSelectedMovement)}>
       <option value="" disabled hidden>
                {selectedMovement === "" ? "Movement" : selectedMovement}
               </option>
