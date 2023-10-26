@@ -1,36 +1,25 @@
 import { FilterStyled } from './FilterStyled';
+import { useState } from 'react';
 import { getAllMovements } from '../../../utils/getAllMovements';
+import { clearFilter, handleFilter, handleSelect } from '../../../utils/filterFunctions';
 import { Item } from '../../../types/item';
 
 import Button from '../Button/Button';
 
+
 const Filter = ({ items, setExcludedItems }: Props) => {
 const movements = getAllMovements(items)
-
-const handleFilter = (movement: string) => {
-    const newExcludedItems = items.filter((item) => item.movement !== movement)
-    setExcludedItems(newExcludedItems)
-    }
-
-    const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
-      const newExcludedItems = items.filter((item) => item.movement !== event.target.value)
-      console.log(newExcludedItems)
-      setExcludedItems(newExcludedItems)
-      }
-
-const clearFilter = () => {
-  setExcludedItems([])
-}
+const [selectedMovement, setSelectedMovement] = useState<string>("")
 
   return (
     <FilterStyled>
-      <Button type="button" key="all" text="All movements" onClick={clearFilter} id="clear-filter"></Button>
+      <Button type="button" key="all" text="All movements" onClick={() => clearFilter(setExcludedItems, setSelectedMovement)} id="clear-filter"></Button>
    {movements.map((movement: string) => (
-        <Button type="button" key={movement} text={movement} onClick={() => handleFilter(movement)}></Button>
+        <Button type="button" key={movement} text={movement} onClick={() => handleFilter(items, movement, setExcludedItems)}></Button>
       ))}
-      <select className="button" name="movement" value="" onChange={handleSelect}>
+      <select className="button" name="movement" value="" onChange={() => handleSelect(items, event, setExcludedItems, setSelectedMovement)}>
       <option value="" disabled hidden>
-                Movement
+               {selectedMovement === "" ? "Movement" : selectedMovement}
               </option>
       {movements.map((movement: string) => (
             <option key={movement} value={movement}>

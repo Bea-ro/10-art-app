@@ -5,7 +5,8 @@ export const FilterStyled = styled.ul`
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
-  padding: 0 20px;
+max-width: 75%;
+align-self: center;
 
   #clear-filter {
     color: black;
@@ -31,7 +32,7 @@ button:hover {
   border: 1px solid black
 }
 
-@media screen and (max-width: 567px) {
+@media screen and (max-width: 1068px) {
   button {
     display: none;
   }
