@@ -11,7 +11,7 @@ import Link from "next/link";
 import Image from "next/legacy/image";
 import Button from "../ui/Button/Button";
 
-const ItemCard = ({ item, itemType, isModalOpen }: Props) => {
+const ItemCard = ({ item, itemType, isModalOpen, filter }: Props) => {
   const router = useRouter();
   const currentPath = router.pathname;
 
@@ -31,7 +31,7 @@ const ItemCard = ({ item, itemType, isModalOpen }: Props) => {
   const src = getSrc(item);
 
   return (
-    <ItemCardStyled isModalOpen={isModalOpen}>
+    <ItemCardStyled filter={filter} isModalOpen={isModalOpen}>
       <h3>{item.title || item.name}</h3>
       <p>{item.author || item.movement}</p>
       <Link
@@ -77,6 +77,7 @@ export type Props = {
   item: Item;
   itemType: string;
   isModalOpen: boolean;
+  filter: string;
 };
 
 export default ItemCard;

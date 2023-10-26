@@ -48,7 +48,7 @@ const AuthorPage = ({ author }: Props) => {
                 </span>
               ))}
           </p>
-          <ItemsGrid itemType="" items={author.mainArtworks}></ItemsGrid>
+          <ItemsGrid items={author.mainArtworks}></ItemsGrid>
           {modalDisplay && (
             <Container>
               <Button

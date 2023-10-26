@@ -1,5 +1,5 @@
 import { GetStaticProps } from 'next';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext, ModalContext, ModalTopContext } from '../_app';
 import { getAuthors } from '../../libs/authors/authors';
 import { Author } from '../../types/author';
@@ -9,12 +9,14 @@ import PageTitle from '../../components/ui/PageTitle/PageTitle';
 import Text from '../../components/ui/Text/Text';
 import ItemsGrid from '../../components/ui/ItemsGrid/ItemsGrid';
 import Modal from '../../components/ui/Modal/Modal';
-
+import Filter from '../../components/ui/Filter/Filter';
+import { Item } from '@/types/item';
 
 const AuthorsPage = ({ authors }: Props) => {
   const { isAuth } = useContext(AuthContext);
   const { isModalOpen, modalContent } = useContext(ModalContext);
   const { modalTop } = useContext(ModalTopContext);
+  const [ excludedItems, setExcludedItems ] = useState<Item[]>([])
 
   return (
     <Layout
@@ -24,7 +26,8 @@ const AuthorsPage = ({ authors }: Props) => {
       <PageTitle title="Artists" />
       {isAuth ? (
           <>
-        <ItemsGrid items={authors} itemType="authors"></ItemsGrid>
+            <Filter items={authors} setExcludedItems={setExcludedItems}></Filter>
+        <ItemsGrid items={authors} itemType="authors" excludedItems={excludedItems}></ItemsGrid>
         {isModalOpen && <Modal top={`${modalTop.toString()}px`}>{modalContent}</Modal>}
         </>
       ) : (

@@ -1,6 +1,6 @@
 import { ButtonStyled } from "./ButtonStyled";
 
-const Button = ({ type, onClick, disabled, display, text }: Props) => {
+const Button = ({ type, onClick, disabled, display, text, id }: Props) => {
   return (
     <ButtonStyled
       type={type}
@@ -8,6 +8,7 @@ const Button = ({ type, onClick, disabled, display, text }: Props) => {
       disabled={disabled}
       display={display}
       text={text}
+      id={id}
     >
       {text}
     </ButtonStyled>
@@ -20,6 +21,7 @@ export type Props = {
   disabled?: boolean;
   display?: string;
   text: string;
+  id?: string
 };
 
 export default Button;

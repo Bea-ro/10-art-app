@@ -7,9 +7,10 @@ export const ItemCardStyled = styled.li<{
   isModalOpen?: boolean;
   mobile?: string
   tablet?: string
+  filter?: string;
 }>`
 display: flex;
-  display: ${(props) => props.display || "flex"};
+  display: ${(props) => props.filter || "flex"};
   max-width: ${(props) => props.width || "100%"};
   opacity: ${(props) => (props.isModalOpen ? "50%" : "100%")};
   background-color: var(--color-beige);
@@ -37,7 +38,7 @@ display: flex;
   }
 
   @media screen and (max-width: 567px) {
-    display: ${(props) => props.mobile || "flex"};
+    display: ${(props) => props.mobile ? props.mobile : (props.filter ? props.filter : "flex")}; 
     min-width: 102px;
 
   h2, h3 {
