@@ -27,7 +27,6 @@ describe("ItemCard", () => {
           <ItemCard
             item={artwork}
             itemType="artworks"
-            display="flex"
             isModalOpen={false}
           />
         );
