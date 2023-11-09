@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import { GetStaticProps } from 'next';
 import { AuthContext, ModalContext, ModalTopContext } from '../_app';
 import { getArtworks } from '../../libs/artworks/artworks';
+import { scrollToTop } from '../../utils/scrollToTop';
 import { Artwork } from '../../types/artwork';
 import { Item } from '../../types/item';
 
@@ -11,6 +12,8 @@ import Text from '../../components/ui/Text/Text';
 import ItemsGrid from '../../components/ui/ItemsGrid/ItemsGrid';
 import Modal from '../../components/ui/Modal/Modal';
 import Filter from '../../components/ui/Filter/Filter';
+import Button from '../../components/ui/Button/Button';
+
 
 
 const ArtworksPage = ({ artworks }: Props) => {
@@ -18,6 +21,7 @@ const ArtworksPage = ({ artworks }: Props) => {
   const { isModalOpen, modalContent } = useContext(ModalContext);
   const { modalTop } = useContext(ModalTopContext);
   const [ excludedItems, setExcludedItems ] = useState<Item[]>([])
+
 
   return (
     <Layout
@@ -32,6 +36,7 @@ const ArtworksPage = ({ artworks }: Props) => {
           {isModalOpen && (
             <Modal top={`${modalTop.toString()}px`}>{modalContent}</Modal>
           )}
+         <Button type="button" text="&#8743;" onClick={scrollToTop} id="scroll-button"></Button> 
         </>
       ) : (
         <Text text="Please, log in to discover artworks." />

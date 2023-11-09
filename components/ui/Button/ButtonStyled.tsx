@@ -17,8 +17,8 @@ export const ButtonStyled = styled.button<{
   text-shadow: 2px 2px 4px var(--color-blue);
   box-shadow: var(--box-shadow);
   border-radius: var(--border-radius);
-  font-size: 22px;
   width: fit-content;
+  font-size: "22px";
   cursor: pointer;
 
   @media screen and (max-width: 567px) {

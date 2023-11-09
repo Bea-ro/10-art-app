@@ -21,7 +21,7 @@ export type Props = {
   disabled?: boolean;
   display?: string;
   text: string;
-  id?: string
+  id?: string;
 };
 
 export default Button;

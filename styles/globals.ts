@@ -80,16 +80,32 @@ align-self: center;
    text-decoration: none
 }
 
+#scroll-button {
+  align-self: flex-end;
+  margin-right: 30px;
+}
+
+.image-container {
+position: relative;
+height: 600px;
+width: calc(600px * (16 / 9));
+max-width: 100%;
+max-height: 100%;
+}
+
   @media screen and (max-width: 567px) {
   .button {
   font-size: 18px;
-  padding: 5px;
-
-  
+  padding: 5px;  
 }
 
 .artwork-info {
   padding: 0 14px
+}
+
+.image-container {
+height: 300px;
+width: calc(300px * (16 / 9));
 }
 
 }

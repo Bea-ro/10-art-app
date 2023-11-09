@@ -51,12 +51,14 @@ return (
             </Link>
             <p>{`${artwork.movement} ${upperCaseArea(artwork.area)},  ${artwork.year}`}</p>
             </div>
+            <div className="image-container">
             <Image
               src={typeof artwork.image === "string" && artwork.image || ""}
               alt={artwork.title}
-              height={600}
-              width={600 * (16 / 9)}
+              layout="fill"
+              objectFit="contain"
             ></Image>
+            </div>
           </Container>
 
           {modalDisplay && (
