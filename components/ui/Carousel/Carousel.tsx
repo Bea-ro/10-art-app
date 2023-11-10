@@ -34,7 +34,6 @@ const Carousel = ({ carouselItems, isModalOpen }: Props) => {
             <CarouselItemCard
               key={item._id}
               item={item}
-              // itemType={itemType}
               display={
                 index >= currentIndex && index < currentIndex + 4
                   ? "flex"
@@ -63,7 +62,6 @@ const Carousel = ({ carouselItems, isModalOpen }: Props) => {
 
 export type Props = {
   carouselItems: Item[];
-  // itemType: string;
   isModalOpen: boolean;
 };
 

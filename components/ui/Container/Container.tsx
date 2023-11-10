@@ -8,6 +8,7 @@ const Container = ({
   color,
   background,
   isModalOpen,
+  height
 }: Props) => {
   return (
     <>
@@ -18,6 +19,7 @@ const Container = ({
         color={color}
         background={background}
         isModalOpen={isModalOpen}
+        height={height}
       >
         {children}
       </ContainerStyled>
@@ -33,6 +35,7 @@ export type Props = {
   color?: string;
   background?: string;
   isModalOpen?: boolean;
+  height?: string
 };
 
 export default Container;

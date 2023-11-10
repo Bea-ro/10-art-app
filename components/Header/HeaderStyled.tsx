@@ -1,8 +1,8 @@
 import { styled } from "styled-components";
 
-export const HeaderStyled = styled.header`
+export const HeaderStyled = styled.header<{ isAuth?: boolean}>`
   display: flex;
-  justify-content: space-between;
+  justify-content:  ${(props) => (props.isAuth? 'space-between' : 'flex-end')};
   padding: 20px 20px 0 20px;
 
   #user-icon {

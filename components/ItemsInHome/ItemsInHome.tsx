@@ -1,19 +1,20 @@
-import { ItemsInHomeStyled } from "./ItemsInHomeStyled";
-import { useContext } from "react";
-import { MessageContext } from "../../pages/_app";
-import { useModal } from "../../customHooks/useModal";
-import { handleAddModal } from "../../utils/handleAddModal";
-import { Item } from "../../types/item";
+import { ItemsInHomeStyled } from './ItemsInHomeStyled';
+import { useContext } from 'react';
+import { AuthContext, MessageContext } from '../../pages/_app';
+import { useModal } from '../../customHooks/useModal';
+import { handleAddModal } from '../../utils/handleAddModal';
+import { Item } from '../../types/item';
 
-import Link from "next/link";
-import Button from "../ui/Button/Button";
-import Container from "../ui/Container/Container";
-import Subtitle from "../ui/Subtitle/Subtitle";
-import Modal from "../ui/Modal/Modal";
-import Carousel from "../ui/Carousel/Carousel";
+import Link from 'next/link';
+import Button from '../ui/Button/Button';
+import Container from '../ui/Container/Container';
+import Subtitle from '../ui/Subtitle/Subtitle';
+import Modal from '../ui/Modal/Modal';
+import Carousel from '../ui/Carousel/Carousel';
 
 const ItemsInHome = ({ items, itemType }: Props) => {
   const { setMessage } = useContext(MessageContext);
+  const { isAuth } = useContext(AuthContext);
   const {
     isModalOpen,
     modalDisplay,
@@ -29,7 +30,7 @@ const ItemsInHome = ({ items, itemType }: Props) => {
         subtitle={itemType === "authors" ? "artists" : itemType}
         align="left"
       />
-      <Container>
+      {isAuth && <Container>
         {modalDisplay && (
           <Button
             text={`New ${
@@ -48,9 +49,9 @@ const ItemsInHome = ({ items, itemType }: Props) => {
         )}
         {isModalOpen && <Modal>{modalContent}</Modal>}
       </Container>
+      }
       <Carousel
         carouselItems={items}
-        // itemType={itemType}
         isModalOpen={isModalOpen}
       ></Carousel>
     </ItemsInHomeStyled>

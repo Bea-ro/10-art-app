@@ -20,8 +20,8 @@ const Header = () => {
   };
 
   return (
-    <HeaderStyled>
-      <Navbar></Navbar>
+    <HeaderStyled isAuth={isAuth}>
+      {isAuth && <Navbar></Navbar>}
       <Link
         className="button" id="login-text"
         href={action === undefined && !isAuth ? "/user?action=login" : "/"}
@@ -51,6 +51,7 @@ const Header = () => {
 
 type Props = {
   action: string | undefined;
+  isAuth?: boolean
 };
 
 export default Header;

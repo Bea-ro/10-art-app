@@ -35,7 +35,25 @@ const Home = () => {
       auth={isAuth.toString()}
     >
       <PageTitle fontSize={isAuth ? "54px" : "80px"} title="Your Art App" />
-      {isAuth ? (
+   
+      {!isAuth &&
+        <>
+          <Subtitle subtitle="Find your favourite artists and artworks" />
+          <Container direction="column" height="57vh">
+            <Text text="Still without account?"></Text>
+            <Text fontSize='18px' 
+            text="Register and see artworks and artists details. You will be able to add new artworks and artists and also update or delete existing ones."></Text>
+            <Link
+              className="button"
+              href="/user?action=register"
+              onClick={() => setMessage("")}
+            >
+              Free Register
+            </Link>
+          </Container>
+        </>
+      }
+
         <ItemsContext.Provider
           value={{
             artworks: artworks as Artwork[],
@@ -47,21 +65,8 @@ const Home = () => {
           <ItemsInHome items={artworks} itemType="artworks"></ItemsInHome>
           <ItemsInHome items={authors} itemType="authors"></ItemsInHome>
         </ItemsContext.Provider>
-      ) : (
-        <>
-          <Subtitle subtitle="Find your favourite artists and artworks" />
-          <Container direction="column">
-            <Text text="Still without account?"></Text>
-            <Link
-              className="button"
-              href="/user?action=register"
-              onClick={() => setMessage("")}
-            >
-              Free Register
-            </Link>
-          </Container>
-        </>
-      )}
+      
+        
     </Layout>
   );
 };

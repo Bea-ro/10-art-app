@@ -8,6 +8,7 @@ export const ItemCardStyled = styled.li<{
   mobile?: string
   tablet?: string
   filter?: string;
+  isAuth?: boolean;
 }>`
   display: ${(props) => props.display ? props.display : (props.filter? props.filter : "flex")};
   max-width: ${(props) => props.width || "100%"};
@@ -22,7 +23,7 @@ export const ItemCardStyled = styled.li<{
   justify-content: center;
 
   &:hover {
-    transform: scale(1.1);
+    transform: ${(props) => (props.isAuth ? "scale(1.1)" : "")};
   }
 
   h2, h3 {
@@ -30,7 +31,7 @@ export const ItemCardStyled = styled.li<{
     color: black;
   }
 
-  a > span > img {
+  span > img {
     object-fit: ${(props) => props.imagefit || "contain"};
     object-position: center 30%;
     border-radius: 2%;
