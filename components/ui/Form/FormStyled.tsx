@@ -15,6 +15,13 @@ export const FormStyled = styled.form`
     color: grey;
   }
 
+  div > div> input,
+  div > div> select,
+    div > div> #area {
+    background-color: #ffffff;
+    color: grey;
+  }
+
   select {
     width: 100%;
   }
