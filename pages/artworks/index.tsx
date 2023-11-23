@@ -1,5 +1,5 @@
-import { useContext, useState } from 'react'
 import { GetStaticProps } from 'next'
+import { useContext, useState } from 'react'
 import { AuthContext, ModalContext, ModalTopContext } from '../_app'
 import { getArtworks } from '../../libs/artworks/artworks'
 import { Artwork } from '../../types/artwork'
@@ -49,6 +49,7 @@ const ArtworksPage = ({ artworks }: Props) => {
 
 export const getStaticProps: GetStaticProps = async () => {
   const artworks = await getArtworks()
+  console.log(artworks)
   return {
     props: {
       artworks: artworks
