@@ -17,11 +17,7 @@ export const handleDeleteModal = (
   closeModal: () => void,
   setMessage: (arg0: string) => void,
   setModalContent: (arg0: React.ReactNode) => void,
-  router: NextRouter,
-  authors: Author[],
-  setAuthors: (arg0: Author[]) => void,
-  artworks: Artwork[],
-  setArtworks: (arg0: Artwork[]) => void
+  router: NextRouter
 ) => {
   const closeWithNavigate = () => {
     closeModal()
