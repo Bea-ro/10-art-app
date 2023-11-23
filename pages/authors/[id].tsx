@@ -82,9 +82,7 @@ const AuthorPage = ({ author }: Props) => {
                     closeModal,
                     setMessage,
                     setModalContent,
-                    router,
-                    authors,
-                    setAuthors
+                    router
                   )
                 }
               />
