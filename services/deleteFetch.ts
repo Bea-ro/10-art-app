@@ -17,11 +17,7 @@ export const deleteFetch = async (
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log('data en delete', data)
       setMessage(data)
-      // itemType === 'authors'
-      //   ? setAuthors([...authors, data])
-      //   : setArtworks([...artworks, data])
     })
     .catch((error) => {
       console.log('error:', error.message)

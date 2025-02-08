@@ -49,7 +49,6 @@ const ArtworksPage = ({ artworks }: Props) => {
 
 export const getStaticProps: GetStaticProps = async () => {
   const artworks = await getArtworks()
-  console.log(artworks)
   return {
     props: {
       artworks: artworks
