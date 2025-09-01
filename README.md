@@ -15,4 +15,4 @@
 ## Backend URL
 
 https://github.com/Bea-ro/09-complete-server
-https://09-complete-server.fly.dev/
+https://09-complete-server.fly.dev/api
